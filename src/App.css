@@ -1,0 +1,207 @@
+@font-face {
+  font-family: 'titre';
+  src: url('./static/police/NeueHaasDisplay-Mediu.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'text';
+  src: url('./static/police/NeueHaasDisplay-Roman.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'italic';
+  src: url('./static/police/NeueHaasDisplay-MediumItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'bold';
+  src: url('./static/police/NeueHaasDisplay-Bold.ttf') format('truetype');
+}
+*{
+  color:black;
+  text-decoration: none;
+}
+html, body, #root, .app-container {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+.app-container{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header{
+  display:flex;
+  flex-direction:'row';
+  justify-content: space-between;
+  align-items:end;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.header .left{
+  width:120px;
+  display:flex;
+  flex-direction:'row';
+  justify-content: space-between;
+  align-items:baseline;
+  margin-top: 0;
+}
+.header #image{
+  width:1.2457cm;  
+  margin-left:70px;
+}
+.header .FANCH{
+  font-family:'titre', sans-serif;
+  font-size: 2em;
+  margin: 0;
+}
+.left .lien{
+  margin-bottom: 10px;
+  font-family:'text', sans-serif;
+}
+.footer{
+  width:100%;
+  margin-bottom: 20px;
+  display:flex;
+  flex-direction: column;
+}
+.footer .top{
+  width:100;
+  display:flex;
+  flex-direction:'row';
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.footer .bottom{
+  width:100%;
+  display:flex;
+  flex-direction:'row';
+  justify-content: space-between;
+  height:60px;
+
+}
+.footer .bottom .left{
+  width:60%;
+  display:flex;
+  flex-direction:'row';
+  justify-content: space-between;
+  align-items:center;
+  margin-left:20px;
+  margin-top:15px;
+}
+.footer .column{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap:5px
+}
+.footer p{
+  margin:0;
+  font-family: 'text';
+  font-size:8pt
+}
+.footer .columnlink{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.footer .bottom .right{
+  width:50%;
+  display:flex;
+  flex-direction:'row';
+  justify-content: end;
+  align-items:end;
+  margin-right:20px;
+}
+.about{
+  min-height: 100vh;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.text {
+  flex-shrink: 0;
+}
+.banner {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  width: calc(3 * 3000px); /* Total width to hold three images */
+  height: 100%;
+}
+.banner img {
+  width: 3500px;
+  height: 150px;
+  flex-shrink: 0;
+}
+.about .Paragraphe{
+  width:50%;
+  margin: 3% 25% 0% 25%;
+  font-family:'text', sans-serif;
+  font-size: 15pt;
+}
+
+.about .Paragraphe .signature{
+  width:35%;
+  margin-left:63%;
+  margin-bottom: 15%;
+}
+
+/* Accueil */
+.point{
+  height:60vh;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.point .circle {
+  align-self: center;
+  background-color: black;
+  border-radius: 100%;
+  animation: circle 3s infinite;
+  overflow: hidden;
+}
+.point .circleClick{
+  position:absolute;
+  overflow: hidden;
+  align-self: center;
+  background-color: black;
+  animation: circleClick 3s 1;
+}
+
+@keyframes circleClick {
+  0% {
+    top:50%;
+    right:50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+  }
+  100% {
+    top:0%;
+    right:0%;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }}
+@keyframes circle {
+  0%, 100% {
+    width: 50px;
+    height: 50px;
+  }
+
+  50% {
+    width: 40px;
+    height: 40px;
+  }
+}
