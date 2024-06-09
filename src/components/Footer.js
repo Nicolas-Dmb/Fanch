@@ -8,7 +8,7 @@ import linkedin from '../static/image/linkedin.png';
 import linkedinPhon from '../static/image/linkedinphon.png';
 import copyright from '../static/image/copyright.png';
 
-function Footer({acceuil}){
+function Footer({acceuil, logoFanch}){
     const navigate = useNavigate()
     const [instagram, setInsta] = useState(true)
     const [linke, setLinke] = useState(true)
@@ -45,8 +45,8 @@ function Footer({acceuil}){
    
     const { dateString, timeString } = formatDateTime(dateTime);
     return(
-        <div className='footer' style={{ backgroundColor:acceuil &&'#000'}}>
-            {!acceuil &&
+        <div className='footer' style={{ backgroundColor:acceuil ?'#000':'#fff'}}>
+            {logoFanch &&
             <div className='top'>
                 <img src={fanch} style={{width:'2.3612cm', height:'2.5722cm', margin:'auto'}} alt='fanch' className='fanch'/>
             </div>}

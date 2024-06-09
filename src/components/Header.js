@@ -46,7 +46,7 @@ function Header({acceuil}){
     }, []);
     
     return(
-        <div className='header' style={{ backgroundColor:acceuil &&'#000'}}>
+        <div className='header' style={{ backgroundColor:acceuil ?'#000':'#fff'}}>
             <div className='left'>
                 {workPhone?
                 <img src={Worklettre} style={{width:35.95, height:19}} alt='phonetique' onMouseOver={()=>setWorkPhone(false)} onClick={()=>navigate('/work')} />:<img src={work} style={{width:35.95, height:19}} alt='phonetique' onMouseOut={()=>setWorkPhone(true)} onClick={()=>navigate('/work')} />}

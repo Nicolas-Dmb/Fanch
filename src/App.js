@@ -10,18 +10,19 @@ import Footer from './components/Footer.js';
 
 function App() {
   const [acceuil, setAcceuil] = useState(false)
+  const [logoFanch, setLogoFanch] = useState(true)
   return (
     <div className='app-container' style={{backgroundColor: acceuil && 'black'}}>
       <Router>
         <Header acceuil={acceuil} />
           <div className='content'>
         <Routes>
-          <Route element={<Acceuil setAcceuil={setAcceuil}/>} path='/' exact/>
-          <Route element={<About setAcceuil={setAcceuil}/>} path='/about' exact/>
-          <Route element={<Work setAcceuil={setAcceuil}/>} path='/work' exact/>
+          <Route element={<Acceuil setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/' exact/>
+          <Route element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/about' exact/>
+          <Route element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/work' exact/>
         </Routes>
         </div>
-        <Footer acceuil={acceuil}/>
+        <Footer acceuil={acceuil} logoFanch={logoFanch}/>
       </Router>
     </div>
   );

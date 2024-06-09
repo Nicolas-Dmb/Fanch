@@ -3,7 +3,7 @@ import facefanch from '../static/image/facefanch.png';
 import bandeau from '../static/image/Bandeau.png';
 import signature from '../static/image/signature.png';
 
-function About({setAcceuil}) {
+function About({setAcceuil,setLogoFanch}) {
   const bannerRef = useRef(null);
   const [xPos, setXPos] = useState(0);
   const speed = 2; // Vitesse de défilement
@@ -11,6 +11,7 @@ function About({setAcceuil}) {
   // Utilisez useEffect pour simuler componentDidMount
   useEffect(() => {
     setAcceuil(false)
+    setLogoFanch(true)
     const banner = bannerRef.current;
     const images = banner.children;
 

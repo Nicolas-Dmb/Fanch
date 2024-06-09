@@ -30,6 +30,7 @@ html, body, #root, .app-container {
   display:flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .header{
@@ -154,54 +155,64 @@ html, body, #root, .app-container {
   margin-left:63%;
   margin-bottom: 15%;
 }
-
 /* Accueil */
 .point{
-  height:60vh;
-  width:100%;
-  display:flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-}
-.point .circle {
-  align-self: center;
-  background-color: black;
-  border-radius: 100%;
-  animation: circle 3s infinite;
-  overflow: hidden;
-}
-.point .circleClick{
-  position:absolute;
-  overflow: hidden;
-  align-self: center;
-  background-color: black;
-  animation: circleClick 3s 1;
+  position: relative;
+  height:80vh;
+  width:100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@keyframes circleClick {
-  0% {
-    top:50%;
-    right:50%;
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-  }
-  100% {
-    top:0%;
-    right:0%;
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-  }}
-@keyframes circle {
+.point .circle {
+  background-color: #000; /* Transparent black */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+.point .circleClick {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: black;
+  animation: expand 3s forwards;
+  overflow: hidden;
+}
+
+@keyframes pulse {
   0%, 100% {
     width: 50px;
     height: 50px;
   }
-
   50% {
     width: 40px;
     height: 40px;
   }
+}
+
+@keyframes expand {
+  0% {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+  }
+  100% {
+    width: 2500px; /* Large enough to cover the screen */
+    height: 2500px;
+    overflow: hidden; /* Large enough to cover the screen */
+  }
+}
+
+.partie2 {
+  position: absolute;
+  bottom: 0%;
+  left: 3%;
 }
