@@ -216,3 +216,11 @@ html, body, #root, .app-container {
   bottom: 0%;
   left: 3%;
 }
+
+/*Foto*/
+.pagefoto {
+  background-image: url("/src/static/image/BGFoto.png");
+  background-size: cover; /* ou contain, ou une taille spécifique */
+  background-repeat: no-repeat;
+  background-position: center;
+}

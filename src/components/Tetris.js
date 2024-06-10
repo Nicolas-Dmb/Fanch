@@ -27,7 +27,7 @@ function Tetris({descente}) {
         top: 0,
         left: 0,
         right: 0,
-        height: `${cellSize * 3.2}px`, // Couvrir les 4 premières lignes
+        height: `${cellSize * 6}px`, // Couvrir les 4 premières lignes
         backgroundColor: 'black',
         width:screenWidth,
     };
