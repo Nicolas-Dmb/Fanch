@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../static/css/Tetris.css';
 import Header from '../components/Header.js';
 import Footer from '../components/Footer.js';
+import { useNavigate } from 'react-router-dom';
 
 const screen = window.innerHeight;
 const screenWidth = window.innerWidth;
@@ -10,6 +11,7 @@ const screenHeight = screen - headerFooterHeight;
 const cellSize = screenHeight / 9;
 
 function Tetris({descente}) {
+    const navigate = useNavigate()
     const tetrisStyle = {
         position: 'relative',
         marginTop:68,
@@ -327,8 +329,8 @@ function Tetris({descente}) {
                 </div>
                 <div className='STurn' style={{display:`${huit <= 1?'none':'grid'}`,gridRow:`${huit <= 1? 1 : huit >= 7? 7 : huit} / span 2`,  gridColumn:` ${huit<5?5:6} / span  3`}}>
                     <div></div>
-                    <div className='Carre'></div>
-                    <div className='Carre'></div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
                     <div className='Carre'>{dix>=8.5&&'T'}</div>
                     <div className='Carre'>{dix>=9&&'E'}</div>
                     <div></div>
@@ -336,16 +338,16 @@ function Tetris({descente}) {
                 <div className={huit-1<4?'Pyramide':'PyramideTurn'} style={{display:`${huit-1 <= 1?'none':'grid'}`,gridRow:`${huit-1< 1 ? 1 : huit-1 >= 6 ? 6 : huit-1} / span ${huit-1<4?2:3}`,  gridColumn:`${huit-1>4?17:16}/ span ${huit-1<4?3:2}`}}>
                     <div className={huit-1<4&&'Carre'}></div>
                     <div className='Carre'></div>
-                    <div className='Carre'></div>
-                    <div className={huit-1>=4&&'Carre'}></div>
+                    <div className='Carre'onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
+                    <div className={huit-1>=4&&'Carre'} onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
                     <div className={huit-1<4&&'Carre'}></div>
                     <div className={huit-1>=4&&'Carre'}></div>
                 </div>
                 <div className='S' style={{display:`${huit-3 <= 1?'none':'grid'}`,gridRow:`${huit-3 <= 1? 1 : huit-3 >= 6 ? 6 : huit-3} / span 3`,  gridColumn:` ${huit-3<3?2:1} / span  2`}}>
                     <div></div>
                     <div className='Carre'></div>
-                    <div className='Carre'>{dix-3>=5&&'C'}</div>
-                    <div className='Carre'>{dix-3>=5.5&&'A'}</div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}>{dix-3>=5&&'C'}</div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}>{dix-3>=5.5&&'A'}</div>
                     <div className='Carre'>{dix>=6&&'V'}</div>
                     <div></div>
                 </div>
@@ -353,7 +355,7 @@ function Tetris({descente}) {
                     //Neuf
                 }
                 <div className={neuf<4?'STurn':'S'} style={{display:`${neuf <= 1?'none':'grid'}`,gridRow:`${neuf<=1? 1 : neuf >= 7 ? 7 : neuf} / span ${neuf<4?'2':'3'}`,  gridColumn:` ${neuf<4?9:10} / span ${neuf<4?'3':'2'}`}}>
-                    <div className={neuf>=4&&'Carre'}></div>
+                    <div className={neuf>=4&&'Carre'} onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
                     <div className={neuf<4&&'Carre'}></div>
                     <div className='Carre'>{dix>=10.5&&'T'}</div>
                     <div className='Carre'>{dix>=11&&'U'}</div>
@@ -361,18 +363,18 @@ function Tetris({descente}) {
                     <div className={neuf>=4&&'Carre'}></div>
                 </div>
                 <div className='Barre1' style={{display:`${neuf <= 1?'none':'grid'}`,gridRow: `${neuf<1?1:neuf>= 7 ? 7 :neuf} / span 1`, gridColumn: ` ${neuf<4? 4 :3} / span 4` }}>
-                    <div className='Carre'>{dix-3>=6&&'R'}</div>
-                    <div className='Carre'>{dix-3>=6.5&&'E'}</div>
-                    <div className='Carre'>{dix-3>=7&&'L'}</div>
-                    <div className='Carre'></div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}>{dix-3>=6&&'R'}</div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}} >{dix-3>=6.5&&'E'}</div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}>{dix-3>=7&&'L'}</div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
                 </div>
                 <div className={neuf-1===3?'PyramideTurn':'Pyramide'} style={{display:`${neuf-1 <= 1?'none':'grid'}`,gridRow:`${neuf-1 < 1 ? 1 : neuf-1 >= 6 ? 6 : neuf-1} / span ${neuf-1===3?3:2}`,  gridColumn:`${neuf-1 <3?14:13}/ span ${neuf-1 ===3?2:3}`}}>
                     <div className={neuf-1<3&&'Carre'}></div>
                     <div className='Carre'></div>
                     <div className={neuf-1<=3&&'Carre'}></div>
-                    <div className={neuf-1>=3&&'Carre'}></div>
-                    <div className={neuf-1!==3&&'Carre'}></div>
-                    <div className={neuf-1>=3&&'Carre'}></div>
+                    <div className={neuf-1>=3&&'Carre'} onClick={()=>{dix-3>=7 && navigate('carel')}}></div>
+                    <div className={neuf-1!==3&&'Carre'} onClick={()=>{dix-3>=7 && navigate('carel')}}></div>
+                    <div className={neuf-1>=3&&'Carre'} onClick={()=>{dix-3>=7 &&navigate('carel')}}></div>
                 </div>
                 {
                     //Dix
@@ -380,8 +382,8 @@ function Tetris({descente}) {
                 <div className={dix<4?'STurn':'S'} style={{display:`${dix <= 1?'none':'grid'}`,gridRow:`${dix<=1? 1 : dix >= 6 ? 6 : dix} / span ${dix<4?'2':'3'}`,  gridColumn:` ${dix<4?10:11} / span ${dix<4?'3':'2'}`}}>
                     <div className={dix>=4&&'Carre'}></div>
                     <div className={dix<4&&'Carre'}></div>
-                    <div className='Carre'></div>
-                    <div className='Carre'></div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
                     <div className={dix<4&&'Carre'}></div>
                     <div className={dix>=4&&'Carre'}>{dix>=11.5&&'D'}</div>
                 </div>
@@ -391,7 +393,7 @@ function Tetris({descente}) {
                     <div className='Carre'></div> 
                     <div></div>
                     <div></div> 
-                    <div className='Carre'></div>
+                    <div className='Carre' onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
                 </div>
                 <div className={dix-1<3?'STurn':'S'} style={{display:`${dix-1 <= 1?'none':'grid'}`,gridRow:`${dix-1<=1? 1 : dix-1 >= 5? 5 : dix-1} / span ${dix-1<3?'2':'3'}`,  gridColumn:` ${dix-1<3?14:15} / span ${dix-1<3?'3':'2'}`}}>
                     <div className={dix-1>=3&&'Carre'}></div>
@@ -399,7 +401,7 @@ function Tetris({descente}) {
                     <div className='Carre'></div>
                     <div className='Carre'></div>
                     <div className={dix-1<3&&'Carre'}></div>
-                    <div className={dix-1>=3&&'Carre'}></div>
+                    <div className={dix-1>=3&&'Carre'} onClick={()=>{dix-3>=7&&navigate('carel')}}></div>
                 </div>
             </div>
         </div>

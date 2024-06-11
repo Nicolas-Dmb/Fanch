@@ -7,6 +7,7 @@ import About from './pages/about.js';
 import Work from './pages/work.js';
 import Footer from './components/Footer.js';
 import Foto from './pages/foto.js';
+import Carel from './pages/carel.js';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/about' exact/>
           <Route element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/work' exact/>
           <Route element={<Foto setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/Foto' exact/>
+          <Route element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/carel' exact/>
         </Routes>
         </div>
         <Footer acceuil={acceuil} logoFanch={logoFanch}/>

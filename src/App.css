@@ -224,3 +224,142 @@ html, body, #root, .app-container {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+/*Carel*/
+
+.Carel {
+  height: 180vh;
+  width: 100vw;
+}
+
+.Carel .Top {
+  display: flex;
+  flex-direction: row;
+  height: 25%;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.Carel .Top .Picture{
+  position:relative;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Carel .Top .Picture img{
+  position:absolute;
+  top:67%;
+  width:300px;
+
+}
+
+.Carel .Top p {
+  font-size: 500px;
+  margin: 0;
+  padding: 0;
+  line-height: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Carel .Bottom {
+  display: grid;
+  grid-template-columns: repeat(22, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+}
+
+.Carel .Bottom .Concorde {
+  grid-column: 3 / span 1;
+  grid-row: 3 / span 8;
+  display: grid;
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+}
+.Carel .Bottom .Clemenceau {
+  grid-column: 1 / span 9;
+  grid-row: 11 / span 1;
+  display: grid;
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+.Carel .Bottom .Lorette {
+  grid-column: 7 / span 1;
+  grid-row: 8 / span 7;
+  display: grid;
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+}
+.Carel .Bottom .Nikita {
+  grid-column: 3 / span 6;
+  grid-row: 13 / span 1;
+  display: grid;
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+.Carel .Bottom .Clochette{
+  grid-column: 6 / span 9;
+  grid-row: 8 / span 1;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+}
+.Carel .Bottom .Elysee {
+  grid-column: 11 / span 1;
+  grid-row: 3 / span 6;
+  display: grid;
+  grid-template-rows: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.Carel .Bottom .Vintage {
+  grid-column: 14 / span 1;
+  grid-row: 2 / span 7;
+  display: grid;
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.Carel .Bottom .Raya{
+  grid-column: 13 / span 4;
+  grid-row: 6 / span 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+}
+.Carel .Bottom .Mimi{
+  grid-column: 13 / span 4;
+  grid-row: 3 / span 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+}
+.Carel .Bottom .Dauphine {
+  grid-column: 16 / span 1;
+  grid-row: 5 / span 8;
+  display: grid;
+  grid-template-rows: repeat(8, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.Carel .Bottom .Rivoli{
+  grid-column: 11 / span 6;
+  grid-row: 10 / span 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+}
+.Carel .Bottom .Madeleine{
+  grid-column: 13 / span 9;
+  grid-row: 12 / span 1;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+}
+.Carel .Bottom .Carre {
+  border: 1px solid #000;
+  color: #ccc;
+  font-family: 'titre';
+  color:#000;
+}
