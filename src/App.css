@@ -231,7 +231,6 @@ html, body, #root, .app-container {
   height: 180vh;
   width: 100vw;
 }
-
 .Carel .Top {
   display: flex;
   flex-direction: row;
@@ -245,32 +244,13 @@ html, body, #root, .app-container {
 .Carel .Top .Picture{
   position:relative;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.Carel .Top .Picture .Picture1{
-  position:absolute;
   top:67%;
   width:300px;
 }
-.Carel .Top .Picture .Picture2{
-  position:absolute;
-  top:67%;
-  width:300px;
-  animation: invisible 10s infinite;
-}
-@keyframes invisible {
-  0%,75% ,100% {
-    opacity: 0; 
-  }
-  25%, 50% {
-    opacity: 1;
-  }
-}
-
 .Carel .Top p {
   font-size: 500px;
   margin: 0;

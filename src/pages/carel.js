@@ -1,6 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
-import carel1 from '../static/image/carel1.png';
-import carel2 from '../static/image/carel2.png';
+import carel1 from '../static/image/carel_1.png';
+import carel2 from '../static/image/carel_2.png';
+import carel3 from '../static/image/carel_3.png';
+import carel4 from '../static/image/carel_4.png';
+import carel5 from '../static/image/carel_5.png';
+import carel6 from '../static/image/carel_6.png';
+import carel7 from '../static/image/carel_7.png';
+import carel8 from '../static/image/carel_8.png';
 import ligne from '../static/image/Ligne.png';
 import ligne1 from '../static/image/Ligne1.png';
 
@@ -30,17 +36,16 @@ function Carel({ setAcceuil, setLogoFanch }) {
         BottomMargin: (window.innerWidth / 100) * 5
 
     });
-    useEffect(()=>{
-        let temps = 3000;
-        let interval = setInterval(() => {
-            if (display===true){
-                    setDisplay(false)
-                }else{
-                    setDisplay(true)
-                }
+    const carels = [carel1, carel2, carel3, carel4, carel5, carel6, carel7, carel8];
+    const [imgcarel, setImgCarel] = useState(0);
+    
+    useEffect(() => {
+        const temps = 2000; // Temps en millisecondes entre les changements d'images
+        const interval = setInterval(() => {
+        setImgCarel((prevImgCarel) => (prevImgCarel + 1) % carels.length);
         }, temps);
         return () => clearInterval(interval);
-    },)
+    }, [carels.length]);
 
     useEffect(() => {
         setAcceuil(false);
@@ -68,10 +73,9 @@ function Carel({ setAcceuil, setLogoFanch }) {
         <div className='Carel'>
             <div className='Top'>
                     <p>B</p>
-                    <div className='Picture'>
+                    <div className='A'>
                         <p>A</p>
-                        <img src={carel1} className='Picture1' alt='BAG'/>
-                        <img src={carel2} className='Picture2' alt='BAG'/>
+                        <img src={carels[0]} className='Picture' alt={`BAG`} />
                     </div>
                     <p>G</p>
             </div>

@@ -16,14 +16,14 @@ function App() {
   return (
     <div className='app-container' style={{backgroundColor: acceuil && 'black'}}>
       <Router>
-        <Header acceuil={acceuil} />
+        <Header acceuil={acceuil}/>
           <div className='content'>
         <Routes>
           <Route element={<Acceuil setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/' exact/>
-          <Route element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/about' exact/>
-          <Route element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/work' exact/>
-          <Route element={<Foto setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/Foto' exact/>
-          <Route element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/carel' exact/>
+          <Route element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/about'/>
+          <Route element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/work'/>
+          <Route element={<Foto setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/photo'/>
+          <Route element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch}/>} path='/carel'/>
         </Routes>
         </div>
         <Footer acceuil={acceuil} logoFanch={logoFanch}/>

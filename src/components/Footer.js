@@ -7,6 +7,11 @@ import instaPhon from '../static/image/Instaphon.png';
 import linkedin from '../static/image/linkedin.png';
 import linkedinPhon from '../static/image/linkedinphon.png';
 import copyright from '../static/image/copyright.png';
+import insta_white from '../static/image/Insta_white.png';
+import instaPhon_white from '../static/image/Instapho_white.png';
+import linkedin_white from '../static/image/Linkedin_white.png';
+import linkedinPhon_white from '../static/image/Linkedinpho_white.png';
+import copyright_white from '../static/image/copyright_white.png';
 
 function Footer({acceuil, logoFanch}){
     const navigate = useNavigate()
@@ -59,11 +64,11 @@ function Footer({acceuil, logoFanch}){
                     </div>
                     <div className='columnlink' style={instagram ? {gap:'5px'} : {gap: '3.5px' }}>
                         {instagram?
-                        <img src={insta} style={{width:'1.41448cm', height:'0.3064cm'}} alt='instagrame' onMouseOver={()=>setInsta(false)} onClick={handleImageClick} />:
-                        <img src={instaPhon} style={{width:'1.49592cm', height:'0.34312cm'}} alt='instagrame phonetique' onMouseOut={()=>setInsta(true)} onClick={handleImageClick} />}
+                        <img src={acceuil ?insta_white:insta} style={{width:'1.41448cm', height:'0.3064cm'}} alt='instagrame' onMouseOver={()=>setInsta(false)} onClick={handleImageClick} />:
+                        <img src={acceuil ?instaPhon_white:instaPhon} style={{width:'1.49592cm', height:'0.34312cm'}} alt='instagrame phonetique' onMouseOut={()=>setInsta(true)} onClick={handleImageClick} />}
                         {linke? 
-                        <img src={linkedin} style={{width:'1.21744cm', height:'0.3064cm', ...instagram ? {} : {margin:'2px'}}} onMouseOver={()=>setLinke(false)} alt='linkedin' onClick={handleLinkedinImageClick}/>:
-                        <img src={linkedinPhon} style={{width:'0.97896cm', height:'0.31776cm'}} onMouseOut={()=>setLinke(true)} alt='Linkedine phonetique' onClick={handleLinkedinImageClick}/>}
+                        <img src={acceuil ?linkedin_white:linkedin} style={{width:'1.21744cm', height:'0.3064cm', ...instagram ? {} : {margin:'2px'}}} onMouseOver={()=>setLinke(false)} alt='linkedin' onClick={handleLinkedinImageClick}/>:
+                        <img src={acceuil ?linkedinPhon_white:linkedinPhon} style={{width:'0.97896cm', height:'0.31776cm'}} onMouseOut={()=>setLinke(true)} alt='Linkedine phonetique' onClick={handleLinkedinImageClick}/>}
                     </div>
                     <div className='column'>
                         <p style={{ color:acceuil &&'#fff'}}>Paris {timeString}</p>
@@ -71,7 +76,7 @@ function Footer({acceuil, logoFanch}){
                     </div>
                 </div>
                 <div className='right'>
-                    <img src={copyright} style={{width:'3.2766cm', height:'0.2746cm'}} alt='copyright' className='copyright'/>
+                    <img src={acceuil ?copyright_white:copyright} style={{width:'3.2766cm', height:'0.2746cm'}} alt='copyright' className='copyright'/>
                 </div>
             </div>
         </div>

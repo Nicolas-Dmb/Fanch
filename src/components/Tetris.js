@@ -116,14 +116,14 @@ function Tetris({descente}) {
                 <div className='Cube' style={{display:`${un <= 1?'none':'grid'}`,gridRow: `${un >= 12 ? 12 : un} / span 2`, gridColumn: '1 / span 2 '}}>
                     <div className='Carre'>{quatre-1 >= 11&&'I'}</div>
                     <div className='Carre'>{quatre-1 >= 11.5&&'L'}</div>
-                    <div className='Carre'>{deux-3 >= 11&&'P'}</div>
-                    <div className='Carre'>{deux-3 >= 11.5&&'H'}</div>
+                    <div className='Carre' onClick={()=>navigate('/photo')}>{deux-3 >= 11&&'P'}</div>
+                    <div className='Carre' onClick={()=>navigate('/photo')}>{deux-3 >= 11.5&&'H'}</div>
                 </div>
                 <div className={un-1>9?'LTurn':'L'} style={{display:`${un-1 <= 1?'none':'grid'}`,gridRow:`${un-1 <= 1? 1 : un-1 >= 12 ? 12 : un-1} / span ${un-1>9?2:3}`,  gridColumn:`${un-1<10?11:un-1>10?11:10}/ span ${un-1>9?3:2}`}}>
                     <div className='Carre'>{quatre-1 >= 16&&'0'}</div>
                     <div className={un-1<=9&&'Carre'}></div>
                     <div className={un-1<=9&&'Carre'}></div>
-                    <div className={un-1>9&&'Carre'}>{deux-3 >= 16&&'Y'}</div> 
+                    <div className={un-1>9&&'Carre'} onClick={()=>navigate('/photo')}>{deux-3 >= 16&&'Y'}</div> 
                     <div className='Carre'></div>
                     <div className={un-1>9&&'Carre'}></div>
                 </div>
@@ -131,9 +131,9 @@ function Tetris({descente}) {
                     <div className={un-2<6&&'Carre'}></div>
                     <div className='Carre'>{quatre-1 >= 14&&'R'}</div>
                     <div className={un-2<=6&&'Carre'}></div>
-                    <div className={un-2>=6&&'Carre'}>{deux-3 >= 13.5&&'G'}</div>
-                    <div className={un-2!==6&&'Carre'}>{deux-3 >= 14&&'R'}</div>
-                    <div className={un-2>=6&&'Carre'}>{deux-3 >= 14.5&&'A'}</div>
+                    <div className={un-2>=6&&'Carre'} onClick={()=>navigate('/photo')}>{deux-3 >= 13.5&&'G'}</div>
+                    <div className={un-2!==6&&'Carre'} onClick={()=>navigate('/photo')}>{deux-3 >= 14&&'R'}</div>
+                    <div className={un-2>=6&&'Carre'} onClick={()=>navigate('/photo')}>{deux-3 >= 14.5&&'A'}</div>
                 </div>
                 <div className='Barre1' style={{display:`${un-2 <= 1?'none':'grid'}`,gridRow: `${un-2<1?1:un-3 >= 13 ? 13 : un-2} / span 1`, gridColumn: ` ${un-2<7? 15 :14} / span 4` }}>
                     <div className='Carre'></div>
@@ -153,17 +153,18 @@ function Tetris({descente}) {
                     <div className={deux-1<=6&&'Carre'}></div>
                     <div className={deux-1<=6&&'Carre'}></div>
                     <div className={deux-1>6&&'Carre'}>{quatre-1>= 13&&'S'}</div>
-                    <div className='Carre'>{deux-3 >= 12&&'0'}</div> 
-                    <div className={deux-1>6&&'Carre'}>{deux-3 >= 12.5&&'T'}</div>
-                    <div className='Carre'>{deux-3 >= 13&&'0'}</div>
+                    <div className='Carre' onClick={()=>navigate('/photo')}>{deux-3 >= 12&&'0'}</div> 
+                    <div className={deux-1>6&&'Carre'} onClick={()=>navigate('/photo')}>{deux-3 >= 12.5&&'T'}</div>
+                    <div className='Carre' onClick={()=>navigate('/photo')}>{deux-3 >= 13&&'0'}</div>
                 </div>
                 <div className='STurn' style={{display:`${deux-2 <= 1?'none':'grid'}`,gridRow:`${deux-2<=1? 1 : deux-2 >= 12 ? 12 : deux-2} / span 2`,  gridColumn:` ${deux-2<=6?6:deux-2===7?7:8} / span 3`}}>
                     <div className='Carre'>{quatre-1 >= 14.5&&'A'}</div>
                     <div className='Carre'>{quatre-1 >= 15&&'T'}</div>
                     <div></div>
-                    <div></div>
-                    <div className='Carre'>{deux-3 >= 15&&'P'}</div>
-                    <div className='Carre'>{deux-3 >= 15.5&&'H'}</div>
+                    <div onClick={()=>navigate('/photo')}></div>{//car il est au dessus du A de photography
+                    }
+                    <div className='Carre' onClick={()=>navigate('/photo')}>{deux-3 >= 15&&'P'}</div>
+                    <div className='Carre' onClick={()=>navigate('/photo')}>{deux-3 >= 15.5&&'H'}</div>
                 </div>
                 <div className={deux-3<9?'STurn':'S'} style={{display:`${deux-3 <= 1?'none':'grid'}`,gridRow:`${deux-3<=1? 1 : deux-3 >= 11 ? 11 : deux-3} / span ${deux-3<9?'2':'3'}`,  gridColumn:` ${deux-3<9?16:17} / span ${deux-3<9?'3':'2'}`}}>
                     <div className={deux-3>=9&&'Carre'}></div>
