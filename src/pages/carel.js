@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import carel1 from '../static/image/carel_1.png';
 import carel2 from '../static/image/carel_2.png';
 import carel3 from '../static/image/carel_3.png';
@@ -10,47 +10,64 @@ import carel8 from '../static/image/carel_8.png';
 import ligne from '../static/image/Ligne.png';
 import ligne1 from '../static/image/Ligne1.png';
 
-//style={{display:!display?'none':'block'}}
-//style={{display:!display?'block':'none'}}
 function Carel({ setAcceuil, setLogoFanch }) {
-    const [display, setDisplay] = useState(true)
-    const [stop, setStop] = useState(false)
+    const [display, setDisplay] = useState(true);
+    const [stop, setStop] = useState(false);
 
-    const [concorde, setConcorde] = useState(false)
-    const [clemenceau, setClemenceau] = useState(false)
-    const [nikita, setNikita] = useState(false)
-    const [lorette, setLorette] = useState(false)
-    const [clochette, setClochette] = useState(false)
-    const [elysee, setElysee] = useState(false)
-    const [vintage, setVintage] = useState(false)
-    const [mimi, setMimi] = useState(false)
-    const [raya, setRaya] = useState(false)
-    const [dauphine, setDauphine] = useState(false)
-    const [rivoli, setRivoli] = useState(false)
-    const [madeleine, setMadeleine] = useState(false)
+    const [concorde, setConcorde] = useState(false);
+    const [clemenceau, setClemenceau] = useState(false);
+    const [nikita, setNikita] = useState(false);
+    const [lorette, setLorette] = useState(false);
+    const [clochette, setClochette] = useState(false);
+    const [elysee, setElysee] = useState(false);
+    const [vintage, setVintage] = useState(false);
+    const [mimi, setMimi] = useState(false);
+    const [raya, setRaya] = useState(false);
+    const [dauphine, setDauphine] = useState(false);
+    const [rivoli, setRivoli] = useState(false);
+    const [madeleine, setMadeleine] = useState(false);
 
     const [screenDimensions, setScreenDimensions] = useState({
         screenHeight: window.innerHeight,
         screenWidth: window.innerWidth,
         BottomWidth: (window.innerWidth / 100) * 90,
         BottomMargin: (window.innerWidth / 100) * 5
-
     });
+
     const carels = [carel1, carel2, carel3, carel4, carel5, carel6, carel7, carel8];
-    const [imgcarel, setImgCarel] = useState(0);
-    
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+
     useEffect(() => {
-        const temps = 2000; // Temps en millisecondes entre les changements d'images
-        const interval = setInterval(() => {
-        setImgCarel((prevImgCarel) => (prevImgCarel + 1) % carels.length);
-        }, temps);
-        return () => clearInterval(interval);
-    }, [carels.length]);
+        const preloadImages = async () => {
+            const promises = carels.map((src) => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = resolve;
+                    img.onerror = reject;
+                });
+            });
+            await Promise.all(promises);
+            setImagesLoaded(true);
+        };
+        preloadImages();
+    }, [carels]);
+
+    useEffect(() => {
+        if (imagesLoaded) {
+            const interval = setInterval(() => {
+                setCurrentIndex((prevIndex) => (prevIndex + 1) % carels.length);
+            }, 1000); // Change image every second
+
+            return () => clearInterval(interval); // Cleanup the interval on component unmount
+        }
+    }, [carels.length, imagesLoaded]);
 
     useEffect(() => {
         setAcceuil(false);
         setLogoFanch(true);
-        
+
         const handleResize = () => {
             setScreenDimensions({
                 screenHeight: window.innerHeight,
@@ -59,9 +76,9 @@ function Carel({ setAcceuil, setLogoFanch }) {
                 BottomMargin: (window.innerWidth / 100) * 5
             });
         };
-        
+
         window.addEventListener('resize', handleResize);
-        
+
         return () => {
             window.removeEventListener('resize', handleResize);
         };
@@ -72,12 +89,24 @@ function Carel({ setAcceuil, setLogoFanch }) {
     return (
         <div className='Carel'>
             <div className='Top'>
-                    <p>B</p>
-                    <div className='A'>
-                        <p>A</p>
-                        <img src={carels[0]} className='Picture' alt={`BAG`} />
-                    </div>
-                    <p>G</p>
+                <p>B</p>
+                <div style={{ position: 'relative' }}>
+                    <p>A</p>
+                    {imagesLoaded && (
+                        <img
+                            src={carels[currentIndex]}
+                            className='A'
+                            alt='BAG'
+                            style={{
+                                position: 'absolute',
+                                top: '87%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                            }}
+                        />
+                    )}
+                </div>
+                <p>G</p>
             </div>
             <div className='Bottom' style={{ width: BottomWidth, height: BottomWidth * 0.63,margin:BottomMargin,marginTop: '100px', position:'absolute' }}>
                     <img src={ligne} className='LigneConcorde' style={{height:BottomWidth * 0.63/13*8, width:BottomWidth/30, margin:'20px 10px', display:concorde?'block':'none'}}/>

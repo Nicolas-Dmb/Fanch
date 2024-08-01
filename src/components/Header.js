@@ -69,7 +69,9 @@ function Header({acceuil}){
                 <img src={acceuil ?about_white:Aboutlettre} onMouseOver={()=>setAboutPhone(false)} style={{width:41.22, height:19}} className='lien' alt='phonetique' onClick={()=>navigate('/about')}/>:<img src={acceuil ?aboutphon_white:about} onMouseOut={()=>setAboutPhone(true)} style={{width:41.22, height:19}} className='lien' alt='phonetique'onClick={()=>navigate('/about')}/>}
             </div>
             <p className='FANCH' style={{ color: acceuil&&'#fff'}}>FANCH</p>
-            <img  src={acceuil ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={acceuil ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('')}/>
+            <div className='house'>
+                <img  src={acceuil ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={acceuil ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('')}/>
+            </div>
         </div>
     );
 }
