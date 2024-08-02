@@ -231,7 +231,7 @@ html, body, #root, .app-container {
 /*Carel*/
 
 .Carel {
-  height: 180vh;
+  height: 230vh;
   width: 100vw;
 }
 .Carel .Top {
@@ -259,9 +259,47 @@ html, body, #root, .app-container {
   transform: translate(-0%, 0);  Centrage horizontal 
   */
 }
+.Carel .Text{
+  padding:0px 100px 0px 100px;
+  margin-top : 300px;
+  font-family:'titre', sans-serif;
+  font-size: 2.2vh;
+  text-align: justify;
+  width:85%
+}
+.Carel .signature{
+  margin-left:70%;
+}
+.Carel .title{
+  display:flex;
+  justify-content: flex-end;
+  margin-right: 100px;
+}
+.Carel .Bottom .collection{
+  font-family:'titre', sans-serif;
+  font-size: 3.5vh;
+  display:grid;
+  white-space: nowrap;
+  grid-column: 18 / span 3;
+  grid-row: 1 / span 2;
+  justify-self: end;
+  align-self: start;
+  margin:0;
+}
+.Carel .Bottom .maroquinerie{
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family:'titre', sans-serif;
+  font-size: 3.5vh;
+  display:grid;
+  grid-column: 21 / span 1;
+  grid-row: 1 / span 4;
+  width:5px;
+  justify-self: start;
+  margin-top:5px;
 
+}
 .Carel .Bottom {
-  padding-top:10%;
   display: grid;
   grid-template-columns: repeat(21, 1fr);
   grid-template-rows: repeat(14, 1fr);

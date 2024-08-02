@@ -9,6 +9,7 @@ import carel7 from '../static/image/carel_7.png';
 import carel8 from '../static/image/carel_8.png';
 import ligne from '../static/image/Ligne.png';
 import ligne1 from '../static/image/Ligne1.png';
+import signature from '../static/image/signature_carel.png';
 
 function Carel({ setAcceuil, setLogoFanch }) {
     const [display, setDisplay] = useState(true);
@@ -108,7 +109,13 @@ function Carel({ setAcceuil, setLogoFanch }) {
                 </div>
                 <p>G</p>
             </div>
+            <div className='Center'>
+                <p className='Text'>Depuis septembre 2023, j'occupe le poste de designer maroquinerie chez Carel. Chargé de son développement, j'ai conçu et introduit de nouveaux modèles. L'un de mes défis est d'inculquer dans mes créations l'esprit du design des années 60, caractérisé par des lignes épurées, des formes géométriques et des couleurs vives. Mon objectif est de réinterpréter cette esthétique emblématique en l'intégrant à la maroquinerie Carel.</p>
+                <img className='signature' src={signature} alt='signature'/>
+            </div>
             <div className='Bottom' style={{ width: BottomWidth, height: BottomWidth * 0.63,margin:BottomMargin,marginTop: '100px', position:'absolute' }}>
+                    <p className='collection'>LA COLLECTION:</p>
+                    <p className='maroquinerie'>MAROQUINERIE</p>
                     <img src={ligne} className='LigneConcorde' style={{height:BottomWidth * 0.63/13*8, width:BottomWidth/30, margin:'20px 10px', display:concorde?'block':'none'}}/>
                     <img src={ligne1} className='LigneClemenceau' style={{height:BottomWidth * 0.63/16, width:BottomWidth/21*9, display:clemenceau?'block':'none'}}/>
                     <img src={ligne1} className='LigneNikita' style={{height:BottomWidth * 0.63/16, width:BottomWidth/21*6, display:nikita?'block':'none'}}/>
