@@ -8,7 +8,7 @@ import Work from './pages/work';
 import Footer from './components/Footer';
 import Foto from './pages/foto';
 import Carel from './pages/carel';
-import Nika from './pages/nika';
+import Nika from './pages/nika.tsx';
 import './index.css';
 import Background from './entities/Background.ts';
 
@@ -19,10 +19,10 @@ const App: React.FC = () => {
   const [logoFanch, setLogoFanch] = useState<boolean>(true);
 
   return (
-    <div className="app-container" style={{ backgroundColor: acceuil }}>
+    <div id="nika-wrapper" className="h-screen w-screen flex flex-col" style={{ backgroundColor: acceuil }} >
       <Router>
         <Header acceuil={acceuil} />
-        <div className="content">
+        <div className="relative overflow-hidden flex-1">
           <Routes>
             <Route path="/" element={<Acceuil setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} />} />
             <Route path="/about" element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} />} />

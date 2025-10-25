@@ -49,7 +49,7 @@ function Footer({acceuil, logoFanch}){
    
     const { dateString, timeString } = formatDateTime(dateTime);
     return(
-        <div className='footer' style={{ backgroundColor:acceuil}}>
+        <div className=" footer h-18" style={{ backgroundColor:acceuil}}>
             {logoFanch &&
             <div className='top'>
                 <img src={fanch} style={{width:'2.3612cm', height:'2.5722cm', margin:'auto'}} alt='fanch' className='fanch'/>
