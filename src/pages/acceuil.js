@@ -1,11 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import Typewriter from 'typewriter-effect';
 import Tetris from '../components/Tetris.js'
-import Header from '../components/Header.js';
-import Footer from '../components/Footer.js';
-
-const screen = window.innerHeight;
-const screenWidth = window.innerWidth;
+import Background from '../entities/Background.ts';
 
 function Acceuil({ setAcceuil, setLogoFanch }) {
   const [nameCircle, setNameCircle] = useState('circle');
@@ -13,7 +9,7 @@ function Acceuil({ setAcceuil, setLogoFanch }) {
   const [descente, setDescente] = useState(); // Décompte
 
   useEffect(() => {
-    setAcceuil(background);
+    setAcceuil(Background.White);
     setLogoFanch(false);
   }, [background, setAcceuil, setLogoFanch]);
 

@@ -10,6 +10,8 @@ import carel8 from '../static/image/carel_8.png';
 import ligne from '../static/image/Ligne.png';
 import ligne1 from '../static/image/Ligne1.png';
 import signature from '../static/image/signature_carel.png';
+import Background from '../entities/Background.ts';
+
 
 function Carel({ setAcceuil, setLogoFanch }) {
     const [display, setDisplay] = useState(true);
@@ -66,7 +68,7 @@ function Carel({ setAcceuil, setLogoFanch }) {
     }, [carels.length, imagesLoaded]);
 
     useEffect(() => {
-        setAcceuil(false);
+        setAcceuil(Background.White);
         setLogoFanch(true);
 
         const handleResize = () => {

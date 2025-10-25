@@ -19,6 +19,7 @@ import workphon_white from '../static/image/workphon_white.png'
 import aboutphon_white from '../static/image/aboutphon_white.png'
 import Worklettre from  '../static/image/Worklettre.png';
 import Aboutlettre from  '../static/image/Aboutlettre.png'
+import Background from '../entities/Background.ts';
 
 
 function Header({acceuil}){
@@ -35,10 +36,10 @@ function Header({acceuil}){
     let handleMouseOver=()=>{
         let index = 0;
         intervalId = setInterval(() => {
-            acceuil ?
+            acceuil === Background.Black ?
             setCurrentImage_white(images_white[index]):
             setCurrentImage(images[index]);
-            acceuil ?
+            acceuil === Background.Black ?
             index = (index + 1) % images_white.length:
             index = (index + 1) % images.length;
         }, 1000);
@@ -61,16 +62,16 @@ function Header({acceuil}){
     }, []);
     
     return(
-        <div className='header' style={{ backgroundColor:acceuil ?'#000':'#fff'}}>
+        <div className='header' style={{ backgroundColor: acceuil }}>
             <div className='left'>
                 {workPhone?
-                <img src={acceuil ?work_white:Worklettre} style={{width:35.95, height:19}} alt='phonetique' onMouseOver={()=>setWorkPhone(false)} onClick={()=>navigate('/work')} />:<img src={acceuil ?workphon_white:work} style={{width:35.95, height:19}} alt='phonetique' onMouseOut={()=>setWorkPhone(true)} onClick={()=>navigate('/work')} />}
+                <img src={acceuil === Background.Black ?work_white:Worklettre} style={{width:35.95, height:19}} alt='phonetique' onMouseOver={()=>setWorkPhone(false)} onClick={()=>navigate('/work')} />:<img src={acceuil ?workphon_white:work} style={{width:35.95, height:19}} alt='phonetique' onMouseOut={()=>setWorkPhone(true)} onClick={()=>navigate('/work')} />}
                 {aboutPhone? 
-                <img src={acceuil ?about_white:Aboutlettre} onMouseOver={()=>setAboutPhone(false)} style={{width:41.22, height:19}} className='lien' alt='phonetique' onClick={()=>navigate('/about')}/>:<img src={acceuil ?aboutphon_white:about} onMouseOut={()=>setAboutPhone(true)} style={{width:41.22, height:19}} className='lien' alt='phonetique'onClick={()=>navigate('/about')}/>}
+                <img src={acceuil === Background.Black ?about_white:Aboutlettre} onMouseOver={()=>setAboutPhone(false)} style={{width:41.22, height:19}} className='lien' alt='phonetique' onClick={()=>navigate('/about')}/>:<img src={acceuil === Background.Black ?aboutphon_white:about} onMouseOut={()=>setAboutPhone(true)} style={{width:41.22, height:19}} className='lien' alt='phonetique'onClick={()=>navigate('/about')}/>}
             </div>
-            <p className='FANCH' style={{ color: acceuil&&'#fff'}}>FANCH</p>
+            <p className='FANCH' style={{ color: acceuil === Background.Black ?? '#fff'}}>FANCH</p>
             <div className='house'>
-                <img  src={acceuil ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={acceuil ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('')}/>
+                <img  src={acceuil === Background.Black ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={acceuil=== Background.Black ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('')}/>
             </div>
         </div>
     );

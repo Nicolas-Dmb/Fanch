@@ -3,6 +3,7 @@ import foto1 from '../static/image/foto1.png';
 import foto2 from '../static/image/foto2.png';
 import foto3 from '../static/image/foto3.png';
 import foto4 from '../static/image/foto4.png';
+import Background from '../entities/Background.ts';
 
 
 const screen = window.innerHeight;
@@ -19,7 +20,7 @@ function Foto({ setAcceuil, setLogoFanch }) {
     const [Foto, setFoto] = useState(1)
 
     useEffect(() => {
-        setAcceuil(false);
+        setAcceuil(Background.White);
         setLogoFanch(false);
 
         const handleMouseMove = (event) => {

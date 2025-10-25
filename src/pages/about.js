@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import facefanch from '../static/image/facefanch.png';
 import bandeau from '../static/image/Bandeau.png';
 import signature from '../static/image/signature.png';
+import Background from '../entities/Background.ts';
 
 function About({setAcceuil,setLogoFanch}) {
   const bannerRef = useRef(null);
@@ -10,7 +11,7 @@ function About({setAcceuil,setLogoFanch}) {
 
   // Utilisez useEffect pour simuler componentDidMount
   useEffect(() => {
-    setAcceuil(false)
+    setAcceuil(Background.White)
     setLogoFanch(true)
     const banner = bannerRef.current;
     const images = banner.children;
