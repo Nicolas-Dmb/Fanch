@@ -24,84 +24,87 @@ export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
   const aRef = useRef<HTMLParagraphElement | null>(null);
 
   useEffect(() => {
-    const wrapperEl = document.getElementById("nika-wrapper");
-    const textEl = textRef.current;
-    const nEl = nRef.current;
-    const iEl = iRef.current;
-    const kEl = kRef.current;
-    const aEl = aRef.current;
+  const wrapperEl = document.getElementById("nika-wrapper");
+  const textEl = textRef.current;
+  const nEl = nRef.current;
+  const iEl = iRef.current;
+  const kEl = kRef.current;
+  const aEl = aRef.current;
 
-    if (!wrapperEl || !textEl || !nEl || !iEl || !kEl || !aEl) return;
+  if (!wrapperEl || !textEl || !nEl || !iEl || !kEl || !aEl) return;
 
-    // reset
-    gsap.set(textEl, { yPercent: -5, xPercent: 0, rotate: 0 });
-    gsap.set([nEl, iEl, kEl, aEl], {
-      rotate: 0,
-      x: 0,
-      y: 0,
-      transformOrigin: "bottom left",
-    });
+  gsap.set(textEl, { yPercent: -5, xPercent: 0, rotate: 0 });
+  gsap.set([nEl, iEl, kEl, aEl], {
+    rotate: 0,
+    x: 0,
+    y: 0,
+    transformOrigin: "bottom left",
+  });
 
-    // === 1️⃣ TIMELINE PRINCIPALE CONTROLE PAR LE SCROLL ===
-    const mainTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapperEl,
-        start: "top top",
-        end: "+=5000", // long scroll
-        scrub: true,
-        pin: true,
-        anticipatePin: 1,
-        // markers: true,
-      },
-    });
+  const mainTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: wrapperEl,
+      start: "top top",
+      end: "+=5000",
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+    },
+  });
 
-    // === 2️⃣ PHASE 1: rotation globale de l’écran ===
-    const screenTiltTl = gsap.timeline();
-    screenTiltTl.to(textEl, {
-      xPercent: -70,
-      ease: "none",
-      duration: 0.4,
-    });
+  // PHASE 1 : tilt the screen
+  const screenTiltTl = gsap.timeline();
+  screenTiltTl.to(textEl, {
+    xPercent: -70,
+    ease: "none",
+    duration: 0.5,
+  });
 
-    // === 3️⃣ PHASE 2: effet domino sur les lettres ===
-    const dominoTl = gsap.timeline();
-    dominoTl.to(nEl, { rotate: 20, y: -150, ease: "none", duration: 0.15 }, 0);
-    dominoTl.to(iEl, { rotate: 30, x: 10, y:-35, ease: "none", duration: 0.15 }, 0.1);
-    dominoTl.to(kEl, { rotate: 50, x: 60,y:-250, ease: "none", duration: 0.15 }, 0.15);
-    dominoTl.to(aEl, { rotate: 90, x: 80, ease: "none", duration: 0.15 }, 0.21);
+  // PHASE 2 : domino effect on letters
+  const dominoTl = gsap.timeline();
+  // Hit i first
+  dominoTl.to(nEl, { rotate: 14, transformOrigin: "bottom right", ease: "none", duration: 0.13 }, 0);
 
-    const fallTl = gsap.timeline();
-    fallTl.to(aEl, {
-      y: 600,
-      x: -300,
-      ease: "none",
-      duration: 0.6,
-    }, 0);
-    fallTl.to(kEl, {
-      y: 1000,
-      x: -180,
-      rotate: "+=300",
-      ease: "none",
-      duration: 0.62,
-    }, 0);
-    fallTl.to(iEl, {
-      y:300,
-      x: -300,
-      rotate: "+=200",
-      ease: "none",
-      duration: 0.8,
-    }, 0);
+  // Hit k 
+  dominoTl.to(iEl, { rotate: 13, transformOrigin: "bottom right", ease: "none", duration: 0.08 }, 0.13);
+  dominoTl.to(nEl, { rotate: 25, transformOrigin: "bottom right", ease: "none", duration: 0.08 }, 0.13);
 
-    // === 5️⃣ SUPERPOSITION DES 3 PHASES ===
-    mainTl.add(screenTiltTl, 0.0); // commence direct
-    mainTl.add(dominoTl, 0.11);    // débute un peu après
-    mainTl.add(fallTl, 0.38);       // la chute se déclenche pendant la rotation
+  // Hit a 
+  dominoTl.to(kEl, { rotate: 19.2, transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.21);
+  dominoTl.to(iEl, { rotate: 30, transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.21);
+  dominoTl.to(nEl, { rotate: 40, transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.21);
 
-    return () => {
-      mainTl.scrollTrigger?.kill();
-      mainTl.kill();
-    };
-  }, []);
+  // all rotate a bit more 
+  dominoTl.to(aEl, { rotate: 30, transformOrigin: "bottom right", ease: "none", duration: 0.21 }, 0.38);
+  dominoTl.to(kEl, { rotate: 40, transformOrigin: "bottom right", ease: "none", duration: 0.19 }, 0.40);
+  dominoTl.to(iEl, { x:-60, rotate:45,  transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.42);
+
+
+  // PHASE 3 : falling letters
+  const fallTl = gsap.timeline();
+
+  //  a falls first 
+  fallTl.to(aEl, {y: "+=800",x: "-=200",rotate: "+=200",ease: "none",duration: 1.0,}, 0.0);
+  fallTl.to(kEl, {rotate: "+=25", transformOrigin: "bottom right", ease: "none", duration: 0.2 }, 0.00); 
+  fallTl.to(iEl, {x:"-=80",rotate:"+=13",  transformOrigin: "bottom right", ease: "none", duration: 0.2 }, 0.0);
+
+  // the "k" falls 
+  fallTl.to(kEl, {y: "+=800",x: "-=150",rotate: 25,ease: "none",duration: 1,}, 0.2);
+  fallTl.to(iEl, {x:"-=50",rotate: "+=17", transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.20);
+
+  // the "i" falls
+  fallTl.to(iEl, {y: "+=800",x: "-=100",rotate: 40,ease: "none",duration: 1,}, 0.4);
+
+  mainTl.add(screenTiltTl, 0.0);
+  mainTl.add(dominoTl, 0.11);
+  mainTl.add(fallTl, 0.71);
+
+  return () => {
+    mainTl.scrollTrigger?.kill();
+    mainTl.kill();
+  };
+}, []);
+
 
   return (
     <section
@@ -131,10 +134,18 @@ export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
           relative
         "
       >
-        <p ref={nRef} className="inline-block will-change-transform">N</p>
-        <p ref={iRef} className="inline-block will-change-transform">i</p>
-        <p ref={kRef} className="inline-block will-change-transform">k</p>
-        <p ref={aRef} className="inline-block will-change-transform">a</p>
+        <p ref={nRef} style={{
+                transition: "transform 0.6s ease-out",
+            }}className="inline-block will-change-transform">N</p>
+        <p ref={iRef} style={{
+                transition: "transform 0.6s ease-out",
+            }}className="inline-block will-change-transform">i</p>
+        <p ref={kRef} style={{
+                transition: "transform 0.6s ease-out",
+            }}className="inline-block will-change-transform">k</p>
+        <p ref={aRef} style={{
+                transition: "transform 0.6s ease-out",
+            }}className="inline-block will-change-transform">a</p>
       </div>
     </section>
   );
