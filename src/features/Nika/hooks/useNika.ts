@@ -1,6 +1,5 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Background from "../../../entities/Background.ts";
-
 
 type BackgroundColor = typeof Background[keyof typeof Background];
 
