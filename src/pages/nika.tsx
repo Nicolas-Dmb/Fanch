@@ -63,7 +63,7 @@ export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
         // PHASE 1 : tilt the screen
         const screenTiltTl = gsap.timeline();
         screenTiltTl.to(textEl, {
-            xPercent: 0,
+            xPercent: -70,
             ease: "none",
             duration: 0.5,
         });
@@ -98,13 +98,21 @@ export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
         fallTl.to(iEl, {x:"-=80",rotate:"+=13",  transformOrigin: "bottom right", ease: "none", duration: 0.2 }, 0.0);
         fallTl.to(nEl, {x:"-=50",rotate:"+=9",  transformOrigin: "bottom right", ease: "none", duration: 0.2 }, 0.0);
 
-        // the "k" falls 
-        fallTl.to(kEl, {y: "+=800",x: "-=150",rotate:"+=25",ease: "none",duration: 1,}, 0.2);
-        fallTl.to(iEl, {x:"-=50",rotate: "+=17", transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.20);
+        // before falls 
+        fallTl.to(kEl, {rotate: "+=30",ease: "none",duration: 0.17,}, 0.2);
+        fallTl.to(iEl, {rotate: "-=1", transformOrigin: "bottom right", ease: "none", duration: 0.05 }, 0.2);
+        fallTl.to(nEl, {rotate: "-=1", transformOrigin: "bottom right", ease: "none", duration: 0.05 }, 0.2);
+        fallTl.to(iEl, {rotate: "+=25", transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.25);
+        fallTl.to(nEl, {rotate: "+=15", transformOrigin: "bottom right", ease: "none", duration: 0.17 }, 0.25);
+        fallTl.to(kEl, {rotate: "+=36",ease: "none", duration: 0.17,}, 0.37);
+        fallTl.to(iEl, {rotate: "+=8",ease: "none", duration: 0.17,}, 0.42);
+        fallTl.to(nEl, {rotate: "+=10",ease: "none", duration: 0.17,}, 0.42);
 
-        // the "i" falls
-        fallTl.to(iEl, {y: "+=800",x: "-=100",rotate: 40,ease: "none",duration: 1,}, 0.4);
-
+        // all falling
+        fallTl.to(kEl, {y: "+=800",x: "-=150",rotate: "+=180",ease: "none",transformOrigin: "bottom right", duration: 1.0,}, 0.54);
+        fallTl.to(nEl, {x: "+=100",rotate: "+=100",ease: "none",transformOrigin: "bottom right",duration: 1}, 0.59);
+        fallTl.to(iEl, {y: "+=200",x: "-=100",rotate: "+=140",ease: "none",duration: 1.0,}, 0.59);
+        
         mainTl.add(screenTiltTl, 0.0);
         mainTl.add(dominoTl, 0.11);
         mainTl.add(fallTl, 0.71);
