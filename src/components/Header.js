@@ -65,11 +65,11 @@ function Header({acceuil}){
         <div className='header' style={{ backgroundColor: acceuil }}>
             <div className='left'>
                 {workPhone?
-                <img src={acceuil === Background.Black ?work_white:Worklettre} style={{width:35.95, height:19}} alt='phonetique' onMouseOver={()=>setWorkPhone(false)} onClick={()=>navigate('/work')} />:<img src={acceuil ?workphon_white:work} style={{width:35.95, height:19}} alt='phonetique' onMouseOut={()=>setWorkPhone(true)} onClick={()=>navigate('/work')} />}
+                <img src={acceuil === Background.Black ?work_white:Worklettre} style={{width:35.95, height:19}} alt='phonetique' onMouseOver={()=>setWorkPhone(false)} onClick={()=>navigate('/work')} />:<img src={acceuil === Background.Black ?workphon_white:work} style={{width:35.95, height:19}} alt='phonetique' onMouseOut={()=>setWorkPhone(true)} onClick={()=>navigate('/work')} />}
                 {aboutPhone? 
                 <img src={acceuil === Background.Black ?about_white:Aboutlettre} onMouseOver={()=>setAboutPhone(false)} style={{width:41.22, height:19}} className='lien' alt='phonetique' onClick={()=>navigate('/about')}/>:<img src={acceuil === Background.Black ?aboutphon_white:about} onMouseOut={()=>setAboutPhone(true)} style={{width:41.22, height:19}} className='lien' alt='phonetique'onClick={()=>navigate('/about')}/>}
             </div>
-            <p className='FANCH' style={{ color: acceuil === Background.Black ?? '#fff'}}>FANCH</p>
+            <p className='FANCH' style={{ color: acceuil === Background.Black ? "#fff":"#000"}}>FANCH</p>
             <div className='house'>
                 <img  src={acceuil === Background.Black ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={acceuil=== Background.Black ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('')}/>
             </div>

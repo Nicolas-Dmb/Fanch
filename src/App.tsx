@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
-import Acceuil from './pages/acceuil';
+import Home from './pages/Home.tsx';
 import About from './pages/about';
 import Work from './pages/work';
 import Footer from './components/Footer';
@@ -24,7 +24,7 @@ const App: React.FC = () => {
         <Header acceuil={acceuil} />
         <div className="relative overflow-hidden flex-1">
           <Routes>
-            <Route path="/" element={<Acceuil setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} />} />
+            <Route path="/" element={<Home setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} acceuil={acceuil}/>} />
             <Route path="/about" element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} />} />
             <Route path="/work" element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} />} />
             <Route path="/photo" element={<Foto setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} />} />

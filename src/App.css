@@ -166,10 +166,8 @@ html, body, #root, .app-container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.point .circle {
-  background-color: #000; /* Transparent black */
+}.circle {
+  background-color: #000;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -177,17 +175,25 @@ html, body, #root, .app-container {
   animation: pulse 2s infinite;
 }
 
-.point .circleClick {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+.circleClick {
+  background-color: #000;
+  border-radius: 50%;
   width: 50px;
   height: 50px;
+  cursor: default;
+  animation: none;
+  transform: scale(0.9);
+  transition: transform .2s;
+}
+
+.circleFullscreen {
+  flex-shrink: 0;
+  width: 2500px;
+  height: 2500px;
+  background-color: #000;
   border-radius: 50%;
-  background-color: black;
-  animation: expand 3s forwards;
-  overflow: hidden;
+  animation: boomExpand 2s forwards;
+  will-change: transform;
 }
 
 @keyframes pulse {
@@ -200,20 +206,15 @@ html, body, #root, .app-container {
     height: 40px;
   }
 }
-
-@keyframes expand {
+/* l'explosion */
+@keyframes boomExpand {
   0% {
-    width: 50px;
-    height: 50px;
-    overflow: hidden;
+    transform: scale(0);
   }
   100% {
-    width: 2500px; /* Large enough to cover the screen */
-    height: 2500px;
-    overflow: hidden; /* Large enough to cover the screen */
+    transform: scale(1);
   }
 }
-
 .partie2 {
   position: absolute;
   bottom: 0%;
