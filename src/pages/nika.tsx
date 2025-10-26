@@ -1,5 +1,4 @@
 import Background from "../entities/Background.ts";
-import FallingLetter from "../features/Nika/components/FallingLetter.tsx";
 import useNika from "../features/Nika/hooks/useNika.ts";
 
 import gsap from "gsap";
@@ -19,41 +18,93 @@ export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
   useNika(setAcceuil, setLogoFanch);
 
   const textRef = useRef<HTMLDivElement | null>(null);
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const nRef = useRef<HTMLParagraphElement | null>(null);
+  const iRef = useRef<HTMLParagraphElement | null>(null);
+  const kRef = useRef<HTMLParagraphElement | null>(null);
+  const aRef = useRef<HTMLParagraphElement | null>(null);
 
   useEffect(() => {
-  const textEl = textRef.current;
-  const wrapperEl = document.getElementById("nika-wrapper");
-  if (!textEl || !wrapperEl) return;
+    const wrapperEl = document.getElementById("nika-wrapper");
+    const textEl = textRef.current;
+    const nEl = nRef.current;
+    const iEl = iRef.current;
+    const kEl = kRef.current;
+    const aEl = aRef.current;
 
-  gsap.set(textEl, {
-    yPercent: -5,
-    xPercent: 0,
-  });
+    if (!wrapperEl || !textEl || !nEl || !iEl || !kEl || !aEl) return;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: wrapperEl,
-      start: "top top",
-      end: "+=1000",
-      scrub: 1,
-      pin: true, 
-    },
-  });
+    // reset
+    gsap.set(textEl, { yPercent: -5, xPercent: 0, rotate: 0 });
+    gsap.set([nEl, iEl, kEl, aEl], {
+      rotate: 0,
+      x: 0,
+      y: 0,
+      transformOrigin: "bottom left",
+    });
 
-  tl.to(textEl, {
-    xPercent: -100,
-    ease: "none",
-  });
+    // === 1️⃣ TIMELINE PRINCIPALE CONTROLE PAR LE SCROLL ===
+    const mainTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapperEl,
+        start: "top top",
+        end: "+=5000", // long scroll
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+        // markers: true,
+      },
+    });
 
-  return () => {
-    tl.scrollTrigger?.kill();
-    tl.kill();
-  };
-}, []);
+    // === 2️⃣ PHASE 1: rotation globale de l’écran ===
+    const screenTiltTl = gsap.timeline();
+    screenTiltTl.to(textEl, {
+      xPercent: -70,
+      ease: "none",
+      duration: 0.4,
+    });
+
+    // === 3️⃣ PHASE 2: effet domino sur les lettres ===
+    const dominoTl = gsap.timeline();
+    dominoTl.to(nEl, { rotate: 20, y: -150, ease: "none", duration: 0.15 }, 0);
+    dominoTl.to(iEl, { rotate: 30, x: 10, y:-35, ease: "none", duration: 0.15 }, 0.1);
+    dominoTl.to(kEl, { rotate: 50, x: 60,y:-250, ease: "none", duration: 0.15 }, 0.15);
+    dominoTl.to(aEl, { rotate: 90, x: 80, ease: "none", duration: 0.15 }, 0.21);
+
+    const fallTl = gsap.timeline();
+    fallTl.to(aEl, {
+      y: 600,
+      x: -300,
+      ease: "none",
+      duration: 0.6,
+    }, 0);
+    fallTl.to(kEl, {
+      y: 1000,
+      x: -180,
+      rotate: "+=300",
+      ease: "none",
+      duration: 0.62,
+    }, 0);
+    fallTl.to(iEl, {
+      y:300,
+      x: -300,
+      rotate: "+=200",
+      ease: "none",
+      duration: 0.8,
+    }, 0);
+
+    // === 5️⃣ SUPERPOSITION DES 3 PHASES ===
+    mainTl.add(screenTiltTl, 0.0); // commence direct
+    mainTl.add(dominoTl, 0.11);    // débute un peu après
+    mainTl.add(fallTl, 0.38);       // la chute se déclenche pendant la rotation
+
+    return () => {
+      mainTl.scrollTrigger?.kill();
+      mainTl.kill();
+    };
+  }, []);
+
   return (
     <section
-      ref={sectionRef}
       className="
         bg-[#f6e820]
         font-perso
@@ -75,15 +126,15 @@ export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
           font-normal
           text-black
           select-none
-          transition-all
-          duration-300
           will-change-transform
+          z-[999]
+          relative
         "
       >
-        <FallingLetter char="N" />
-        <FallingLetter char="i" />
-        <FallingLetter char="k" />
-        <FallingLetter char="a" />
+        <p ref={nRef} className="inline-block will-change-transform">N</p>
+        <p ref={iRef} className="inline-block will-change-transform">i</p>
+        <p ref={kRef} className="inline-block will-change-transform">k</p>
+        <p ref={aRef} className="inline-block will-change-transform">a</p>
       </div>
     </section>
   );

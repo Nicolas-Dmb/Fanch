@@ -1,25 +1,23 @@
 
-import React, { forwardRef } from "react";
 
 interface FallingLetterProps {
-  char: string;
-  className?: string;
+    char: string;
+    ref?: React.Ref<HTMLSpanElement>;
 }
 
-const FallingLetter = forwardRef<HTMLSpanElement, FallingLetterProps>(
-  ({ char, className = "" }, ref) => {
+export default function FallingLetter({
+    char,
+    ref,
+}:FallingLetterProps) {
     return (
-      <span
-        ref={ref}
-        className={
-          "inline-block origin-bottom will-change-transform " + className
-        }
-      >
-        {char}
-      </span>
+        <span
+            ref={ref}
+            className={"inline-block origin-bottom hover:animate-wiggle "}
+            style={{
+                transition: "transform 0.6s ease-out",
+            }}
+        >
+            {char}
+        </span>
     );
-  }
-);
-
-export default FallingLetter;
-
+}
