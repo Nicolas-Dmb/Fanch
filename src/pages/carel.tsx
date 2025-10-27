@@ -1,10 +1,8 @@
-"use client";
-
-import { useLayoutEffect, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Background from "../entities/Background.ts";
-import StorageSVG from "../features/Carel/components/Storage.tsx";
+import Storage from '../features/Carel/static/images/Storage.svg';
 
 type BackgroundColor = typeof Background[keyof typeof Background];
 
@@ -16,9 +14,8 @@ interface carelProps {
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Carel({ setAcceuil, setLogoFanch }: carelProps) {
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
-  const frameRef = useRef<SVGGElement | null>(null);
-  const drawerRef = useRef<SVGGElement | null>(null);
+  const StorageRef = useRef<HTMLImageElement | null>(null);
+  const windowRef = useRef<HTMLDivElement | null>(null);
 
   // fond noir + pas de logo
   useEffect(() => {
@@ -26,59 +23,64 @@ export default function Carel({ setAcceuil, setLogoFanch }: carelProps) {
     setLogoFanch(false);
   }, [setAcceuil, setLogoFanch]);
 
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // état initial = tiroir fermé
-      // 1. le cadre du haut est invisible
-      gsap.set(frameRef.current, {
-        opacity: 0,
-      });
+  useEffect(() => {
+    const wrapperEl = document.getElementById("nika-wrapper");
+    const storageEl = StorageRef.current;
+    const windowEl = windowRef.current;
 
-      // 2. le tiroir est en position "fermée"
-      gsap.set(drawerRef.current, {
-        y: 0,
-      });
+    if (!wrapperEl || !storageEl || !windowEl ) return;
 
-      // timeline liée au scroll
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: wrapperRef.current,
+    const mainTl = gsap.timeline({
+          scrollTrigger: {
+          trigger: wrapperEl,
           start: "top top",
           end: "+=4000",
           scrub: true,
+          pin: true,
+          anticipatePin: 1,
           markers: true,
-        },
-      })
-        // le tiroir descend
-        .to(drawerRef.current, {
-          y: 80, // ajuste la valeur selon l'ouverture
-          ease: "none",
-        })
-        // les montants + barre du haut apparaissent
-        .to(
-          frameRef.current,
-          {
-            opacity: 1,
-            ease: "none",
-          },
-          "<" // "<" = en même temps que le mouvement du tiroir
-        );
+      },
     });
 
-    return () => ctx.revert();
+
+    const screenTl = gsap.timeline();
+
+    screenTl.fromTo(storageEl, {
+        position: "fixed",                   
+        opacity: 0.0,
+        top: "49vh",           
+    }, {
+        top: "85vh",
+        ease: "power2.out",
+        duration: 1,
+    }, 0.0);
+
+    screenTl.to(storageEl, {
+        opacity:1
+    }, 0.1);
+
+
+    
+    mainTl.add(screenTl, 0.0);
+
+  return () => {
+        mainTl.scrollTrigger?.kill();
+        mainTl.kill();
+    };
   }, []);
 
   return (
     <section className="w-full min-h-[200vh] bg-black text-white">
-      {/* wrapper juste pour que ScrollTrigger sache où regarder */}
       <div
-        ref={wrapperRef}
+        ref={windowRef}
         className="w-full h-screen flex items-center justify-center"
       >
-        <StorageSVG
-          frameRef={(el) => (frameRef.current = el)}
-          drawerRef={(el) => (drawerRef.current = el)}
-        />
+        <img
+        ref={StorageRef}
+        src={Storage}
+        alt="Storage SVG"
+        className="w-[90vw] h-auto z-[0]"
+      />
       </div>
     </section>
   );
