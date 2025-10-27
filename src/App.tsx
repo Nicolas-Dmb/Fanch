@@ -7,7 +7,7 @@ import About from './pages/about';
 import Work from './pages/work';
 import Footer from './components/Footer';
 import Foto from './pages/foto';
-import Carel from './pages/carel';
+import Carel from './pages/carel.tsx';
 import Nika from './pages/nika.tsx';
 import './index.css';
 import Background from './entities/Background.ts';
