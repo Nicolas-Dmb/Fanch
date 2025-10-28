@@ -33,33 +33,26 @@ function Header({acceuil}){
     const[workPhone, setWorkPhone]=useState(true)
     const[aboutPhone, setAboutPhone]=useState(true)
 
-    let handleMouseOver=()=>{
+    useEffect(() => {
         let index = 0;
-        intervalId = setInterval(() => {
-            acceuil === Background.Black ?
-            setCurrentImage_white(images_white[index]):
-            setCurrentImage(images[index]);
-            acceuil === Background.Black ?
-            index = (index + 1) % images_white.length:
-            index = (index + 1) % images.length;
+        const id = setInterval(() => {
+            if (acceuil === Background.Black) {
+                setCurrentImage_white(images_white[index]);
+                index = (index + 1) % images_white.length;
+            } else {
+                setCurrentImage(images[index]);
+                index = (index + 1) % images.length;
+            }
         }, 1000);
-    };
+
+        return () => {
+            clearInterval(id);
+        };
+    }, [acceuil]);
     /*let handleMouseOut=()=>{
         clearInterval(intervalId);
         setCurrentImage({maison:maison1, height:'0.9679cm', paddingTop:'0.3521cm'})
     };*/
-    useEffect(() => {
-        handleMouseOver()
-        /*const imgElement = document.getElementById('image');
-        imgElement.addEventListener('mouseover', handleMouseOver);
-        imgElement.addEventListener('mouseout', handleMouseOut);
-
-        // Nettoyer les écouteurs d'événements lors du démontage
-        return () => {
-            imgElement.removeEventListener('mouseover', handleMouseOver);
-            imgElement.removeEventListener('mouseout', handleMouseOut);
-        };*/
-    }, []);
     
     return(
         <div className='header' style={{ backgroundColor: acceuil }}>
