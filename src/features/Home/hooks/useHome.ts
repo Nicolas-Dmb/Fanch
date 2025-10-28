@@ -86,6 +86,9 @@ export default function useHome({setAcceuil, setLogoFanch}:useHomeProps) {
       case "nika":
         window.location.href = "/Nika";
         break;
+      case "carel":
+        window.location.href = "/carel";
+        break;
       default:
         console.warn("Unknown link:", link);
     }
