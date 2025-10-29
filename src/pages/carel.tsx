@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Background from "../entities/Background.ts";
-import Storage from '../features/Carel/static/images/Storage.svg';
+import Storage from '../features/Carel/static/images/storage.svg';
 
 type BackgroundColor = typeof Background[keyof typeof Background];
 
