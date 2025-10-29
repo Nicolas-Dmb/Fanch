@@ -25,7 +25,7 @@ jobs:
         run: pnpm run build:static
 
       - name: Deploy (FTPS)
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTPURL }}
           username: ${{ secrets.FTPLOGIN }}
