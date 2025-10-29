@@ -51,7 +51,6 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
                     setHasScrolled(true);
                 }
             },
-            markers:true,
         },
         });
         

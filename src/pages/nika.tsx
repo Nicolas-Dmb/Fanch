@@ -14,7 +14,7 @@ interface NikaProps {
 
 export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaProps) {
     const {textRef, nRef, iRef, kRef, aRef, transitionRef, screenTiltTl, dominoTl, fallTl} = useDomino();
-    const  {fontsTlRef, thinRef,regularRef,boldRef} = useFonts();
+    const  {fontsTlRef, thinRef,regularRef,boldRef, inputRef} = useFonts();
     const {hasScrolled,letterClassName } = useNika({setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef});
     
 
@@ -125,7 +125,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
       </div>
     </section>
     </section>
-    <FontInput />
+    <FontInput ref={inputRef}/>
     </>
   );
 }
