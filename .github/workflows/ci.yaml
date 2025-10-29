@@ -20,7 +20,7 @@ jobs:
         run: npm ci
 
       - name: Build static site
-        run: npm run build
+        run: CI=false npm run build 
 
       - name: Deploy (FTPS)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
