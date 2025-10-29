@@ -2,16 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import facefanch from '../static/image/facefanch.png';
 import bandeau from '../static/image/Bandeau.png';
 import signature from '../static/image/signature.png';
-import Background from '../entities/Background.ts';
+import Colors from '../entities/Background.ts';
 
-function About({setAcceuil,setLogoFanch}) {
+function About({setAcceuil,setLogoFanch, setTextColor}) {
   const bannerRef = useRef(null);
   const [xPos, setXPos] = useState(0);
   const speed = 2; // Vitesse de défilement
 
   // Utilisez useEffect pour simuler componentDidMount
   useEffect(() => {
-    setAcceuil(Background.White)
+    setAcceuil(Colors.White)
+    setTextColor(Colors.Black)
     setLogoFanch(true)
     const banner = bannerRef.current;
     const images = banner.children;

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import Background from "../../../entities/Background.ts";
+import Colors from "../../../entities/Background.ts";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type BackgroundColor = typeof Background[keyof typeof Background];
+type BackgroundColor = typeof Colors[keyof typeof Colors];
 
 interface UseNikaProps {
     setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
@@ -14,20 +14,22 @@ interface UseNikaProps {
     dominoTl: React.MutableRefObject<gsap.core.Timeline | null>;
     fallTl: React.MutableRefObject<gsap.core.Timeline | null>;
     fontsTlRef: React.MutableRefObject<gsap.core.Timeline | null>;
+    setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
 }
 
-export default function useNika({ setAcceuil, setLogoFanch, screenTiltTl, dominoTl, fallTl, fontsTlRef }: UseNikaProps) {
+export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef }: UseNikaProps) {
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
 
     useEffect(() => {
         if (setAcceuil) {
-            setAcceuil(Background.Yellow);
+            setAcceuil(Colors.Yellow);
+            setTextColor(Colors.Black);
         }
         if (setLogoFanch) {
             setLogoFanch(false);
         }
-    }, [setAcceuil, setLogoFanch]);
+    }, [setAcceuil, setLogoFanch, setTextColor]);
 
 
     useEffect(() => {

@@ -1,16 +1,17 @@
 import {useEffect, useState, useRef} from 'react';
-import Background from '../../../entities/Background.ts';
+import Colors from '../../../entities/Background.ts';
 import data from '../static/tetris_timeline.json';
 
-type BackgroundColor = typeof Background[keyof typeof Background];
+type BackgroundColor = typeof Colors[keyof typeof Colors];
 
 interface useHomeProps {
   setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
+  setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
 }
 
 
-export default function useHome({setAcceuil, setLogoFanch}:useHomeProps) {
+export default function useHome({setAcceuil, setLogoFanch, setTextColor}:useHomeProps) {
   const [nameCircle, setNameCircle] = useState('circle');
   const grid = data.grid; 
   const [displayTetris, setDisplayTetris] = useState(false);
@@ -25,7 +26,8 @@ export default function useHome({setAcceuil, setLogoFanch}:useHomeProps) {
 
 
   useEffect(() => {
-    setAcceuil(Background.White);
+    setAcceuil(Colors.White);
+    setTextColor(Colors.Black);
     setLogoFanch(false);
 
     function computeSize() {
@@ -44,12 +46,13 @@ export default function useHome({setAcceuil, setLogoFanch}:useHomeProps) {
     return () => {
       window.removeEventListener("resize", computeSize);
     };
-  }, [setAcceuil, setLogoFanch]);
+  }, [setAcceuil, setLogoFanch, setTextColor]);
 
   const handleNoGame = () => {
       setFrameIndex(lastFrameIndex);
       setDisplayTetris(true);
-      setAcceuil(Background.Black);
+      setAcceuil(Colors.Black);
+      setTextColor(Colors.White);
   };
 
   const tetrisFrame = () => {
@@ -73,7 +76,8 @@ export default function useHome({setAcceuil, setLogoFanch}:useHomeProps) {
       setTimeout(() => {
         setDisplayTetris(true);
         setPhase("done");   
-        setAcceuil(Background.Black);
+        setAcceuil(Colors.Black);
+        setTextColor(Colors.White);
         tetrisFrame();
       }, time);
     

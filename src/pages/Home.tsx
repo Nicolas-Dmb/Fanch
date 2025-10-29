@@ -1,19 +1,20 @@
 import Typewriter from 'typewriter-effect';
 import TetrisBoard from '../features/Home/components/Tetris.tsx'
-import Background from '../entities/Background.ts';
+import Colors from '../entities/Background.ts';
 import useHome from '../features/Home/hooks/useHome.ts';
 import CircleOverlay from '../features/Home/components/Circle.tsx';
 
-type BackgroundColor = typeof Background[keyof typeof Background];
+type BackgroundColor = typeof Colors[keyof typeof Colors];
 
 interface HomeProps {
   setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
+  setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   acceuil: BackgroundColor;
 }
 
-function Home({ setAcceuil, setLogoFanch, acceuil}:HomeProps) {
-  const {nameCircle, grid, frame, displayTetris, handleNoGame, handleCircleClick, handleCellClick, size, containerRef,phase} = useHome({setAcceuil, setLogoFanch});
+function Home({ setAcceuil, setLogoFanch,setTextColor, acceuil}:HomeProps) {
+  const {nameCircle, grid, frame, displayTetris, handleNoGame, handleCircleClick, handleCellClick, size, containerRef,phase} = useHome({setAcceuil, setLogoFanch, setTextColor});
 
   const showIntro = phase === "idle";
   const showCircle = phase !== "done";

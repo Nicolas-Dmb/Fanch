@@ -1,27 +1,29 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Background from "../entities/Background.ts";
+import Colors from "../entities/Background.ts";
 import Storage from '../features/Carel/static/images/storage.svg';
 
-type BackgroundColor = typeof Background[keyof typeof Background];
+type BackgroundColor = typeof Colors[keyof typeof Colors];
 
 interface carelProps {
   setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
+  setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
 }
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Carel({ setAcceuil, setLogoFanch }: carelProps) {
+export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelProps) {
   const StorageRef = useRef<HTMLImageElement | null>(null);
   const windowRef = useRef<HTMLDivElement | null>(null);
 
   // fond noir + pas de logo
   useEffect(() => {
-    setAcceuil(Background.Black);
+    setAcceuil(Colors.Black);
+    setTextColor(Colors.White);
     setLogoFanch(false);
-  }, [setAcceuil, setLogoFanch]);
+  }, [setAcceuil, setLogoFanch, setTextColor]);
 
   useEffect(() => {
     const wrapperEl = document.getElementById("nika-wrapper");

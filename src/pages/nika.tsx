@@ -1,21 +1,21 @@
-import Background from "../entities/Background.ts";
+import {ColorType} from "../entities/Background.ts";
 import useNika from "../features/Nika/hooks/useNika.ts";
 import useDomino from "../features/Nika/hooks/useDominos.ts";
 import useFonts from "../features/Nika/hooks/useFonts.ts";
-
-type BackgroundColor = typeof Background[keyof typeof Background];
+import FontInput from "../features/Nika/components/FontInput.tsx";
 
 interface NikaProps {
-  setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
+  setAcceuil: React.Dispatch<React.SetStateAction<ColorType>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
+  setTextColor: React.Dispatch<React.SetStateAction<ColorType>>;
 }
 
 
 
-export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
+export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaProps) {
     const {textRef, nRef, iRef, kRef, aRef, transitionRef, screenTiltTl, dominoTl, fallTl} = useDomino();
     const  {fontsTlRef, thinRef,regularRef,boldRef} = useFonts();
-    const {hasScrolled,letterClassName } = useNika({setAcceuil, setLogoFanch, screenTiltTl, dominoTl, fallTl, fontsTlRef});
+    const {hasScrolled,letterClassName } = useNika({setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef});
     
 
   return (
@@ -125,6 +125,7 @@ export default function Nika({ setAcceuil, setLogoFanch }: NikaProps) {
       </div>
     </section>
     </section>
+    <FontInput />
     </>
   );
 }

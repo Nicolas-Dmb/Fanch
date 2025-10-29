@@ -1,12 +1,13 @@
 import React, { useEffect} from 'react';
-import Background from '../entities/Background.ts';
+import Colors from '../entities/Background.ts';
 
 
-function Work({setAcceuil, setLogoFanch}){
+function Work({setAcceuil, setLogoFanch, setTextColor}){
     useEffect(()=>{
-        setAcceuil(Background.White)
+        setAcceuil(Colors.White)
+        setTextColor(Colors.Black)
         setLogoFanch(true)
-    },[setAcceuil, setLogoFanch])
+    },[setAcceuil, setLogoFanch, setTextColor])
     return(
         <div>
             work

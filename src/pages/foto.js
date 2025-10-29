@@ -3,7 +3,7 @@ import foto1 from '../static/image/foto1.png';
 import foto2 from '../static/image/foto2.png';
 import foto3 from '../static/image/foto3.png';
 import foto4 from '../static/image/foto4.png';
-import Background from '../entities/Background.ts';
+import Colors from '../entities/Background.ts';
 
 
 const screen = window.innerHeight;
@@ -14,14 +14,15 @@ const screenHeight = screen - headerFooterHeight;
 //footer 61
 
 
-function Foto({ setAcceuil, setLogoFanch }) {
+function Foto({ setAcceuil, setLogoFanch, setTextColor }) {
     const [localMousePos, setLocalMousePos] = useState({ x: 0, y: 0 });
     const [Fotochange, setFotoChange] = useState({ x: null, y: null});
     const [Foto, setFoto] = useState(1)
 
     useEffect(() => {
-        setAcceuil(Background.White);
+        setAcceuil(Colors.White);
         setLogoFanch(false);
+        setTextColor(Colors.Black);
 
         const handleMouseMove = (event) => {
             setLocalMousePos({
@@ -37,7 +38,7 @@ function Foto({ setAcceuil, setLogoFanch }) {
                 window.removeEventListener('mousemove', handleMouseMove);
             };
         
-    }, [setAcceuil, setLogoFanch, localMousePos, Fotochange, Foto]);
+    }, [setAcceuil, setLogoFanch, localMousePos, Fotochange, Foto, setTextColor]);
 
     useEffect(()=>{
             if (Fotochange.x===null && Fotochange.y===null){
