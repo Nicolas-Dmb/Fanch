@@ -1,0 +1,37 @@
+name: Deploy via FTP
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install deps
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+
+      - name: Build static site
+        run: pnpm run build:static
+
+      - name: Deploy (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTPURL }}
+          username: ${{ secrets.FTPLOGIN }}
+          password: ${{ secrets.FTPPASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: out
+          server-dir: /
+          dangerous-clean-slate: true
