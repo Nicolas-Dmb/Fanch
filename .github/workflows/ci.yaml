@@ -30,6 +30,6 @@ jobs:
           password: ${{ secrets.FTPPASSWORD }}
           protocol: ftps
           port: 21
-          local-dir: build
+          local-dir: build/
           server-dir: /
           dangerous-clean-slate: true
