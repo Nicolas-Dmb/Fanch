@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+
+# si la ressource demandée existe en fichier ou dossier, on la sert normalement
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# sinon on renvoie index.html
+RewriteRule ^ index.html [L]
