@@ -17,12 +17,13 @@ jobs:
           node-version: "20"
 
       - name: Install deps
-        run: |
-          corepack enable
-          npm install --frozen-lockfile
+        run: npm ci
 
       - name: Build static site
         run: npm run build:static
+      
+      - name: Build static site
+        run: npm run build
 
       - name: Deploy (FTPS)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
@@ -32,6 +33,6 @@ jobs:
           password: ${{ secrets.FTPPASSWORD }}
           protocol: ftps
           port: 21
-          local-dir: out
+          local-dir: build
           server-dir: /
           dangerous-clean-slate: true
