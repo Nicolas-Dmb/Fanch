@@ -8,13 +8,15 @@ interface useHomeProps {
   setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
   setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
+  isDesktop: boolean;
 }
 
 
-export default function useHome({setAcceuil, setLogoFanch, setTextColor}:useHomeProps) {
+export default function useHome({setAcceuil, setLogoFanch, setTextColor, isDesktop}:useHomeProps) {
   const [nameCircle, setNameCircle] = useState('circle');
   const grid = data.grid; 
   const [displayTetris, setDisplayTetris] = useState(false);
+  const [displayMobileModal, setDisplayMobileModal] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const timeline: any[] = data.timeline;
@@ -29,7 +31,7 @@ export default function useHome({setAcceuil, setLogoFanch, setTextColor}:useHome
     setAcceuil(Colors.White);
     setTextColor(Colors.Black);
     setLogoFanch(false);
-
+    isDesktop ? setDisplayMobileModal(false) : setDisplayMobileModal(true);
     function computeSize() {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
@@ -46,7 +48,7 @@ export default function useHome({setAcceuil, setLogoFanch, setTextColor}:useHome
     return () => {
       window.removeEventListener("resize", computeSize);
     };
-  }, [setAcceuil, setLogoFanch, setTextColor]);
+  }, [setAcceuil, setLogoFanch, setTextColor, isDesktop]);
 
   const handleNoGame = () => {
       setFrameIndex(lastFrameIndex);
@@ -106,8 +108,10 @@ export default function useHome({setAcceuil, setLogoFanch, setTextColor}:useHome
     handleNoGame,
     handleCircleClick,
     handleCellClick,
+    setDisplayMobileModal,
     size,
     containerRef,
-    phase
+    phase, 
+    displayMobileModal
   };
 }

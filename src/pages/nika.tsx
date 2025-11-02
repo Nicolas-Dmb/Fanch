@@ -39,7 +39,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
     </section>
     {/* Fonts Section */}
     <section ref={transitionRef} className="absolute inset-0 bg-[#f6e820] w-full font-perso">
-      <section ref={thinRef} className="absolute inset-0 bg-[#f6e820] w-full flex flex-row items-center justify-center gap-[4vw] px-[4vw] py-[4vh] text-black font-thin">
+      <section ref={thinRef} className="absolute inset-0 bg-[#f6e820] w-full flex flex-col md:flex-row items-center justify-center md:gap-[4vw] px-[4vw] py-[4vh] text-black font-thin">
         <div className="basis-[45%] flex items-start justify-start">
           <p className="text-[30vw] md:text-[45vw] leading-none text-black relative z-[2]">
             A
@@ -48,19 +48,19 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
 
         <div className="basis-[40%] flex flex-col">
           <p
-            className="text-[4vw] leading-none text-black"
+            className="text-[6vw] md:text-[4vw] leading-none text-black"
             style={{ opacity: 1 }}
           >
             Nika_Thin
           </p>
 
-          <p className="text-[0.8vw] leading-none tracking-tight uppercase mt-[2vh]">
+          <p className="text-[2vw] md:text-[0.8vw] leading-none tracking-tight uppercase mt-[2vh]">
             FAIRE UN TEXTE EXPRIMANT LES INSPIRATION ET COMMENT TU EN ES ARRIVÉ LA
           </p>
 
           <div className="w-full border-t border-black mt-[4vh] mb-[4vh]" />
 
-          <div className="text-[2vw] leading-[1.1]">
+          <div className="text-[4vw] md:text-[2vw] leading-[1.1]">
             <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
             <p className="mt-[2vh]">abcdefghijklmnopqrstuvwxyz</p>
             <p className="mt-[2vh]">0123456789</p>
@@ -68,7 +68,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
           </div>
         </div>
     </section>
-    <section ref={regularRef} className="absolute inset-0 bg-[#f6e820] w-full flex flex-row items-center justify-center gap-[4vw] px-[4vw] py-[4vh] text-black font-normal">
+    <section ref={regularRef} className="absolute inset-0 bg-[#f6e820] w-full flex flex-col md:flex-row  items-center justify-center md:gap-[4vw] px-[4vw] py-[4vh] text-black font-normal">
       <div className="basis-[45%] flex items-start justify-start">
         <p className="text-[30vw] md:text-[45vw] leading-none text-black relative z-[2]">
           A
@@ -77,18 +77,18 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
 
       <div className="basis-[40%] flex flex-col">
         <p
-          className="text-[4vw] leading-none text-black"
+          className="text-[6vw] md:text-[4vw] leading-none text-black"
         >
           Nika_Regular
         </p>
 
-        <p className="text-[0.8vw] leading-none tracking-tight uppercase mt-[2vh]">
+        <p className="text-[2vw] md:text-[0.8vw] leading-none tracking-tight uppercase mt-[2vh]">
           FAIRE UN TEXTE EXPRIMANT LES INSPIRATION ET COMMENT TU EN ES ARRIVÉ LA
         </p>
 
         <div className="w-full border-t border-black mt-[4vh] mb-[4vh]" />
 
-        <div className="text-[2vw] leading-[1.1]">
+        <div className="text-[4vw] md:text-[2vw] leading-[1.1]">
           <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
           <p className="mt-[2vh]">abcdefghijklmnopqrstuvwxyz</p>
           <p className="mt-[2vh]">0123456789</p>
@@ -96,7 +96,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
         </div>
       </div>
     </section>
-    <section ref={boldRef} className="absolute inset-0 bg-[#f6e820] w-full flex flex-row items-center justify-center gap-[4vw] px-[4vw] py-[4vh] text-black font-bold">
+    <section ref={boldRef} className="absolute inset-0 bg-[#f6e820] w-full flex flex-col md:flex-row  items-center justify-center md:gap-[4vw] px-[4vw] py-[4vh] text-black font-bold">
       <div className="basis-[45%] flex items-start justify-start">
         <p className="text-[30vw] md:text-[45vw] leading-none text-black relative z-[2]">
           A
@@ -105,18 +105,18 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
 
       <div className="basis-[40%] flex flex-col">
         <p
-          className="text-[4vw] leading-none text-black"
+          className="text-[6vw] md:text-[4vw] leading-none text-black"
         >
           Nika_Bold
         </p>
 
-        <p className="text-[0.8vw] leading-none tracking-tight uppercase mt-[2vh]">
+        <p className="text-[2vw] md:text-[0.8vw] leading-none tracking-tight uppercase mt-[2vh]">
           FAIRE UN TEXTE EXPRIMANT LES INSPIRATION ET COMMENT TU EN ES ARRIVÉ LA
         </p>
 
         <div className="w-full border-t border-black mt-[4vh] mb-[4vh]" />
 
-        <div className="text-[2vw] leading-[1.1]">
+        <div className="text-[4vw] md:text-[2vw] leading-[1.1]">
           <p>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
           <p className="mt-[2vh]">abcdefghijklmnopqrstuvwxyz</p>
           <p className="mt-[2vh]">0123456789</p>

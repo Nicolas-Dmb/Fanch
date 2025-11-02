@@ -3,7 +3,8 @@ import TetrisBoard from '../features/Home/components/Tetris.tsx'
 import Colors from '../entities/Background.ts';
 import useHome from '../features/Home/hooks/useHome.ts';
 import CircleOverlay from '../features/Home/components/Circle.tsx';
-
+import useIsDesktop from '../hooks/isDesktop.tsx';
+import Modal from '../components/Modal.tsx';
 type BackgroundColor = typeof Colors[keyof typeof Colors];
 
 interface HomeProps {
@@ -14,7 +15,8 @@ interface HomeProps {
 }
 
 function Home({ setAcceuil, setLogoFanch,setTextColor, acceuil}:HomeProps) {
-  const {nameCircle, grid, frame, displayTetris, handleNoGame, handleCircleClick, handleCellClick, size, containerRef,phase} = useHome({setAcceuil, setLogoFanch, setTextColor});
+  const isDesktop = useIsDesktop();
+  const {nameCircle, grid, frame, displayTetris, handleNoGame, handleCircleClick, handleCellClick, setDisplayMobileModal, size, containerRef,phase, displayMobileModal} = useHome({setAcceuil, setLogoFanch, setTextColor, isDesktop});
 
   const showIntro = phase === "idle";
   const showCircle = phase !== "done";
@@ -26,6 +28,9 @@ function Home({ setAcceuil, setLogoFanch,setTextColor, acceuil}:HomeProps) {
       style={{ backgroundColor: acceuil }}
       className="w-full h-full relative"
     >
+      {displayMobileModal && 
+        <Modal onClose={() => setDisplayMobileModal(false)} title="Bienvenue" content="Pour une meilleure expérience, il est préférable de visiter ce site sur ordinateur." background={Colors.White} text={Colors.Black} />
+      }
       {displayTetris ? (
         <TetrisBoard
           grid={grid}

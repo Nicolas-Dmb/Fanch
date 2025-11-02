@@ -76,7 +76,7 @@ export default  function Footer({bgColor, logoFanch, textColor}:FooterProps){
                         <img src={textColor === Colors.White?linkedin_white:linkedin} style={{width:'1.21744cm', height:'0.3064cm', ...instagram ? {} : {margin:'2px'}}} onMouseOver={()=>setLinke(false)} alt='linkedin' onClick={handleLinkedinImageClick}/>:
                         <img src={textColor === Colors.White?linkedinPhon_white:linkedinPhon} style={{width:'0.97896cm', height:'0.31776cm'}} onMouseOut={()=>setLinke(true)} alt='Linkedine phonetique' onClick={handleLinkedinImageClick}/>}
                     </div>
-                    <div className='column'>
+                    <div className='hidden md:block'>
                         <p style={{color:textColor}}>Paris {timeString}</p>
                         <p style={{color:textColor}}>{dateString} (GMT+02:00)</p>
                     </div>

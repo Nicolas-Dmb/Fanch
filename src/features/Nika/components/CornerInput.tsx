@@ -7,30 +7,30 @@ interface SideBracketsInputProps {
 
 export default function SideBracketsInput({fonts}:SideBracketsInputProps) {
   return (
-    <div className="relative w-[30vw] h-[8vh]">
+    <div className="relative w-[60vw] h-[6vh] md:w-[30vw] md:h-[8vh]">
 
       <img
         src={corner}
         alt="corner top left"
-        className="absolute top-0 left-0 w-[1vw] h-[1vw] pointer-events-none select-none
+        className="absolute top-0 left-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] pointer-events-none select-none
                    -translate-x-[2px] -translate-y-[2px] z-20"
       />
       <img
         src={corner}
         alt="corner top right"
-        className="absolute top-0 right-0 w-[1vw] h-[1vw] rotate-90 pointer-events-none select-none
+        className="absolute top-0 right-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] rotate-90 pointer-events-none select-none
                    translate-x-[2px] -translate-y-[2px] z-20"
       />
       <img
         src={corner}
         alt="corner bottom right"
-        className="absolute bottom-0 right-0 w-[1vw] h-[1vw] rotate-180 pointer-events-none select-none
+        className="absolute bottom-0 right-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] rotate-180 pointer-events-none select-none
                    translate-x-[2px] translate-y-[2px] z-20"
       />
       <img
         src={corner}
         alt="corner bottom left"
-        className="absolute bottom-0 left-0 w-[1vw] h-[1vw] -rotate-90 pointer-events-none select-none
+        className="absolute bottom-0 left-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] -rotate-90 pointer-events-none select-none
                    -translate-x-[2px] translate-y-[2px] z-20"
       />
 
@@ -149,8 +149,10 @@ function FancyCaretInput({
         spellCheck={false}
         placeholder={placeholder}
         value={value as string | number | readonly string[] | undefined}
+        maxLength={12}
         onChange={onChange}
-        className={`w-full h-full bg-transparent outline-none px-6 text-center text-[#fff] text-[4vw] [&::placeholder]:text-center ${className}`}
+
+        className={`w-full h-full bg-transparent outline-none px-6 text-center text-[#fff] text-[8vw] md:text-[4vw] [&::placeholder]:text-center ${className}`}
         {...rest}
       />
 

@@ -74,7 +74,7 @@ export default function Header({bgColor, textColor}: HeaderProps){
                 {aboutPhone? 
                 <img src={textColor === Colors.White ?about_white:Aboutlettre} onMouseOver={()=>setAboutPhone(false)} style={{width:41.22, height:19}} className='lien' alt='phonetique' onClick={()=>navigate('/about')}/>:<img src={textColor === Colors.White ?aboutphon_white:about} onMouseOut={()=>setAboutPhone(true)} style={{width:41.22, height:19}} className='lien' alt='phonetique'onClick={()=>navigate('/about')}/>}
             </div>
-            <p className='FANCH' style={{ color: textColor}}>FANCH</p>
+            <p className='FANCH hidden sm:block' style={{ color: textColor}}>FANCH</p>
             <div className='house'>
                 <img  src={textColor === Colors.White ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={textColor=== Colors.White ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('')}/>
             </div>

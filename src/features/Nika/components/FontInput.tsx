@@ -28,17 +28,17 @@ const FontInput = React.forwardRef<HTMLDivElement, FontInputProps>(function Font
     <div ref={ref} className="fixed inset-0 bg-[#1D1D1B] flex flex-col justify-between font-perso">
         <Header bgColor={Colors.Grey} textColor={Colors.White} />
         <div className="flex-grow flex flex-col justify-center mt-[20vh] gap-10">
-            <div className="w-[30vw] h-[10vh] items-center mx-auto my-30 ">
+            <div className="w-[60vw] h-[6vh] md:w-[30vw] md:h-[8vh] items-center mx-auto my-30 ">
                 <CornerInput fonts={selectedFont}/>
             </div>
             <div className="flex flex-row justify-around items-center h-full mx-8">
-                <div onClick={()=>setSelectedFont(Fonts.Nika_Thin)} className={`cursor-pointer font-thin h-[5vh] text-[2vw] px-2 ${selectedFont === Fonts.Nika_Thin ? selectedStyles : styles}`}>
+                <div onClick={()=>setSelectedFont(Fonts.Nika_Thin)} className={`cursor-pointer font-thin h-[3vh] md:h-[5vh] text-[4vw] md:text-[2vw] px-2 ${selectedFont === Fonts.Nika_Thin ? selectedStyles : styles}`}>
                     <p>Nika_Thin</p>
                 </div>
-                <div onClick={()=>setSelectedFont(Fonts.Nika_Regular)} className={`cursor-pointer font-regular h-[5vh] text-[2vw] px-2  ${selectedFont === Fonts.Nika_Regular ? selectedStyles : styles}`}>
+                <div onClick={()=>setSelectedFont(Fonts.Nika_Regular)} className={`cursor-pointer font-regular h-[3vh] md:h-[5vh] text-[4vw] md:text-[2vw] px-2  ${selectedFont === Fonts.Nika_Regular ? selectedStyles : styles}`}>
                     <p>Nika_Regular</p>
                 </div>
-                <div onClick={()=>setSelectedFont(Fonts.Nika_Bold)} className={`cursor-pointer font-bold h-[5vh] text-[2vw] px-2  ${selectedFont === Fonts.Nika_Bold ? selectedStyles : styles}`}>
+                <div onClick={()=>setSelectedFont(Fonts.Nika_Bold)} className={`cursor-pointer font-bold h-[3vh] md:h-[5vh] text-[4vw] md:text-[2vw] px-2  ${selectedFont === Fonts.Nika_Bold ? selectedStyles : styles}`}>
                     <p>Nika_Bold</p>
                 </div>
             </div>
