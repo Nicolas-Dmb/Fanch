@@ -56,7 +56,7 @@ export default  function Footer({bgColor, logoFanch, textColor}:FooterProps){
    
     const { dateString, timeString } = formatDateTime(dateTime);
     return(
-        <div className="footer h-18 border-t border-solid" style={{ backgroundColor:bgColor, borderColor:textColor, borderTopWidth: 1  }}>
+        <div id="footer" className="footer h-18 border-t border-solid" style={{ backgroundColor:bgColor, borderColor:textColor, borderTopWidth: 1  }}>
             {logoFanch &&
             <div className='top'>
                 <img src={fanch} style={{width:'2.3612cm', height:'2.5722cm', margin:'auto'}} alt='fanch' className='fanch'/>
