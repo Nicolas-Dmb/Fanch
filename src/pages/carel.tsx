@@ -6,8 +6,6 @@ import Storage from '../features/Carel/static/images/storage.png';
 import Alesia from '../features/Carel/static/images/alesia.png';
 import APC from '../features/Carel/static/images/apc.png';
 import Concorde from '../features/Carel/static/images/concorde.png';
-import BagPage from '../features/Carel/static/images/page_maroquinerie.png'; 
-import ShoesPage from '../features/Carel/static/images/page_shoes.png';
 
 
 
@@ -26,9 +24,7 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
   const StorageRef = useRef<HTMLImageElement | null>(null);
   const windowRef = useRef<HTMLDivElement | null>(null);
   const concordeRef = useRef<HTMLImageElement | null>(null);
-  const shoesRef = useRef<HTMLImageElement | null>(null);
   const apcRef = useRef<HTMLImageElement | null>(null);
-  const bagRef = useRef<HTMLImageElement | null>(null);
   const alesiaRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
@@ -43,13 +39,11 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
     const storageEl = StorageRef.current;
     const windowEl = windowRef.current;
 
-    if (!concordeRef.current || !shoesRef.current || !apcRef.current || !bagRef.current || !alesiaRef.current || !wrapperEl || !storageEl || !windowEl || !footerEl) return;
+    if (!concordeRef.current || !apcRef.current || !alesiaRef.current || !wrapperEl || !storageEl || !windowEl || !footerEl) return;
 
     gsap.set(StorageRef.current, { zIndex: 70 });
     gsap.set(concordeRef.current, { zIndex: 60 });
-    gsap.set(shoesRef.current, { zIndex: 50 });
     gsap.set(apcRef.current, { zIndex: 40 });
-    gsap.set(bagRef.current, { zIndex: 30 });
     gsap.set(alesiaRef.current, { zIndex: 20 });
 
 
@@ -78,20 +72,6 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
       apcRef.current,
       alesiaRef.current,
     ];
-    gsap.set(bagRef.current,{
-      position: "fixed",
-      left: "25%",
-      top: "50%",
-      xPercent: -25,
-      yPercent: -50,
-    })
-    gsap.set(shoesRef.current,{
-      position: "fixed",
-      left: "65%",
-      top: "50%",
-      xPercent: -65,
-      yPercent: -50,
-    })
 
     gsap.set(all, {
       position: "fixed",
@@ -133,28 +113,8 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
       0
     );
 
-    screenTl.fromTo(
-      [bagRef.current, shoesRef.current],
-      { opacity:0, y:50, x: 50, width: "5vw" },
-      { opacity:0, y:120, x: 50, width: "10vw", ease: "power2.out", duration: 1 },
-      0
-    );
-
-    screenTl.fromTo(
-      [bagRef.current, shoesRef.current],
-      { opacity:0},
-      { opacity:1, duration:1},
-      0.3
-    );
-
-    // Display folders animation
-    gsap.set(bagRef.current,{
-      opacity:1,
-    })
     displayFolderTl.to(concordeRef.current, { y: 190 }, 0.0);
-    displayFolderTl.to(shoesRef.current,    { y: 20  }, 0.2);
     displayFolderTl.to(apcRef.current,      { y: 165  }, 0.4);
-    displayFolderTl.to(bagRef.current,      { y: 15  }, 0.6);
     displayFolderTl.to(alesiaRef.current,   { y: 140 }, 0.8);
       
     mainTl.add(screenTl, 0.0);
@@ -183,9 +143,7 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
         className="absolute w-[70vw] h-auto"
       />
       <img ref={concordeRef} src={Concorde} alt="Concorde" className="absolute w-[70vw] h-auto"/>
-      <img ref={shoesRef} src={ShoesPage} alt="Shoes" className="absolute  w-[70vw] h-auto"/>
       <img ref={apcRef} src={APC} alt="APC" className="absolute  w-[70vw] h-auto"/>
-      <img ref={bagRef} src={BagPage} alt="Bag" className="absolute  w-[70vw] h-auto"/>
       <img ref={alesiaRef} src={Alesia} alt="Alesia" className="absolute  w-[70vw] h-auto"/>
     </div>
   );
