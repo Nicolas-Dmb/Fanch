@@ -75,11 +75,23 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
     const all = [
       storageEl,
       concordeRef.current,
-      shoesRef.current,
       apcRef.current,
-      bagRef.current,
       alesiaRef.current,
     ];
+    gsap.set(bagRef.current,{
+      position: "fixed",
+      left: "25%",
+      top: "50%",
+      xPercent: -25,
+      yPercent: -50,
+    })
+    gsap.set(shoesRef.current,{
+      position: "fixed",
+      left: "65%",
+      top: "50%",
+      xPercent: -65,
+      yPercent: -50,
+    })
 
     gsap.set(all, {
       position: "fixed",
@@ -116,24 +128,34 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
     // paquet sort du storage (tous ensemble)
     screenTl.fromTo(
       [concordeRef.current, apcRef.current, alesiaRef.current],
-      { y: -50, width: "25vw" },
-      { y: 150, width: "55vw", ease: "power2.out", duration: 1 },
+      { y: -20, width: "25vw" },
+      { y: 220, width: "55vw", ease: "power2.out", duration: 1 },
       0
     );
 
     screenTl.fromTo(
       [bagRef.current, shoesRef.current],
-      { y: -50, width: "5vw" },
-      { y: 150, width: "10vw", ease: "power2.out", duration: 1 },
+      { opacity:0, y:50, x: 50, width: "5vw" },
+      { opacity:0, y:120, x: 50, width: "10vw", ease: "power2.out", duration: 1 },
       0
     );
 
+    screenTl.fromTo(
+      [bagRef.current, shoesRef.current],
+      { opacity:0},
+      { opacity:1, duration:1},
+      0.3
+    );
+
     // Display folders animation
-    displayFolderTl.to(concordeRef.current, { y: 110 }, 0.0);
-    displayFolderTl.to(shoesRef.current,    { y: 80  }, 0.2);
-    displayFolderTl.to(apcRef.current,      { y: 50  }, 0.4);
-    displayFolderTl.to(bagRef.current,      { y: 20  }, 0.6);
-    displayFolderTl.to(alesiaRef.current,   { y: -10 }, 0.8);
+    gsap.set(bagRef.current,{
+      opacity:1,
+    })
+    displayFolderTl.to(concordeRef.current, { y: 190 }, 0.0);
+    displayFolderTl.to(shoesRef.current,    { y: 20  }, 0.2);
+    displayFolderTl.to(apcRef.current,      { y: 165  }, 0.4);
+    displayFolderTl.to(bagRef.current,      { y: 15  }, 0.6);
+    displayFolderTl.to(alesiaRef.current,   { y: 140 }, 0.8);
       
     mainTl.add(screenTl, 0.0);
     mainTl.add(displayFolderTl, 0.8);
