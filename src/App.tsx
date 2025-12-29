@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const [logoFanch, setLogoFanch] = useState<boolean>(true);
 
   return (
-    <div id="nika-wrapper" className="h-screen w-screen flex flex-col" style={{ backgroundColor: bgColor }} >
+    <div id="global-wrapper" className="h-screen w-screen flex flex-col" style={{ backgroundColor: bgColor }} >
       <Router>
         <Header bgColor={bgColor} textColor={textColor}/>
         <div className="relative overflow-hidden flex-1">

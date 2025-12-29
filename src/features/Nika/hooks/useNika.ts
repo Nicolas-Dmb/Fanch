@@ -33,7 +33,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
 
 
     useEffect(() => {
-        const wrapperEl = document.getElementById("nika-wrapper");
+        const wrapperEl = document.getElementById("global-wrapper");
 
         if (!wrapperEl||!screenTiltTl.current || !dominoTl.current || !fallTl.current || !fontsTlRef.current) return;
 
