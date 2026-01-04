@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header.tsx';
@@ -11,6 +11,7 @@ import Carel from './pages/carel.tsx';
 import Nika from './pages/nika.tsx';
 import './index.css';
 import Colors from './entities/Background.ts';
+import CarelDetail from './features/Carel/components/CarelDetail.tsx';
 
 type BackgroundColor = typeof Colors[keyof typeof Colors];
 
@@ -19,8 +20,17 @@ const App: React.FC = () => {
   const [textColor, setTextColor] = useState<BackgroundColor>(Colors.Black);
   const [logoFanch, setLogoFanch] = useState<boolean>(true);
 
+  useEffect(() => {
+    document.body.style.backgroundColor = bgColor;
+    document.documentElement.style.backgroundColor = bgColor;
+    return () => {
+      document.body.style.backgroundColor = "";
+      document.documentElement.style.backgroundColor = "";
+    };
+  }, [bgColor]);
+
   return (
-    <div id="global-wrapper" className="h-screen w-screen flex flex-col" style={{ backgroundColor: bgColor }} >
+    <div id="global-wrapper" className={`h-screen w-screen flex flex-col`} style={{ backgroundColor: bgColor }} >
       <Router>
         <Header bgColor={bgColor} textColor={textColor}/>
         <div className="relative overflow-hidden flex-1">
@@ -31,6 +41,7 @@ const App: React.FC = () => {
             <Route path="/photo" element={<Foto setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
             <Route path="/carel" element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
             <Route path="/nika" element={<Nika setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
+            <Route path="/carel/:name" element={<CarelDetail setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
           </Routes>
         </div>
         <Footer bgColor={bgColor} textColor={textColor} logoFanch={logoFanch} />

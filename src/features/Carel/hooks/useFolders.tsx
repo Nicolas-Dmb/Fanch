@@ -81,6 +81,9 @@ export default function useFolders() {
 
         if (!footerEl || !storage || !concorde || !apc || !alesia) return;
 
+        const wrapperEl = document.getElementById("global-wrapper");
+        if (wrapperEl) gsap.set(wrapperEl, { opacity: 1, clearProps: "opacity" });
+
         isReady.current = false;
         cleanupsRef.current.forEach((fn) => fn());
         cleanupsRef.current = [];
@@ -229,8 +232,6 @@ export default function useFolders() {
             defaults: { ease: "power2.inOut" },
             onComplete: () => {
              navigate(`/carel/${folder}`);
-            // exemple:
-            // navigate(`/projects/${folder}`)
             },
         });
 
@@ -243,9 +244,6 @@ export default function useFolders() {
 
         // 3) (facultatif) petit hold de 0.1s
         tl.to({}, { duration: 0.1 }, ">");
-
-        // 4) Wipe sort (si tu restes sur la même page et tu changes juste de scène)
-        // Si tu navigues vers une autre route, fais plutôt l'animation inverse dans la page suivante.
     }
 
 
