@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from "react";
 
 type Insets = { top: number; right: number; bottom: number; left: number }; // en %
+type AlignX = "left" | "center" | "right";
 
-export function useBgImg(insets: Insets) {
+export function useContainedImageInsets(insets: Insets, alignX: AlignX = "center") {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
@@ -25,8 +26,12 @@ export function useBgImg(insets: Insets) {
       const dw = iw * scale;
       const dh = ih * scale;
 
-      const ox = (cw - dw) / 2;
       const oy = (ch - dh) / 2;
+
+      const ox =
+        alignX === "left" ? 0 :
+        alignX === "right" ? (cw - dw) :
+        (cw - dw) / 2;
 
       const left = ox + dw * (insets.left / 100);
       const top = oy + dh * (insets.top / 100);
@@ -39,7 +44,6 @@ export function useBgImg(insets: Insets) {
       overlay.style.height = `${bottom - top}px`;
     };
 
-    // attendre que l’image soit chargée
     if (img.complete) compute();
     else img.addEventListener("load", compute, { once: true });
 
@@ -51,7 +55,7 @@ export function useBgImg(insets: Insets) {
       ro.disconnect();
       window.removeEventListener("resize", compute);
     };
-  }, [insets.top, insets.right, insets.bottom, insets.left]);
+  }, [insets.top, insets.right, insets.bottom, insets.left, alignX]);
 
   return { containerRef, imgRef, overlayRef };
 }

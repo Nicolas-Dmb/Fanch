@@ -67,7 +67,7 @@ export default function Header({bgColor, textColor}: HeaderProps){
     }, [textColor, images, images_white]);
     
     return(
-        <div className='header' style={{ backgroundColor: bgColor }}>
+        <div id="header"className='header' style={{ backgroundColor: bgColor }}>
             <div className='left'>
                 {workPhone?
                 <img src={textColor === Colors.White ?work_white:Worklettre} style={{width:35.95, height:19}} alt='phonetique' onMouseOver={()=>setWorkPhone(false)} onClick={()=>navigate('/work')} />:<img src={textColor === Colors.White ?workphon_white:work} style={{width:35.95, height:19}} alt='phonetique' onMouseOut={()=>setWorkPhone(true)} onClick={()=>navigate('/work')} />}

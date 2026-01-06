@@ -508,3 +508,11 @@ html, body, #root, .app-container {
     clip-path: inset(0 0 0 0);
   }
 }
+.scene {
+  perspective: 1200px;
+}
+
+.page {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
