@@ -1,18 +1,29 @@
 import { useLayoutEffect, useRef } from "react";
 
-type Insets = { top: number; right: number; bottom: number; left: number }; 
+type Insets = {
+  top: number; 
+  right: number;
+  bottom: number;
+  left: number;
+};
+
 type AlignX = "left" | "center" | "right";
 
 // Hook to manage image containment with specified insets
-export function useContainedImageInsets(insets: Insets, alignX: AlignX = "center") {
+export function useContainedImageInsets(
+  insets: Insets,
+  alignX: AlignX = "center"
+) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const imgRef = useRef<HTMLImageElement | null>(null);
+  const pageWrapRef = useRef<HTMLDivElement | null>(null);
+  const pageImgRef = useRef<HTMLImageElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
-    const img = imgRef.current;
+    const img = pageImgRef.current;
     const overlay = overlayRef.current;
+
     if (!container || !img || !overlay) return;
 
     const compute = () => {
@@ -30,9 +41,11 @@ export function useContainedImageInsets(insets: Insets, alignX: AlignX = "center
       const oy = (ch - dh) / 2;
 
       const ox =
-        alignX === "left" ? 0 :
-        alignX === "right" ? (cw - dw) :
-        (cw - dw) / 2;
+        alignX === "left"
+          ? 0
+          : alignX === "right"
+          ? cw - dw
+          : (cw - dw) / 2;
 
       const left = ox + dw * (insets.left / 100);
       const top = oy + dh * (insets.top / 100);
@@ -52,11 +65,23 @@ export function useContainedImageInsets(insets: Insets, alignX: AlignX = "center
     ro.observe(container);
 
     window.addEventListener("resize", compute);
+
     return () => {
       ro.disconnect();
       window.removeEventListener("resize", compute);
     };
-  }, [insets.top, insets.right, insets.bottom, insets.left, alignX]);
+  }, [
+    insets.top,
+    insets.right,
+    insets.bottom,
+    insets.left,
+    alignX,
+  ]);
 
-  return { containerRef, imgRef, overlayRef };
+  return {
+    containerRef, 
+    pageWrapRef,  
+    pageImgRef,   
+    overlayRef,   
+  };
 }

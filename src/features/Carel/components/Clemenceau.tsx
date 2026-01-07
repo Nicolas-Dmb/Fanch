@@ -1,4 +1,3 @@
-import React from "react";
 import design_clemenceau from '../static/images/design_clemenceau.png';
 import white_clemenceau from '../static/images/white_clemenceau.png';
 import black_clemenceau from '../static/images/black_clemenceau.png';

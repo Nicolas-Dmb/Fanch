@@ -11,9 +11,11 @@ const PageIndex = {
 
 interface NavigationProps{
     page: string;
+    nextPageAnimation: () => void;
+    prevPageAnimation: () => void;
 }
 
-export default function useNavigation({page}: NavigationProps) {
+export default function useNavigation({page, nextPageAnimation, prevPageAnimation}: NavigationProps) {
     const maxPage = PageIndex[page as keyof typeof PageIndex] || 0;
     const [currentPage, setCurrentPage] = useState<number>(0);
     const haveNext = currentPage < maxPage;
@@ -22,12 +24,14 @@ export default function useNavigation({page}: NavigationProps) {
 
     const goNext = () => {
         if (haveNext) {
+            nextPageAnimation();
             setCurrentPage(currentPage + 1);
         }
     };
 
     const goPrev = () => {
         if (havePrev) {
+            prevPageAnimation();
             setCurrentPage(currentPage - 1);
         }else{
             navigate("/carel");

@@ -50,5 +50,65 @@ export default function useDetail() {
     return () => ctx.revert();
   }, [left.containerRef, right.containerRef]);
 
-  return { left, right };
+  const nextPageAnimation = () => {
+    const rightEl = right.pageWrapRef.current;
+    const leftEl = left.pageWrapRef.current;
+
+    if (!rightEl) return;
+
+    gsap.set(leftEl, { rotateY: 90, transformOrigin: "right center" });
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+
+      tl.to({}, { duration: 0.75 });
+      
+      tl.to(
+        rightEl,
+        { rotateY: -90, transformOrigin: "left center", duration: 1.2, ease: "power3.in" },
+        0
+      );
+
+      tl.to(
+        leftEl,
+        { rotateY: 0, transformOrigin: "right center", duration: 1.2, ease: "power3.out" },
+        1.2
+      );
+
+    }, []);
+
+    return () => ctx.revert();
+  };
+
+  const prevPageAnimation = () => {
+    const rightEl = right.pageWrapRef.current;
+    const leftEl = left.pageWrapRef.current;
+
+    if (!rightEl) return;
+
+    gsap.set(rightEl, { rotateY: -90, transformOrigin: "left center" });
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+
+      tl.to({}, { duration: 0.75 });
+      
+      tl.to(
+        leftEl,
+        { rotateY: 90, transformOrigin: "right center", duration: 1.2, ease: "power3.in" },
+        0
+      );
+
+      tl.to(
+        rightEl,
+        { rotateY: 0, transformOrigin: "left center", duration: 1.2, ease: "power3.out" },
+        1.2
+      );
+
+    }, []);
+
+    return () => ctx.revert();
+  };
+
+  return { left, right, nextPageAnimation, prevPageAnimation }; 
 }
