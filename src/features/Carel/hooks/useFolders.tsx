@@ -15,7 +15,6 @@ export default function useFolders() {
     const currentRef = useRef<HTMLImageElement | null>(null);
     const clemenceauRef = useRef<HTMLImageElement | null>(null);
 
-    //const defaultRef = useRef<HTMLImageElement | null>(null);
     const navigate = useNavigate()
 
 
