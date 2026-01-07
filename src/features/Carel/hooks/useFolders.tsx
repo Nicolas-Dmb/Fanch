@@ -13,6 +13,7 @@ export default function useFolders() {
     const StorageRef = useRef<HTMLImageElement | null>(null);
     const closeFoldersRef = useRef<HTMLImageElement | null>(null);
     const currentRef = useRef<HTMLImageElement | null>(null);
+    const clemenceauRef = useRef<HTMLImageElement | null>(null);
 
     //const defaultRef = useRef<HTMLImageElement | null>(null);
     const navigate = useNavigate()
@@ -37,8 +38,9 @@ export default function useFolders() {
         const maroquinerie = maroquinerieRef.current;
         const chaussures = chaussuresRef.current;
         const closeFolders = closeFoldersRef.current;
+        const clemenceau = clemenceauRef.current;
 
-        if (!footerEl || !storage || !concorde || !apc || !alesia || !maroquinerie || !chaussures || !closeFolders) return;
+        if (!footerEl || !storage || !concorde || !apc || !alesia || !maroquinerie || !chaussures || !closeFolders || !clemenceau) return;
 
         // Reset opacity on wrapper when go back from Carel subpage
         const wrapperEl = document.getElementById("global-wrapper");
@@ -52,10 +54,10 @@ export default function useFolders() {
 
         const ctx = gsap.context(() => {
             
-            const all = [storage, concorde, apc, alesia, chaussures, maroquinerie, closeFolders];
-            const folderelements = [concorde, apc, alesia, chaussures, maroquinerie];
+            const all = [storage, concorde, apc, alesia, chaussures, maroquinerie, closeFolders, clemenceau];
+            const folderelements = [concorde, apc, alesia, chaussures, maroquinerie, clemenceau];
 
-            _setGsapDefaults({ concorde, chaussures, apc, maroquinerie, alesia, closeFolders, storage, all, folderelements });
+            _setGsapDefaults({ concorde, chaussures, apc, maroquinerie, alesia, closeFolders, storage, all, folderelements, clemenceau });
 
             const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
             
@@ -73,6 +75,7 @@ export default function useFolders() {
             tl.to(apc, { y: 245, duration: 0.4 }, 1.08);
             tl.to(maroquinerie, { y: 210, duration: 0.4 }, 1.12);
             tl.to(alesia, { y: 220, duration: 0.4 }, 1.16);
+            tl.to(clemenceau, { y: 220, duration: 0.4 }, 1.20);
 
             tl.eventCallback("onComplete", () => {
                 _setupFolderInteractions();
@@ -118,16 +121,18 @@ export default function useFolders() {
         const al = alesiaRef.current!;
         const m = maroquinerieRef.current!;
         const ch = chaussuresRef.current!;
+        const clem = clemenceauRef.current!;
 
-        [c, a, al, m, ch].forEach((el) => baseY.current.set(el, gsap.getProperty(el, "y") as number));
+        [c, ch, a, m, al, clem].forEach((el) => baseY.current.set(el, gsap.getProperty(el, "y") as number));
 
         _prepareAlpha(c);
         _prepareAlpha(a);
         _prepareAlpha(al);
         _prepareAlpha(m);
         _prepareAlpha(ch);
+        _prepareAlpha(clem);
 
-        const ORDER = [c, ch,  a, m, al]; 
+        const ORDER = [c, ch,  a, m, al, clem]; 
 
 
         const target = windowRef.current!;
@@ -236,6 +241,7 @@ export default function useFolders() {
         closeFoldersRef, 
         maroquinerieRef,
         chaussuresRef,
+        clemenceauRef,
     };
 }
 
@@ -279,16 +285,18 @@ interface GsapDefaults {
     alesia: HTMLImageElement;
     closeFolders: HTMLImageElement;
     storage: HTMLImageElement;
+    clemenceau: HTMLImageElement;
     all: HTMLImageElement[];
     folderelements: HTMLImageElement[];
 }
 
-function _setGsapDefaults({ concorde, chaussures, apc, maroquinerie, alesia, closeFolders, storage, all, folderelements }: GsapDefaults) { 
+function _setGsapDefaults({ concorde, chaussures, apc, maroquinerie, alesia, closeFolders, storage, clemenceau, all, folderelements }: GsapDefaults) { 
     gsap.set(concorde, { zIndex: 100 });
     gsap.set(chaussures, { zIndex: 90 });
     gsap.set(apc, { zIndex: 80 });
     gsap.set(maroquinerie, { zIndex: 70 });
     gsap.set(alesia, { zIndex: 60 });
+    gsap.set(clemenceau, { zIndex: 40 });
     gsap.set(closeFolders, { zIndex: 50 });
     gsap.set(storage, { zIndex: 120 });
     gsap.set(all, {

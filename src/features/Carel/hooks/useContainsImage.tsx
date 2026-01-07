@@ -1,8 +1,9 @@
 import { useLayoutEffect, useRef } from "react";
 
-type Insets = { top: number; right: number; bottom: number; left: number }; // en %
+type Insets = { top: number; right: number; bottom: number; left: number }; 
 type AlignX = "left" | "center" | "right";
 
+// Hook to manage image containment with specified insets
 export function useContainedImageInsets(insets: Insets, alignX: AlignX = "center") {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);

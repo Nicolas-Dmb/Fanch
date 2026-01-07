@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import Colors from '../../../entities/Background.ts';
 import useDetail from '../hooks/useDetail.tsx';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import useNavigation from '../hooks/useNavigation.tsx';
 
 import open_folder from '../static/images/open_folder.png';
 import back_arrow from '../static/images/back_arrow.png';
@@ -24,7 +25,6 @@ export default function CarelDetail({
   setTextColor,
 }: CarelDetailProps) {
     const { name } = useParams<{ name: string }>();
-    const navigate = useNavigate()
 
     useEffect(() => {
         setAcceuil(Colors.Black);
@@ -33,6 +33,7 @@ export default function CarelDetail({
     }, [setAcceuil, setLogoFanch, setTextColor]);
 
     const { left, right } = useDetail();
+    const { currentPage, goNext, goPrev, haveNext } = useNavigation( {page: name || ""} );
 
     return (
         <div className="absolute w-full h-full bg-black overflow-hidden z-999999">
@@ -41,9 +42,17 @@ export default function CarelDetail({
             <img
                 src={back_arrow}
                 alt="Back"
-                className="absolute top-0 left-0 h-9 w-auto cursor-pointer z-50"
-                onClick={() => navigate("/carel")}
+                className="absolute top-10 left-0 h-9 w-auto cursor-pointer z-50"
+                onClick={() => goPrev()}
             />
+            {haveNext && (
+                <img
+                src={back_arrow}
+                alt="Next"
+                className="absolute top-10 right-0 h-9 w-auto cursor-pointer z-50 scale-x-[-1]"
+                onClick={() => goNext()}
+            />
+            )}
 
             <div className="h-full w-full flex items-center justify-center">
                 <div className="w-full h-full flex items-stretch justify-center scene">
