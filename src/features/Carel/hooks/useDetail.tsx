@@ -61,7 +61,7 @@ export default function useDetail() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-      tl.to({}, { duration: 0.75 });
+      tl.to({}, { duration: 0.10 });
       
       tl.to(
         rightEl,
@@ -91,7 +91,7 @@ export default function useDetail() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-      tl.to({}, { duration: 0.75 });
+      tl.to({}, { duration: 0.10 });
       
       tl.to(
         leftEl,
