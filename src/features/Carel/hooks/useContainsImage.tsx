@@ -15,7 +15,6 @@ export function useContainedImageInsets(
   alignX: AlignX = "center"
 ) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const pageWrapRef = useRef<HTMLDivElement | null>(null);
   const pageImgRef = useRef<HTMLImageElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,7 +79,6 @@ export function useContainedImageInsets(
 
   return {
     containerRef, 
-    pageWrapRef,  
     pageImgRef,   
     overlayRef,   
   };

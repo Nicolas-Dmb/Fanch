@@ -91,17 +91,17 @@ function ConcordeRightContent1() {
           </p>
 
           <p className="text-black text-[8px] whitespace-pre-line">
-{`Détails :
-– Hauteur : 32 cm
-– Largeur : 36 cm (base) / 52 cm (haut)
-– Profondeur : 14 cm
-– Bijou « C » en métal argenté ou platine
-– Fermeture à rabat aimantée
-– Poche intérieure zippée
-– Poche plate intérieure
+            {`Détails :
+            – Hauteur : 32 cm
+            – Largeur : 36 cm (base) / 52 cm (haut)
+            – Profondeur : 14 cm
+            – Bijou « C » en métal argenté ou platine
+            – Fermeture à rabat aimantée
+            – Poche intérieure zippée
+            – Poche plate intérieure
 
-Fabrication artisanale
-Sud de l’Italie`}
+            Fabrication artisanale
+            Sud de l’Italie`}
           </p>
         </div>
       </div>

@@ -33,8 +33,8 @@ export default function CarelDetail({
         setLogoFanch(false); 
     }, [setAcceuil, setLogoFanch, setTextColor]);
 
-    const { left, right, nextPageAnimation, prevPageAnimation } = useDetail();
-    const { currentPage, goNext, goPrev, haveNext } = useNavigation( {page: name || "", nextPageAnimation, prevPageAnimation} );
+    const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation } = useDetail();
+    const { currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage, goNext, goPrev, haveNext } = useNavigation( {page: name || "", nextPageAnimation, prevPageAnimation} );
 
     return (
         <div className="absolute w-full h-full bg-black overflow-hidden z-999999">
@@ -60,42 +60,55 @@ export default function CarelDetail({
                     {/* Left Content */}
                     <div ref={left.containerRef} className="relative h-full w-1/2 page">
                         <img
+                            ref={left.pageImgRef}
                             src={open_folder}
                             alt="folder left"
                             className="absolute inset-0 w-full h-full object-contain object-right pointer-events-none"
                         />
-                        <div className="absolute inset-0" ref={left.pageWrapRef}>
+                        <div ref={left.overlayRef} className="absolute overflow-auto">
+                            {
+                                <LeftRoutes side="left" pageName={name || ""} currentPage={currentLeftPage} />
+                            }
+                        </div>
+                        {/* Transition Page */}
+                        <div className="absolute inset-0" ref={transitionLeft.containerRef}>
                             <img
-                                ref={left.pageImgRef}
+                                ref={transitionLeft.pageImgRef}
                                 src={page}
-                                alt="page left"
+                                alt="page right"
                                 className="absolute inset-0 w-full h-full object-contain object-right pointer-events-none"
                             />
-                            <div ref={left.overlayRef} className="absolute overflow-auto">
+                            <div ref={transitionLeft.overlayRef} className="absolute overflow-auto">
                                 {
-                                    <LeftRoutes side="left" pageName={name || ""} currentPage={currentPage} />
+                                    <LeftRoutes side="left" pageName={name || ""} currentPage={transitionLeftPage} />
                                 }
                             </div>
                         </div>
                     </div>
-
                     {/* Right Content */}
                     <div ref={right.containerRef} className="relative h-full w-1/2 page">
                         <img
+                            ref={right.pageImgRef}
                             src={open_folder}
                             alt="folder right"
                             className="absolute inset-0 w-full h-full object-contain object-right pointer-events-none scale-x-[-1]"
                         />
-                        <div className="absolute inset-0" ref={right.pageWrapRef}>
+                        <div ref={right.overlayRef} className="absolute overflow-auto">
+                            {
+                                <LeftRoutes side="right" pageName={name || ""} currentPage={currentRightPage} />
+                            }
+                        </div>
+                        {/* Transition Page */}
+                        <div className="absolute inset-0" ref={transitionRight.containerRef}>
                             <img
-                                ref={right.pageImgRef}
+                                ref={transitionRight.pageImgRef}
                                 src={page}
                                 alt="page right"
                                 className="absolute inset-0 w-full h-full object-contain object-right pointer-events-none scale-x-[-1]"
                             />
-                            <div ref={right.overlayRef} className="absolute overflow-auto">
+                            <div ref={transitionRight.overlayRef} className="absolute overflow-auto">
                                 {
-                                    <LeftRoutes side="right" pageName={name || ""} currentPage={currentPage} />
+                                    <LeftRoutes side="right" pageName={name || ""} currentPage={transitionRightPage} />
                                 }
                             </div>
                         </div>
