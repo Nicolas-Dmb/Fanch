@@ -95,17 +95,17 @@ function ClemenceauLeftContent() {
         <div>
             <p className="text-black text-xl font-semibold">L'inspiration:</p>
             <div className="h-px bg-black w-full" />
-            <img src={design_clemenceau} alt="Design Clemenceau" className="w-1/2 h-auto translate-x-1/2 py-[5%]"/>
+            <img src={design_clemenceau} alt="Design Clemenceau" className="w-1/2 h-auto translate-x-1/2 py-[10%]"/>
             <p className="text-black text-xs pt-1 px-1 pb-[2%]">
-                <b className="font-bold">Le Clémenceau a été la suite logique du Concorde.</b> Après ce premier projet, j’ai<br />
-                ressenti le besoin d’aller plus loin dans la réflexion autour du cabas, en imaginant un<br />
-                modèle capable de représenter la femme d’aujourd’hui... Active, mobile, et en<br />
-                constante adaptation au fil de la journée.<br />
+                <b className="font-bold">Le Clémenceau a été la suite logique du Concorde.</b> Après ce premier projet, j’ai
+                ressenti le besoin d’aller plus loin dans la réflexion autour du cabas, en imaginant un
+                modèle capable de représenter la femme d’aujourd’hui... Active, mobile, et en
+                constante adaptation au fil de la journée.
             </p>
             <p className="text-black text-xs pt-1 px-1">
-                Le Clémenceau est le premier cabas que j’ai développé pour Carel, ce sac s’inscrit<br />
-                comme pour le concorde, dans une démarche créative où les formes graphiques<br />
-                rencontrent des lignes architecturales.<br />
+                Le Clémenceau est le premier cabas que j’ai développé pour Carel, ce sac s’inscrit
+                comme pour le concorde, dans une démarche créative où les formes graphiques
+                rencontrent des lignes architecturales.
             </p>
         </div>
     );
