@@ -5,8 +5,9 @@ import Alesia from "../features/Carel/static/images/alesia.png";
 import APC from "../features/Carel/static/images/apc.png";
 import Concorde from "../features/Carel/static/images/concorde.png";
 import useFolders from "../features/Carel/hooks/useFolders.tsx";
-import defaultFolder from "../features/Carel/static/images/default_folder.png";
-
+import maroquinerie from "../features/Carel/static/images/maroquinerie.png";
+import chaussures from "../features/Carel/static/images/chaussures.png";
+import close_folders from "../features/Carel/static/images/close_folders.png";
 
 type BackgroundColor = typeof Colors[keyof typeof Colors];
 
@@ -17,7 +18,7 @@ interface carelProps {
 }
 
 export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelProps) {
-  const { windowRef, concordeRef, apcRef, alesiaRef, StorageRef, defaultRef,  handleClick } = useFolders();
+  const { windowRef, concordeRef, apcRef, alesiaRef, StorageRef, maroquinerieRef, chaussuresRef, closeFoldersRef } = useFolders();
 
   useEffect(() => {
     setAcceuil(Colors.Black);
@@ -29,11 +30,14 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelP
 
   return (
     <div ref={windowRef} className="w-full h-screen relative overflow-hidden">
+      <img ref={closeFoldersRef} src={close_folders} alt="Close Folders" className="absolute w-[70vw] h-auto"/>
       <img ref={StorageRef} src={Storage} alt="Storage" className="absolute w-[70vw] h-auto" />
-      <img ref={concordeRef} src={Concorde} alt="Concorde" className="absolute w-[70vw] h-auto" onClick={()=>{handleClick("concorde")}}/>
-      <img ref={apcRef} src={APC} alt="APC" className="absolute w-[70vw] h-auto"  onClick={()=>{handleClick("apc")}}/>
-      <img ref={alesiaRef} src={Alesia} alt="Alesia" className="absolute w-[70vw] h-auto" onClick={()=>{handleClick("alesia")}}/>
-      <img ref={defaultRef} src={defaultFolder} alt="Default Folders" className="absolute w-[70vw] h-auto" />
+      <img ref={concordeRef} src={Concorde} data-folder="concorde" alt="Concorde" className="absolute w-[70vw] h-auto"/>
+      <img ref={chaussuresRef} src={chaussures} data-folder="chaussures" alt="Chaussures" className="absolute w-[70vw] h-auto"/>
+      <img ref={apcRef} src={APC} data-folder="apc" alt="APC" className="absolute w-[70vw] h-auto"/>
+      <img ref={maroquinerieRef} src={maroquinerie} data-folder="maroquinerie" alt="Maroquinerie" className="absolute w-[70vw] h-auto"/>
+      <img ref={alesiaRef} src={Alesia} data-folder="alesia" alt="Alesia" className="absolute w-[70vw] h-auto"/>
+      {/*<img ref={defaultRef} src={defaultFolder} alt="Default Folders" className="absolute w-[70vw] h-auto" />*/}
     </div>
   );
 }

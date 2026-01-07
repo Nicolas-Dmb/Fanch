@@ -6,10 +6,15 @@ import {useNavigate} from "react-router-dom"
 export default function useFolders() {
     const concordeRef = useRef<HTMLImageElement | null>(null);
     const apcRef = useRef<HTMLImageElement | null>(null);
+    const maroquinerieRef = useRef<HTMLImageElement | null>(null);
+    const chaussuresRef = useRef<HTMLImageElement | null>(null);
     const alesiaRef = useRef<HTMLImageElement | null>(null);
     const windowRef = useRef<HTMLDivElement | null>(null);
     const StorageRef = useRef<HTMLImageElement | null>(null);
-    const defaultRef = useRef<HTMLImageElement | null>(null);
+    const closeFoldersRef = useRef<HTMLImageElement | null>(null);
+    const currentRef = useRef<HTMLImageElement | null>(null);
+
+    //const defaultRef = useRef<HTMLImageElement | null>(null);
     const navigate = useNavigate()
 
 
@@ -21,7 +26,156 @@ export default function useFolders() {
 
     const alphaMaps = useRef<Map<HTMLImageElement, AlphaCanvas>>(new Map());
 
-    const liftOn = (el: HTMLElement | null) => {
+    const LIFT = 18;
+
+    useEffect(() => {
+        const footerEl = document.getElementById("footer");
+        const storage = StorageRef.current;
+        const concorde = concordeRef.current;
+        const apc = apcRef.current;
+        const alesia = alesiaRef.current;
+        const maroquinerie = maroquinerieRef.current;
+        const chaussures = chaussuresRef.current;
+        const closeFolders = closeFoldersRef.current;
+
+        if (!footerEl || !storage || !concorde || !apc || !alesia || !maroquinerie || !chaussures || !closeFolders) return;
+
+        // Reset opacity on wrapper when go back from Carel subpage
+        const wrapperEl = document.getElementById("global-wrapper");
+        if (wrapperEl) gsap.set(wrapperEl, { opacity: 1, clearProps: "opacity" });
+
+        isReady.current = false;
+        cleanupsRef.current.forEach((fn) => fn());
+        cleanupsRef.current = [];
+
+        const prev = _footerStyle(footerEl);
+
+        const ctx = gsap.context(() => {
+            
+            const all = [storage, concorde, apc, alesia, chaussures, maroquinerie, closeFolders];
+            const folderelements = [concorde, apc, alesia, chaussures, maroquinerie];
+
+            _setGsapDefaults({ concorde, chaussures, apc, maroquinerie, alesia, closeFolders, storage, all, folderelements });
+
+            const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+            
+            // 1) Entry animation
+            tl.to(storage, { y: 400, width: "80vw", duration: 1 }, 0);
+            tl.to(closeFolders, { y: 300, width: "75vw", duration: 1 }, 0);
+
+            // 2) replace folders
+            tl.to(closeFolders, {opacity:0, duration:0}, 1);
+            tl.to(folderelements, {opacity:1, duration:0},1);
+
+            // 3) staggered rise
+            tl.to(concorde, { y: 270, duration: 0.4 }, 1.0);
+            tl.to(chaussures, { y: 220, duration: 0.4 }, 1.04);
+            tl.to(apc, { y: 245, duration: 0.4 }, 1.08);
+            tl.to(maroquinerie, { y: 210, duration: 0.4 }, 1.12);
+            tl.to(alesia, { y: 220, duration: 0.4 }, 1.16);
+
+            tl.eventCallback("onComplete", () => {
+                _setupFolderInteractions();
+            });
+
+        }, windowRef);
+
+        return () => {
+            cleanupsRef.current.forEach((fn) => fn());
+            cleanupsRef.current = [];
+            ctx.revert();
+            _footerStyleRestore(footerEl, prev);
+        };
+    }, []);
+
+    // Navigation and animation when clicking on a folder
+    function handleClick(folder: string) {
+        isReady.current = false;
+        const wrapperEl = document.getElementById("global-wrapper");
+
+        if (!wrapperEl) return;
+
+        const tl = gsap.timeline({
+            defaults: { ease: "power2.inOut" },
+            onComplete: () => {
+             navigate(`/carel/${folder}`);
+            },
+        });
+
+        // 2/ fade out wrapper
+        tl.to(wrapperEl, { opacity:0, duration: 0.8, ease: "power2.in" }, 0);
+
+        // 3/ (optional) small hold of 0.1s
+        tl.to({}, { duration: 0.1 }, ">");
+    }
+
+    // Setup folder hover and click interactions
+    function _setupFolderInteractions() {
+        isReady.current = true;
+
+        const c = concordeRef.current!;
+        const a = apcRef.current!;
+        const al = alesiaRef.current!;
+        const m = maroquinerieRef.current!;
+        const ch = chaussuresRef.current!;
+
+        [c, a, al, m, ch].forEach((el) => baseY.current.set(el, gsap.getProperty(el, "y") as number));
+
+        _prepareAlpha(c);
+        _prepareAlpha(a);
+        _prepareAlpha(al);
+        _prepareAlpha(m);
+        _prepareAlpha(ch);
+
+        const ORDER = [c, ch,  a, m, al]; 
+
+
+        const target = windowRef.current!;
+        const handleMove = (e: MouseEvent) => _onMove(e, ORDER);
+        const handleLeave = () => _onLeave();
+        const handleClick = () => _onClick();
+
+        target.addEventListener("mousemove", handleMove);
+        target.addEventListener("mouseleave", handleLeave);
+        target.addEventListener("click", handleClick);
+
+        cleanupsRef.current.push(() => {
+            target.removeEventListener("mousemove", handleMove);
+            target.removeEventListener("mouseleave", handleLeave);
+            target.removeEventListener("click", handleClick);
+        });
+    }
+
+    const _onMove = (e: MouseEvent, ORDER: HTMLImageElement[]) => {
+        if (!isReady.current) return;
+
+        let hit: HTMLImageElement | null = null;
+        for (const img of ORDER) {
+            if (!alphaMaps.current.has(img)) continue;
+            if (_alphaAtPointer(img, e) > 10) { hit = img; break; }
+        }
+
+        if (hit !== currentRef.current) {
+            if (currentRef.current) _liftOff(currentRef.current);
+            if (hit) _liftOn(hit);
+            currentRef.current = hit;
+        }
+    };
+
+    const _onClick = () => {
+        const el = currentRef.current;
+        if (!el) return;
+
+        const folderName = el.dataset.folder ?? el.alt.toLowerCase();
+        handleClick(folderName);
+    };
+
+    const _onLeave = () => {
+        if (currentRef.current) _liftOff(currentRef.current);
+        currentRef.current = null;
+    };
+    // Lift folder up on hover
+    const _liftOn = (el: HTMLElement | null) => {
         if (!isReady.current || !el) return;
         const y0 = baseY.current.get(el);
         if (y0 === undefined) return;
@@ -29,7 +183,8 @@ export default function useFolders() {
         gsap.to(el, { y: y0 - LIFT, duration: 0.18, ease: "power2.out", overwrite: "auto" });
     };
 
-    const liftOff = (el: HTMLElement | null) => {
+    // Lower folder back to base position
+    const _liftOff = (el: HTMLElement | null) => {
         if (!isReady.current || !el) return;
         const y0 = baseY.current.get(el);
         if (y0 === undefined) return;
@@ -37,7 +192,8 @@ export default function useFolders() {
         gsap.to(el, { y: y0, duration: 0.22, ease: "power2.out", overwrite: "auto" });
     };
 
-    const prepareAlpha = (img: HTMLImageElement) => {
+    // Prepare alpha map for an image
+    const _prepareAlpha = (img: HTMLImageElement) => {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d", { willReadFrequently: true });
         if (!ctx) return;
@@ -54,7 +210,8 @@ export default function useFolders() {
         else img.addEventListener("load", draw, { once: true });
     };
 
-    const alphaAtPointer = (img: HTMLImageElement, e: MouseEvent) => {
+    // Get alpha value at pointer position
+    const _alphaAtPointer = (img: HTMLImageElement, e: MouseEvent) => {
         const entry = alphaMaps.current.get(img);
         if (!entry) return 0;
 
@@ -70,24 +227,20 @@ export default function useFolders() {
     };
 
 
-    const LIFT = 18;
+    return {
+        windowRef,
+        concordeRef,
+        apcRef,
+        alesiaRef,
+        StorageRef,
+        closeFoldersRef, 
+        maroquinerieRef,
+        chaussuresRef,
+    };
+}
 
-    useEffect(() => {
-        const footerEl = document.getElementById("footer");
-        const storage = StorageRef.current;
-        const concorde = concordeRef.current;
-        const apc = apcRef.current;
-        const alesia = alesiaRef.current;
 
-        if (!footerEl || !storage || !concorde || !apc || !alesia) return;
-
-        const wrapperEl = document.getElementById("global-wrapper");
-        if (wrapperEl) gsap.set(wrapperEl, { opacity: 1, clearProps: "opacity" });
-
-        isReady.current = false;
-        cleanupsRef.current.forEach((fn) => fn());
-        cleanupsRef.current = [];
-
+function _footerStyle(footerEl:HTMLElement){
         const prev = {
         position: footerEl.style.position,
         zIndex: footerEl.style.zIndex,
@@ -105,156 +258,52 @@ export default function useFolders() {
         footerEl.style.left = "0";
         footerEl.style.right = "0";
         footerEl.style.width = "100%";
+        return prev;
+}
 
-        const ctx = gsap.context(() => {
-        gsap.set(storage, { zIndex: 70 });
-        gsap.set(concorde, { zIndex: 60 });
-        gsap.set(apc, { zIndex: 40 });
-        gsap.set(alesia, { zIndex: 20 });
+function _footerStyleRestore(footerEl:HTMLElement, prev: any){
+    footerEl.style.position = prev.position;
+    footerEl.style.zIndex = prev.zIndex;
+    footerEl.style.bottom = prev.bottom;
+    footerEl.style.left = prev.left;
+    footerEl.style.right = prev.right;
+    footerEl.style.width = prev.width;
+    footerEl.style.height = prev.height;
+}
 
-        const all = [storage, concorde, apc, alesia];
+interface GsapDefaults {
+    concorde: HTMLImageElement;
+    chaussures: HTMLImageElement;
+    apc: HTMLImageElement;
+    maroquinerie: HTMLImageElement;
+    alesia: HTMLImageElement;
+    closeFolders: HTMLImageElement;
+    storage: HTMLImageElement;
+    all: HTMLImageElement[];
+    folderelements: HTMLImageElement[];
+}
 
-        gsap.set(all, {
-            position: "fixed",
-            left: "50%",
-            top: "50%",
-            xPercent: -50,
-            yPercent: -50,
-            willChange: "transform",
-        });
-
-        gsap.set(defaultRef.current, {
-            position: "fixed",
-            left: "50%",
-            xPercent: -50,
-            bottom: -window.innerHeight*1.5,
-        });
-
-        gsap.set(storage, { y: 0, width: "35vw" });
-        gsap.set([concorde, apc, alesia], { y: -40, width: "30vw" });
-
-        const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-
-        tl.to(storage, { y: 400, width: "80vw", duration: 1 }, 0);
-        tl.to([concorde, apc, alesia], { y: 300, width: "75vw", duration: 1 }, 0);
-
-        tl.to(concorde, { y: 270, duration: 0.4 }, 1.0);
-        tl.to(apc, { y: 245, duration: 0.4 }, 1.08);
-        tl.to(alesia, { y: 220, duration: 0.4 }, 1.16);
-
-        tl.eventCallback("onComplete", () => {
-        isReady.current = true;
-
-        const c = concordeRef.current!;
-        const a = apcRef.current!;
-        const al = alesiaRef.current!;
-
-        [c, a, al].forEach((el) => baseY.current.set(el, gsap.getProperty(el, "y") as number));
-
-        prepareAlpha(c);
-        prepareAlpha(a);
-        prepareAlpha(al);
-
-        const ORDER = [c, a, al]; 
-
-        let current: HTMLImageElement | null = null;
-
-        const onMove = (e: MouseEvent) => {
-            if (!isReady.current) return;
-
-            let hit: HTMLImageElement | null = null;
-
-            for (const img of ORDER) {
-            if (!alphaMaps.current.has(img)) continue; 
-            const alpha = alphaAtPointer(img, e);
-            if (alpha > 10) { hit = img; break; }
-            }
-
-            if (hit !== current) {
-            if (current) liftOff(current);
-            if (hit) liftOn(hit);
-            current = hit;
-            }
-        };
-
-        const onLeave = () => {
-            if (current) liftOff(current);
-            current = null;
-        };
-
-        const target = windowRef.current!;
-        target.addEventListener("mousemove", onMove);
-        target.addEventListener("mouseleave", onLeave);
-
-        cleanupsRef.current.push(() => {
-                target.removeEventListener("mousemove", onMove);
-                target.removeEventListener("mouseleave", onLeave);
-            });
-        });
-
-        }, windowRef);
-
-        return () => {
-        cleanupsRef.current.forEach((fn) => fn());
-        cleanupsRef.current = [];
-        ctx.revert();
-
-        footerEl.style.position = prev.position;
-        footerEl.style.zIndex = prev.zIndex;
-        footerEl.style.bottom = prev.bottom;
-        footerEl.style.left = prev.left;
-        footerEl.style.right = prev.right;
-        footerEl.style.width = prev.width;
-        footerEl.style.height = prev.height;
-        };
-    }, []);
-
-    function handleClick(folder: string) {
-        const storage = StorageRef.current;
-        const concorde = concordeRef.current;
-        const apc = apcRef.current;
-        const alesia = alesiaRef.current;
-        const defaultFolder = defaultRef.current;
-        const wrapperEl = document.getElementById("global-wrapper");
-
-        if (!storage || !concorde || !apc || !alesia || !defaultFolder  || !windowRef.current || !wrapperEl) return;
-
-        if (!isReady.current) return; // évite multi-clic pendant anim
-        isReady.current = false;
-
-        const all = [storage, concorde, apc, alesia];
-
-        // Important: on tue les tweens en cours (hover etc.)
-        gsap.killTweensOf(all);
-        gsap.killTweensOf(defaultFolder);
-
-        const tl = gsap.timeline({
-            defaults: { ease: "power2.inOut" },
-            onComplete: () => {
-             navigate(`/carel/${folder}`);
-            },
-        });
-
-        // 1) Exit scene: tout descend
-        tl.to(all, { y: "+=800", duration: 0.8, ease: "power2.in" }, 0);
-
-        // option: fais monter le "defaultFolder" (si tu veux qu'il parte vers le haut)
-        tl.to(defaultFolder, { y: "-=800", opacity: 0, duration: 0.8, ease: "power2.in" }, 0);
-        tl.to(wrapperEl, { opacity:0, duration: 0.8, ease: "power2.in" }, 0);
-
-        // 3) (facultatif) petit hold de 0.1s
-        tl.to({}, { duration: 0.1 }, ">");
-    }
-
-
-
-    return {
-        windowRef,
-        concordeRef,
-        apcRef,
-        alesiaRef,
-        StorageRef,
-        handleClick,
-        defaultRef,
-    };
+function _setGsapDefaults({ concorde, chaussures, apc, maroquinerie, alesia, closeFolders, storage, all, folderelements }: GsapDefaults) { 
+    gsap.set(concorde, { zIndex: 100 });
+    gsap.set(chaussures, { zIndex: 90 });
+    gsap.set(apc, { zIndex: 80 });
+    gsap.set(maroquinerie, { zIndex: 70 });
+    gsap.set(alesia, { zIndex: 60 });
+    gsap.set(closeFolders, { zIndex: 50 });
+    gsap.set(storage, { zIndex: 120 });
+    gsap.set(all, {
+        position: "fixed",
+        left: "50%",
+        top: "80vh",
+        xPercent: -50,
+        yPercent: -100,
+        willChange: "transform",
+        force3D: true,
+        backfaceVisibility: "hidden",
+        transformPerspective: 1000,
+    });
+    gsap.set(folderelements, { opacity: 0, y: 300, width: "75vw"});
+    gsap.set(maroquinerie,{y: 290});
+    gsap.set(closeFolders, {width: "35vw", y: -100});
+    gsap.set(storage, { y: -60, width: "35vw" });
 }
