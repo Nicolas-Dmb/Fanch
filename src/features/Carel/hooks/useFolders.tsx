@@ -70,7 +70,7 @@ export default function useFolders() {
 
             // 3) staggered rise
             tl.to(concorde, { y: 270, duration: 0.4 }, 1.0);
-            tl.to(chaussures, { y: 220, duration: 0.4 }, 1.04);
+            tl.to(chaussures, { y: 210, duration: 0.4 }, 1.04);
             tl.to(apc, { y: 245, duration: 0.4 }, 1.08);
             tl.to(maroquinerie, { y: 210, duration: 0.4 }, 1.12);
             tl.to(alesia, { y: 220, duration: 0.4 }, 1.16);
