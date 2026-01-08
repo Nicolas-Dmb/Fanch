@@ -1,5 +1,14 @@
 import design_clemenceau from '../static/images/design_clemenceau.png';
-
+import concorde_model1 from '../static/images/concorde/concorde_model1.png';
+import concorde_model2 from '../static/images/concorde/concorde_model2.png';
+import concorde_black from '../static/images/concorde/concorde_black.png';
+import concorde_camel from '../static/images/concorde/concorde_camel.png';
+import concorde_brown from '../static/images/concorde/concorde_brown.png';
+import concorde_red from '../static/images/concorde/concorde_red.png';
+import concorde_outline from '../static/images/concorde/concorde_outline.png';
+import concorde_ads1 from '../static/images/concorde/concorde_ads1.png';
+import concorde_ads2 from '../static/images/concorde/concorde_ads2.png';
+import {ColumnBags} from './Clemenceau.tsx';
 
 interface ConcordeLeftContentProps{
     page: number;
@@ -25,35 +34,34 @@ export function ConcordeRightContent({page}: ConcordeRightContentProps) {
 
 function ConcordeLeftContent1() {
   return (
-    <div className="space-y-3">
-      <p className="text-black text-xl font-semibold">L’inspiration</p>
+    <div>
+      <p className="text-black text-xl font-semibold tracking-tighter">L’inspiration:</p>
       <div className="h-px bg-black w-full" />
 
       <img
-        src={design_clemenceau}
-        alt="Design Clemenceau"
-        className="w-1/2 h-auto translate-x-1/2 py-[10%]"
+        src={concorde_model1}
+        alt="concorde model1"
+        className="w-1/2 h-auto translate-x-1/2 pb-[5%] pt-[10%]"
+      />
+      <img
+        src={concorde_model2}
+        alt="concorde model2"
+        className="w-1/2 h-auto translate-x-1/2 pb-[10%]"
       />
 
-      <p className="text-black text-xs px-1">
-        <b className="font-bold">
-          Le Concorde est né d’un besoin de simplicité radicale.
-        </b>{" "}
-        À l’origine, il s’agissait de créer un sac capable d’accompagner une
-        journée entière sans jamais contraindre le mouvement. Une forme pure,
-        presque évidente, pensée comme une extension du corps.
+      <p className="text-black text-xs px-1 tracking-tighter pb-[5%]">
+        Le Concorde est né d’une recherche très instinctive autour de formes géométriques
+        pures. À cette période, j’étais obsédé par le design automobile des années 60 : ces
+        carrosseries graphiques qui découpaient les volumes avec une précision presque
+        sculpturale. J’ai eu envie de retranscrire cette sensation ce jeu de lignes nettes, ce
+        mouvement figé dans un sac.
       </p>
 
-      <p className="text-black text-xs px-1">
-        Inspiré par l’architecture moderniste et les lignes fonctionnelles des
-        années 60, le Concorde assume une géométrie franche, équilibrée par la
-        souplesse du cuir. Chaque détail a été réduit à l’essentiel.
-      </p>
-
-      <p className="text-black text-xs px-1">
-        Ce projet marque le point de départ d’une réflexion plus large autour du
-        cabas contemporain : un objet utilitaire, mais porteur d’élégance et de
-        caractère.
+      <p className="text-black text-xs px-1 font-semibold tracking-tighter">
+        Ce sac est devenu l’expression de cette obsession, une forme simple en
+        apparence, mais pensée comme un véritable objet de design, où chaque courbe
+        et chaque angle raconte cette fascination pour l’esthétique automobile de
+        l’époque.
       </p>
     </div>
   );
@@ -61,50 +69,42 @@ function ConcordeLeftContent1() {
 
 function ConcordeRightContent1() {
   return (
-    <div className="space-y-4">
-      <p className="text-black text-xl font-semibold">Versions & usages</p>
+    <div>
+      <p className="text-black text-xl font-semibold tracking-tighter">Versions de modèles:</p>
       <div className="h-px bg-black w-full" />
 
-      <div className="flex flex-row px-2 gap-10">
-        <div className="w-1/2 space-y-2">
-          <p className="text-black text-sm font-semibold">Valeurs ajoutées</p>
-          <div className="h-px bg-black w-full" />
-
-          <p className="text-black text-[10px]">
-            Pensé pour s’adapter à différents moments de la journée, le Concorde
-            peut se porter plié ou déplié grâce à un système discret de pattes
-            internes avec boutons-pression.
-          </p>
-
-          <p className="text-black text-[10px]">
-            Son volume généreux permet d’accueillir aussi bien des documents A4
-            qu’un ordinateur portable, sans compromettre la ligne du sac.
-          </p>
-        </div>
-
-        <div className="w-1/2 space-y-2">
-          <p className="text-black text-sm font-semibold">Fiche produit</p>
-          <div className="h-px bg-black w-full" />
-
-          <p className="text-black text-[8px] underline font-semibold">
-            Cabas Concorde
-          </p>
-
-          <p className="text-black text-[8px] whitespace-pre-line">
-            {`Détails :
-            – Hauteur : 32 cm
-            – Largeur : 36 cm (base) / 52 cm (haut)
-            – Profondeur : 14 cm
-            – Bijou « C » en métal argenté ou platine
-            – Fermeture à rabat aimantée
-            – Poche intérieure zippée
-            – Poche plate intérieure
-
-            Fabrication artisanale
-            Sud de l’Italie`}
-          </p>
-        </div>
+      <div className="flex flex-row gap-2 py-[20%]">
+        <ColumnBags imageSrc={concorde_black} description={"Nappa -\nNoir\nBijou «C» Argent"} price="395€" />
+        <ColumnBags imageSrc={concorde_brown} description={"Chèvre velours -\nChocolat\nBijou «C» Platine"} price="395€" />
+        <ColumnBags imageSrc={concorde_red} description={"Nappa -\nIvoire & rouge\nBijou «C» Argent"} price="395€" />
+        <ColumnBags imageSrc={concorde_camel} description={"Nappa - Ivoire,\n Noir & Camel\nDécoupe «C» Cuir"} price="395€" />
       </div>
+      <div className="flex flex-row justify-space-between px-2 gap-10">
+          <div className="w-1/2">
+              <p className="text-black text-xm font-bold tracking-tighter">Valeurs ajoutées:</p>
+              <div className="h-px bg-black w-full" />
+              <p className="text-black text-[10px] py-2 tracking-tighter">
+                  Son volume graphique évoque la vitesse et la
+                  précision, tandis que sa bandoulière réglable assure
+                  confort et liberté de mouvement.
+              </p>
+          </div>
+          <div className="w-1/2">
+              <p className="text-black text-xm font-bold tracking-tighter">Fiche produit:</p>
+              <div className="h-px bg-black w-full" />
+              <p className="text-black text-[8px] whitespace-pre-line underline font-semibold py-2 tracking-tighter">
+                  Porté épaule.
+              </p>
+              <p className="text-black text-[8px] whitespace-pre-line tracking-tighter">
+                  {`Détails :
+                    - H 15 x L 34(base) - 22(dessus) x P 5 cm
+                    - Empiècement en cuir rouge
+                    - Fermeture à rabat intérieure aimantée
+                    - Poche intérieure fermeture à glissière\n
+                  FABRICATION ARTISANALE, DANS LE SUD DE L’ITALIE`}
+              </p>
+            </div>
+        </div>  
     </div>
   );
 }
@@ -112,47 +112,43 @@ function ConcordeRightContent1() {
 
 function ConcordeLeftContent2() {
   return (
-    <div className="space-y-3">
-      <p className="text-black text-xl font-semibold">Processus de création</p>
+    <div>
+      <p className="text-black text-xl font-semibold tracking-tighter">Caractèristique technique:</p>
       <div className="h-px bg-black w-full" />
-
-      <p className="text-black text-xs px-1">
-        Le développement du Concorde s’est articulé autour de nombreux prototypes,
-        chacun explorant une variation de proportions, de portés et de volumes.
-      </p>
-
-      <p className="text-black text-xs px-1">
-        Le choix des cuirs a fait l’objet d’une attention particulière : souplesse,
-        résistance et patine dans le temps ont été des critères déterminants.
-      </p>
-
-      <p className="text-black text-xs px-1">
-        Chaque couture, chaque tranche est pensée pour durer, dans une logique de
-        sobriété et de fonctionnalité.
+      <img 
+        src={concorde_outline} 
+        alt="concorde outline" 
+        className="w-full h-auto py-[10%]" 
+      />
+      <p className="text-black text-xs px-1 tracking-tighter">
+        La découpe en <b>arc de cercle</b> ouvre au Concorde un large éventail de <b>combinaisons</b>
+         de <b>matières</b> et de <b>couleurs</b>.
       </p>
     </div>
   );
 }
 function ConcordeRightContent2() {
   return (
-    <div className="space-y-4">
-      <p className="text-black text-xl font-semibold">Détails techniques</p>
-      <div className="h-px bg-black w-full" />
-
-      <p className="text-black text-[10px] px-2">
-        Le Concorde repose sur une structure souple renforcée par des zones
-        stratégiques, garantissant un maintien optimal sans rigidifier la forme.
-      </p>
-
-      <p className="text-black text-[10px] px-2">
-        Les anses ont été dessinées pour offrir un confort maximal, que le sac
-        soit porté à l’épaule ou à la main.
-      </p>
-
-      <p className="text-black text-[10px] px-2">
-        Chaque pièce est assemblée à la main, selon un savoir-faire traditionnel,
-        garantissant une finition irréprochable.
-      </p>
+    <div className="flex justify-between h-full">
+      <div className="flex flex-col items-start justify-between h-full gap-4">
+        <img
+          src={concorde_ads1}
+          alt="concorde ad 1"
+          className="w-[70%] h-auto px-[5%]"
+        />
+        <img
+          src={concorde_ads2}
+          alt="concorde ad 2"
+          className=" h-auto"
+        />
+      </div>
+      <div className="flex items-center h-full">
+        <img
+          src={concorde_ads2}
+          alt="concorde ad 2"
+          className="h-auto pl-[15%]"
+        />
+      </div>
     </div>
   );
 }

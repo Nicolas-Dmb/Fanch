@@ -26,24 +26,23 @@ export default function useNavigation({page, nextPageAnimation, prevPageAnimatio
     const navigate = useNavigate()
 
     const goNext = () => {
-
+        setTransitionRightPage(currentRightPage); 
+        setTransitionLeftPage(currentLeftPage + 1);
+        setCurrentRightPage(currentRightPage + 1);
         if (haveNext) {
-            setTransitionRightPage(currentRightPage); 
-            setTransitionLeftPage(currentLeftPage + 1);
             nextPageAnimation(
                 () => {
-                    setCurrentLeftPage(p => p + 1);
-                    setCurrentRightPage(p => p + 1);
+                    setCurrentLeftPage(transitionLeftPage);
                 }
             );
         }
     };
 
     const goPrev = () => {
+        setTransitionLeftPage(currentLeftPage);
+        setCurrentLeftPage(currentLeftPage - 1);
+        setTransitionRightPage(currentRightPage - 1);
         if (havePrev) {
-            setTransitionLeftPage(currentLeftPage);
-            setCurrentLeftPage(currentLeftPage - 1);
-            setTransitionRightPage(currentRightPage - 1);
             prevPageAnimation(
                 () => {
                     setCurrentRightPage(transitionRightPage);

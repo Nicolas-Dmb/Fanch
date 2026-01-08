@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { useContainedImageInsets } from "./useContainsImage.tsx";
 
 export default function useDetail() {
-  const INSETS = { top: 8, right: 10, bottom: 8, left: 12 };
+  const INSETS = { top: 8, right: 10, bottom: 8, left: 10 };
   const left = useContainedImageInsets(INSETS, "right");
   const transitionLeft = useContainedImageInsets(INSETS, "right");
 
@@ -73,19 +73,20 @@ export default function useDetail() {
     const leftEl = transitionLeft.containerRef.current;
 
     if (!rightEl || !leftEl) return;
-    gsap.set([rightEl, leftEl], { autoAlpha: 1 });
+
+    gsap.killTweensOf([rightEl, leftEl]);
+
     gsap.set(leftEl, { rotateY: 90, transformOrigin: "right center" });
     gsap.set(rightEl, { rotateY: 0, transformOrigin: "left center" });
+    gsap.set([rightEl, leftEl], { autoAlpha: 1 });
 
     gsap.timeline({
       defaults: { ease: "power2.inOut" },
-      onComplete: () => {
-        gsap.set([rightEl, leftEl], { autoAlpha: 0, rotateY: 0 });
-        isDone();
-      },
     })
     .to(rightEl, { rotateY: -90, duration: 0.7, ease: "power3.in" }, 0)
-    .to(leftEl, { rotateY: 0, duration: 0.7, ease: "power3.out" }, 0.7);
+    .to(leftEl, { rotateY: 0, duration: 0.7, ease: "power3.out" }, 0.7)
+    .add(() => isDone?.(), 1.3)
+    .to([rightEl, leftEl], { autoAlpha: 0, duration:0}, 1.4);
   };
 
   const prevPageAnimation = (isDone: () => void) => {
@@ -93,29 +94,20 @@ export default function useDetail() {
     const leftEl = transitionLeft.containerRef.current;
 
     if (!rightEl || !leftEl) return;
-    gsap.set([rightEl, leftEl], { autoAlpha: 1 });
+
+    gsap.killTweensOf([rightEl, leftEl]);
+
     gsap.set(rightEl, { rotateY: -90, transformOrigin: "left center" });
+    gsap.set(leftEl, { rotateY: 0, transformOrigin: "right center" });
+    gsap.set([rightEl, leftEl], { autoAlpha: 1 });
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-
-      tl.to({}, { duration: 0.10 });
-      
-      tl.to(
-        leftEl,
-        { rotateY: 90, transformOrigin: "right center", duration: 1.2, ease: "power3.in" },
-        0
-      );
-      tl.to(
-        rightEl,
-        { rotateY: 0, transformOrigin: "left center", duration: 1.2, ease: "power3.out" },
-        1.2
-      );
-      tl.add(() => isDone?.(), ">");
-
-    }, []);
-
-    return () => ctx.revert();
+    gsap.timeline({
+      defaults: { ease: "power2.inOut" },
+    })
+    .to(leftEl, { rotateY: 90, duration: 0.7, ease: "power3.in" }, 0)
+    .to(rightEl, { rotateY: 0, duration: 0.7, ease: "power3.out" }, 0.7)
+    .add(() => isDone?.(), 1.3)
+    .to([rightEl, leftEl], { autoAlpha: 0, duration:0}, 1.4);
   };
 
   return { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation }; 
