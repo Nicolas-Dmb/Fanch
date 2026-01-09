@@ -11,6 +11,7 @@ import back_arrow from '../static/images/back_arrow.png';
 // Detail Components
 import { ClemenceauLeftContent, ClemenceauRightContent } from './Clemenceau.tsx';
 import { ConcordeLeftContent, ConcordeRightContent } from './Concorde.tsx';
+import Maroquinerie from './Maroquinerie.tsx';
 
 type BackgroundColor = typeof Colors[keyof typeof Colors];
 
@@ -132,6 +133,8 @@ function LeftRoutes({side, pageName, currentPage}: RoutesProps) {
             return side === 'left' ? <ClemenceauLeftContent /> : <ClemenceauRightContent />;
         case 'concorde':
             return side === 'left' ? <ConcordeLeftContent page={currentPage} /> : <ConcordeRightContent page={currentPage} />;
+        case 'maroquinerie':
+            return side === 'left' ? <Maroquinerie /> : <div></div>;
         default:
             return <div></div>;
     }

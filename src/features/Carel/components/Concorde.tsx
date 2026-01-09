@@ -8,6 +8,7 @@ import concorde_red from '../static/images/concorde/concorde_red.png';
 import concorde_outline from '../static/images/concorde/concorde_outline.png';
 import concorde_ads1 from '../static/images/concorde/concorde_ads1.png';
 import concorde_ads2 from '../static/images/concorde/concorde_ads2.png';
+import concorde_ads3 from '../static/images/concorde/concorde_ads3.png';
 import {ColumnBags} from './Clemenceau.tsx';
 
 interface ConcordeLeftContentProps{
@@ -129,25 +130,14 @@ function ConcordeLeftContent2() {
 }
 function ConcordeRightContent2() {
   return (
-    <div className="flex justify-between h-full">
-      <div className="flex flex-col items-start justify-between h-full gap-4">
-        <img
-          src={concorde_ads1}
-          alt="concorde ad 1"
-          className="w-[70%] h-auto px-[5%]"
-        />
-        <img
-          src={concorde_ads2}
-          alt="concorde ad 2"
-          className=" h-auto"
-        />
+    <div className="flex h-full w-full">
+      <div className="flex flex-col items-start justify-between h-full w-1/2">
+        <img src={concorde_ads1} alt="concorde ad 1" className="w-[70%] h-auto px-[5%]" />
+        <img src={concorde_ads2} alt="concorde ad 2" className="w-full h-auto px-[5%]" />
       </div>
-      <div className="flex items-center h-full">
-        <img
-          src={concorde_ads2}
-          alt="concorde ad 2"
-          className="h-auto pl-[15%]"
-        />
+
+      <div className="flex items-center h-full w-1/2">
+        <img src={concorde_ads3} alt="concorde ad 3" className="w-full h-auto" />
       </div>
     </div>
   );
