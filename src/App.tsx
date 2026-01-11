@@ -11,7 +11,7 @@ import Carel from './pages/carel.tsx';
 import Nika from './pages/nika.tsx';
 import './index.css';
 import Colors from './entities/Background.ts';
-import CarelDetail from './features/Carel/components/CarelDetail.tsx';
+import CarelDetailRoute from './features/Carel/components/CarelDetail.tsx';
 
 type BackgroundColor = typeof Colors[keyof typeof Colors];
 
@@ -41,7 +41,7 @@ const App: React.FC = () => {
             <Route path="/photo" element={<Foto setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
             <Route path="/carel" element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
             <Route path="/nika" element={<Nika setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
-            <Route path="/carel/:name" element={<CarelDetail setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
+            <Route path="/carel/:name" element={<CarelDetailRoute setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
           </Routes>
         </div>
         <Footer bgColor={bgColor} textColor={textColor} logoFanch={logoFanch} />

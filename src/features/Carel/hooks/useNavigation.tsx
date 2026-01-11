@@ -49,7 +49,7 @@ export default function useNavigation({page, nextPageAnimation, prevPageAnimatio
                 }
             );
         }else{
-            navigate("/carel");
+            navigate(-1);
         }
     };
 

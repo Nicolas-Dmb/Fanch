@@ -19,7 +19,7 @@ function Bag({src, name, date, onClick, isVisible = true}: BagProps) {
     return (
         <div className="flex flex-col p-3 md:p-4" onClick={onClick}>
             <img src={src} alt={name} className={`h-auto ${isVisible ? "opacity-100" : "opacity-0"}`} />
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between pt-2">
                 <p className="text-black font-semibold tracking-tighter text-[8px]">{name}</p>
                 <p className="text-black tracking-tighter text-[8px]">{date}</p>
             </div>
@@ -30,24 +30,20 @@ function Bag({src, name, date, onClick, isVisible = true}: BagProps) {
 export default function Maroquinerie() {
     const navigate = useNavigate()
     return (
-        <div className="w-full h-screen flex flex-col overflow-hidden">
-            <div className="w-full flex-1 flex justify-between min-h-0">
-                <Bag src={madeleine} name="madeleine" date="2024©" onClick={() => navigate("/carel/madeleine")} />
-                <Bag src={maddie} name="maddie" date="2024©" onClick={() => navigate("/carel/maddie")} />
-                <Bag src={madeleine_brodee} name="madeleine brodée" date="2025©" onClick={() => navigate("/carel/madeleine")} />
-            </div>
+    <div className="w-full h-full p-6">
+      <div className="w-full h-full grid grid-cols-3 grid-rows-3 gap-3">
+        <Bag src={madeleine} name="madeleine" date="2024©" onClick={() => navigate("/carel/madeleine")} />
+        <Bag src={maddie} name="maddie" date="2024©" onClick={() => navigate("/carel/maddie")} />
+        <Bag src={madeleine_brodee} name="madeleine brodée" date="2025©" onClick={() => navigate("/carel/madeleine")} />
 
-            <div className="w-full flex-1 flex justify-between min-h-0">
-                <Bag src={mini_clemenceau} name="mini clemenceau" date="2025©" onClick={() => navigate("/carel/mini_clemenceau")} />
-                <Bag src={concorde} name="concorde" date="2025©" onClick={() => navigate("/carel/concorde")} />
-                <Bag src={clemenceau} name="clemenceau" date="2025©" onClick={() => navigate("/carel/clemenceau")} />
-            </div>
+        <Bag src={mini_clemenceau} name="mini clemenceau" date="2025©" onClick={() => navigate("/carel/mini_clemenceau")} />
+        <Bag src={concorde} name="concorde" date="2025©" onClick={() => navigate("/carel/concorde")} />
+        <Bag src={clemenceau} name="clemenceau" date="2025©" onClick={() => navigate("/carel/clemenceau")} />
 
-            <div className="w-full flex-1 flex justify-between min-h-0">
-                <Bag src={alesia} name="alesia" date="2025©" onClick={() => navigate("/carel/alesia")} />
-                <Bag src={alesia} name="" date="" onClick={() => {}} isVisible={false} />
-                <Bag src={alesia} name="" date="" onClick={() => {}} isVisible={false} />
-            </div>
-        </div>
+        <Bag src={alesia} name="alesia" date="2025©" onClick={() => navigate("/carel/alesia")} />
+        <Bag src={alesia} name="" date="" onClick={() => {}} isVisible={false} />
+        <Bag src={alesia} name="" date="" onClick={() => {}} isVisible={false} />
+      </div>
+    </div>
     );
 }

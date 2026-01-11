@@ -21,7 +21,12 @@ interface CarelDetailProps {
   setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
 }
 
-export default function CarelDetail({
+export default function CarelDetailRoute(props: CarelDetailProps) {
+  const { name } = useParams();
+  return <CarelDetail key={name} {...props} />;
+}
+
+function CarelDetail({
   setAcceuil,
   setLogoFanch,
   setTextColor,
