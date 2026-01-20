@@ -172,8 +172,6 @@ export default function useFolders() {
         _prepareAlpha(elysee);
         _prepareAlpha(mabillon);
         
-        // accessoiresLabel, accessoires, chaussures, bossa, maroquinerie, concorde, clemenceau, miniClemenceau, alesia, madeleine, maddie, madeleineBrodee, elysee, mabillon
-
         const ORDER = [alabel, a, ch, b, m, concorde,clem, miniClem, al, madeleine, maddie, madeleineBrodee, elysee, mabillon]; 
 
 
