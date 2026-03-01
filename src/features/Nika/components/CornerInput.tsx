@@ -1,41 +1,37 @@
 import corner from '../static/images/corner.svg';
 import React, { useEffect, useRef, useState } from 'react';
 
-interface SideBracketsInputProps {
-  fonts: string;
-}
-
-export default function SideBracketsInput({fonts}:SideBracketsInputProps) {
+export default function SideBracketsInput() {
   return (
     <div className="relative w-[60vw] h-[6vh] md:w-[30vw] md:h-[8vh]">
 
       <img
         src={corner}
         alt="corner top left"
-        className="absolute top-0 left-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] pointer-events-none select-none
+        className="absolute top-0 left-0 w-[3vw] h-[3vw]  md:w-[2vw] md:h-[2vw] pointer-events-none select-none
                    -translate-x-[2px] -translate-y-[2px] z-20"
       />
       <img
         src={corner}
         alt="corner top right"
-        className="absolute top-0 right-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] rotate-90 pointer-events-none select-none
+        className="absolute top-0 right-0 w-[3vw] h-[3vw]  md:w-[2vw] md:h-[2vw] rotate-90 pointer-events-none select-none
                    translate-x-[2px] -translate-y-[2px] z-20"
       />
       <img
         src={corner}
         alt="corner bottom right"
-        className="absolute bottom-0 right-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] rotate-180 pointer-events-none select-none
+        className="absolute bottom-0 right-0 w-[3vw] h-[3vw]  md:w-[2vw] md:h-[2vw] rotate-180 pointer-events-none select-none
                    translate-x-[2px] translate-y-[2px] z-20"
       />
       <img
         src={corner}
         alt="corner bottom left"
-        className="absolute bottom-0 left-0 w-[3vw] h-[3vw]  md:w-[1vw] md:h-[1vw] -rotate-90 pointer-events-none select-none
+        className="absolute bottom-0 left-0 w-[3vw] h-[3vw]  md:w-[2vw] md:h-[2vw] -rotate-90 pointer-events-none select-none
                    -translate-x-[2px] translate-y-[2px] z-20"
       />
 
       <FancyCaretInput wrapperClassName="w-full h-full"
-        className={`text-center [&::placeholder]:text-center py-0 leading-[8vh] px-6 ${fonts}`}/>
+        className='text-center [&::placeholder]:text-center py-0 leading-[8vh] px-6 font-thin'/>
     </div>
   );
 }
@@ -152,7 +148,7 @@ function FancyCaretInput({
         maxLength={12}
         onChange={onChange}
 
-        className={`w-full h-full bg-transparent outline-none px-6 text-center text-[#fff] text-[8vw] md:text-[4vw] [&::placeholder]:text-center ${className}`}
+        className={`w-full h-full bg-transparent outline-none px-6 text-center text-[#000] text-[8vw] md:text-[4vw] [&::placeholder]:text-center ${className}`}
         {...rest}
       />
 
