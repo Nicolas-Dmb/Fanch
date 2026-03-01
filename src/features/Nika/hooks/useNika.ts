@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Colors from "../../../entities/Background.ts";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,11 +15,20 @@ interface UseNikaProps {
     fallTl: React.MutableRefObject<gsap.core.Timeline | null>;
     fontsTlRef: React.MutableRefObject<gsap.core.Timeline | null>;
     setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
+    bookRef : React.MutableRefObject<HTMLElement | null>
+    inputRef : React.MutableRefObject<HTMLDivElement | null>;
+    goNext: () => void;
+    goPrev: () => void;
+    currentPage: number;
+    maxPage: number;
 }
 
-export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef }: UseNikaProps) {
+export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage }: UseNikaProps) {
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
+
+    const isAnimatingRef = useRef(false);
+    const lastTargetPageRef = useRef<number>(0);
 
     useEffect(() => {
         if (setAcceuil) {
@@ -34,8 +43,13 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
 
     useEffect(() => {
         const wrapperEl = document.getElementById("global-wrapper");
+        const bookEl = bookRef?.current;
+        const inputEl = inputRef?.current;
 
         if (!wrapperEl||!screenTiltTl.current || !dominoTl.current || !fallTl.current || !fontsTlRef.current) return;
+
+        const BOOK_START = 0.78;
+        const BOOK_END = 0.92;
 
         const mainTl = gsap.timeline({
             scrollTrigger: {
@@ -46,12 +60,38 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
             pin: true,
             anticipatePin: 1,
             onUpdate: (self) => {
-                const progress = self.progress;
-                if (progress >= 0.001 && !hasScrolled) {
-                    setHasScrolled(true);
+                const p = self.progress;
+
+                if (p >= 0.001 && !hasScrolled) setHasScrolled(true);
+
+                if (bookEl) gsap.set(bookEl, { autoAlpha: p >= BOOK_START && p <= BOOK_END ? 1 : 0 });
+                if (inputEl) gsap.set(inputEl, { autoAlpha: p > BOOK_END ? 1 : 0 });
+
+                if (p < BOOK_START || p > BOOK_END) return;
+
+                const local = (p - BOOK_START) / (BOOK_END - BOOK_START);
+                const target = Math.round(local * maxPage);
+
+                if (target === lastTargetPageRef.current) return;
+                if (isAnimatingRef.current) return;
+
+                isAnimatingRef.current = true;
+
+                const done = () => {
+                    isAnimatingRef.current = false;
+                };
+
+                if (target > lastTargetPageRef.current) {
+                    goNext();
+                    gsap.delayedCall(1.45, done);
+                } else {
+                    goPrev();
+                    gsap.delayedCall(1.45, done);
                 }
+
+                lastTargetPageRef.current = target;
+                },
             },
-        },
         });
         
         // Domino
@@ -65,7 +105,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
             mainTl.scrollTrigger?.kill();
             mainTl.kill();
         };
-    }, [setHasScrolled, hasScrolled, screenTiltTl, dominoTl, fallTl, fontsTlRef]);
+    }, [setHasScrolled, hasScrolled, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, maxPage]);
 
     useEffect(() => {
         if (hasScrolled) {

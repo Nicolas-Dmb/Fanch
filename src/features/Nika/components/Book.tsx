@@ -6,20 +6,31 @@ import fifth_page from '../static/images/fifth_page.png';
 import sixth_page from '../static/images/sixth_page.png';
 import seventh_page from '../static/images/seventh_page.png';
 import last_page from '../static/images/last_page.png';
-import useDetail from '../hooks/useDetail.tsx';
-import useNavigation from '../hooks/useNavigation.tsx';
 import React from 'react';
 import { createPortal } from "react-dom";
 
 
 interface BookProps {
-    ref: React.Ref<HTMLDivElement>;
+  ref: React.MutableRefObject<HTMLElement | null>;
+  bookApi: {
+    left: any;
+    right: any;
+    transitionLeft: any;
+    transitionRight: any;
+    currentLeftPage: number;
+    currentRightPage: number;
+    transitionLeftPage: number;
+    transitionRightPage: number;
+  };
 }
 
-const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book(_props, ref){
-    const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation} = useDetail();
-    const { currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage} = useNavigation({nextPageAnimation, prevPageAnimation});
-    
+const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi }, ref) {
+    //const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation} = useDetail();
+    //const { currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage, goPrev, goNext} = useNavigation({nextPageAnimation, prevPageAnimation});
+    const {
+        left, right, transitionLeft, transitionRight,
+        currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage
+    } = bookApi;
     
     return createPortal(
         <div ref={ref} className="h-full w-full bg-[#ffffff] flex items-center justify-center">

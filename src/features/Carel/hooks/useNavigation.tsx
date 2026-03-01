@@ -7,6 +7,7 @@ const PageIndex = {
     maroquinerie: 0, 
     chaussures: 0,
     apc: 0,
+    nika: 4
 };
 
 interface NavigationProps{

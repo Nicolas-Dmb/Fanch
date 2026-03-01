@@ -4,7 +4,7 @@ import gsap from "gsap";
 
 export default function useFonts() {
   const thinRef = useRef<HTMLElement | null>(null);
-  const bookRef = useRef<HTMLElement | null>(null);
+  const bookRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLDivElement | null>(null); 
 
   const fontsTlRef = useRef<gsap.core.Timeline | null>(null);
