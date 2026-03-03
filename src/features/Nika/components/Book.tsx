@@ -36,7 +36,7 @@ const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi
     <div ref={ref} className="fixed inset-0 bg-white flex flex-col">
         <Header bgColor={Colors.White} textColor={Colors.Black} />
 
-        <div className="flex-1 overflow-hidden flex py-[20vh] md:py-[1vh] px-[4vw] md:px-[10vw] gap-[4vw] "
+        <div className="flex-1 overflow-hidden flex py-[20vh] md:py-[0vh] px-[4vw] md:px-[10vw]"
             style={{ perspective: 1600, transformStyle: "preserve-3d" }}>
             {/* LEFT */}
             <div ref={left.containerRef} className="relative h-full w-1/2">

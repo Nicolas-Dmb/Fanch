@@ -21,8 +21,7 @@ export default function useFonts() {
       fontsTlRef.current = gsap.timeline()
         .to(thinEl, { autoAlpha: 0, duration: 0.4, ease: "power2.out" }, 0)
         .to(bookEl, { autoAlpha: 1, duration: 0.4, ease: "power2.out" }, 0)
-        .to(bookEl, { autoAlpha: 0, duration: 0.8, ease: "power2.out" }, 1.0)
-        .to(inputEl, { autoAlpha: 1, duration: 0.8, ease: "power2.out" }, 1.2);
+        .to(inputEl, { autoAlpha: 1, duration: 0.8, ease: "power2.out" }, 2.2);
     });
 
     return () => {

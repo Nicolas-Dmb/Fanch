@@ -4,7 +4,7 @@ import useDomino from "../features/Nika/hooks/useDominos.ts";
 import useFonts from "../features/Nika/hooks/useFonts.ts";
 import FontInput from "../features/Nika/components/FontInput.tsx";
 import Book from "../features/Nika/components/Book.tsx";
-import useNavigation from "../features/Carel/hooks/useNavigation.tsx";
+import useNavigation from "../features/Nika/hooks/useNavigation.tsx";
 import useDetailSimple from "../features/Nika/hooks/useDetailSimple.ts";
 
 interface NikaProps {
