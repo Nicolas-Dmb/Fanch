@@ -36,28 +36,28 @@ const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi
     <div ref={ref} className="fixed inset-0 bg-white flex flex-col">
         <Header bgColor={Colors.White} textColor={Colors.Black} />
 
-        <div className="flex-1 overflow-hidden"
+        <div className="flex-1 overflow-hidden flex py-[20vh] md:py-[1vh] px-[4vw] md:px-[10vw] gap-[4vw] "
             style={{ perspective: 1600, transformStyle: "preserve-3d" }}>
             {/* LEFT */}
             <div ref={left.containerRef} className="relative h-full w-1/2">
-            <div className="absolute inset-0">
-                <Routes side="left" currentPage={currentLeftPage} />
-            </div>
+                <div className="absolute inset-0">
+                    <Routes side="left" currentPage={currentLeftPage} />
+                </div>
 
-            <div ref={transitionLeft.containerRef} className="absolute inset-0">
-                <Routes side="left" currentPage={transitionLeftPage} />
-            </div>
+                <div ref={transitionLeft.containerRef} className="absolute inset-0">
+                    <Routes side="left" currentPage={transitionLeftPage} />
+                </div>
             </div>
 
             {/* RIGHT */}
             <div ref={right.containerRef} className="relative h-full w-1/2">
-            <div className="absolute inset-0">
-                <Routes side="right" currentPage={currentRightPage} />
-            </div>
+                <div className="absolute inset-0">
+                    <Routes side="right" currentPage={currentRightPage} />
+                </div>
 
-            <div ref={transitionRight.containerRef} className="absolute inset-0">
-                <Routes side="right" currentPage={transitionRightPage} />
-            </div>
+                <div ref={transitionRight.containerRef} className="absolute inset-0">
+                    <Routes side="right" currentPage={transitionRightPage} />
+                </div>
             </div>
         </div>
         <Footer bgColor={Colors.White} textColor={Colors.Black} logoFanch={false} />
