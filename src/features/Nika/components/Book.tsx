@@ -6,17 +6,19 @@ import fifth_page from '../static/images/fifth_page.png';
 import sixth_page from '../static/images/sixth_page.png';
 import seventh_page from '../static/images/seventh_page.png';
 import last_page from '../static/images/last_page.png';
+import Header from "../../../components/Header.tsx";
+import Footer from "../../../components/Footer.tsx";
+import Colors from "../../../entities/Background.ts";
+
 import React from 'react';
 import { createPortal } from "react-dom";
 
-
 interface BookProps {
-  ref: React.MutableRefObject<HTMLElement | null>;
   bookApi: {
-    left: any;
-    right: any;
-    transitionLeft: any;
-    transitionRight: any;
+    left: { containerRef: React.RefObject<HTMLDivElement> };
+    right: { containerRef: React.RefObject<HTMLDivElement> };
+    transitionLeft: { containerRef: React.RefObject<HTMLDivElement> };
+    transitionRight: { containerRef: React.RefObject<HTMLDivElement> };
     currentLeftPage: number;
     currentRightPage: number;
     transitionLeftPage: number;
@@ -25,53 +27,45 @@ interface BookProps {
 }
 
 const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi }, ref) {
-    //const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation} = useDetail();
-    //const { currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage, goPrev, goNext} = useNavigation({nextPageAnimation, prevPageAnimation});
-    const {
-        left, right, transitionLeft, transitionRight,
-        currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage
-    } = bookApi;
-    
-    return createPortal(
-        <div ref={ref} className="h-full w-full bg-[#ffffff] flex items-center justify-center">
-            <div className="w-full h-full flex items-stretch justify-center" style={{ perspective: 1600, transformStyle: "preserve-3d" }}>
-                {/* Left Content */}
-                <div ref={left.containerRef} className="relative h-full w-1/2 page">
-                    <div ref={left.overlayRef} className="absolute overflow-auto">
-                        {
-                            <Routes side="left" currentPage={currentLeftPage} />
-                        }
-                    </div>
-                    {/* Transition Page */}
-                    <div className="absolute inset-0" ref={transitionLeft.containerRef}>
-                        <div ref={transitionLeft.overlayRef} className="absolute overflow-auto">
-                            {
-                                <Routes side="left" currentPage={transitionLeftPage} />
-                            }
-                        </div>
-                    </div>
-                </div>
-                {/* Right Content */}
-                <div ref={right.containerRef} className="relative h-full w-1/2 page">
-                    <div ref={right.overlayRef} className="absolute overflow-auto">
-                        {
-                            <Routes side="right" currentPage={currentRightPage} />
-                        }
-                    </div>
-                    {/* Transition Page */}
-                    <div className="absolute inset-0" ref={transitionRight.containerRef}>
-                        <div ref={transitionRight.overlayRef} className="absolute overflow-auto">
-                            {
-                                <Routes side="right" currentPage={transitionRightPage} />
-                            }
-                        </div>
-                    </div>
-                </div>
+  const {
+    left, right, transitionLeft, transitionRight,
+    currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage
+  } = bookApi;
+
+  return createPortal(
+    <div ref={ref} className="fixed inset-0 bg-white flex flex-col">
+        <Header bgColor={Colors.White} textColor={Colors.Black} />
+
+        <div className="flex-1 overflow-hidden"
+            style={{ perspective: 1600, transformStyle: "preserve-3d" }}>
+            {/* LEFT */}
+            <div ref={left.containerRef} className="relative h-full w-1/2">
+            <div className="absolute inset-0">
+                <Routes side="left" currentPage={currentLeftPage} />
             </div>
-        </div>,    document.body
-    )
-}
-);
+
+            <div ref={transitionLeft.containerRef} className="absolute inset-0">
+                <Routes side="left" currentPage={transitionLeftPage} />
+            </div>
+            </div>
+
+            {/* RIGHT */}
+            <div ref={right.containerRef} className="relative h-full w-1/2">
+            <div className="absolute inset-0">
+                <Routes side="right" currentPage={currentRightPage} />
+            </div>
+
+            <div ref={transitionRight.containerRef} className="absolute inset-0">
+                <Routes side="right" currentPage={transitionRightPage} />
+            </div>
+            </div>
+        </div>
+        <Footer bgColor={Colors.White} textColor={Colors.Black} logoFanch={false} />
+
+    </div>    ,
+    document.body
+  );
+});
 
 export default Book;
 
@@ -99,6 +93,8 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img
                 src={second_page}
                 alt="second page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     } if(page === 2){
@@ -106,6 +102,8 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img
                 src={fourth_page}
                 alt="fourth page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     } if (page === 3){
@@ -113,6 +111,8 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img 
                 src={sixth_page}
                 alt="sixth page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     } if (page === 4){
@@ -120,9 +120,12 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img 
                 src={last_page}
                 alt="last page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     }
+    return null;
 }
 
 interface BookRightContentProps{
@@ -134,6 +137,8 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img
                 src={first_page}
                 alt="first page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     } if(page === 1){
@@ -141,6 +146,8 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img
                 src={third_page}
                 alt="third page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     } if (page === 2){
@@ -148,6 +155,8 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img 
                 src={fifth_page}
                 alt="fifth page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     } if (page === 3){
@@ -155,6 +164,8 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img 
                 src={seventh_page}
                 alt="seventh page"
+                className="w-full h-full object-cover select-none pointer-events-none"
+                draggable={false}
             />
         );
     } if (page === 4){
@@ -162,5 +173,5 @@ export function BookRightContent({page}: BookRightContentProps) {
             <></>
         );
     }
-
+    return null;
 }

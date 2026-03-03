@@ -27,9 +27,6 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
 
-    const isAnimatingRef = useRef(false);
-    const lastTargetPageRef = useRef<number>(0);
-
     useEffect(() => {
         if (setAcceuil) {
             setAcceuil(Colors.Yellow);
@@ -43,13 +40,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
 
     useEffect(() => {
         const wrapperEl = document.getElementById("global-wrapper");
-        const bookEl = bookRef?.current;
-        const inputEl = inputRef?.current;
-
-        if (!wrapperEl||!screenTiltTl.current || !dominoTl.current || !fallTl.current || !fontsTlRef.current) return;
-
-        const BOOK_START = 0.78;
-        const BOOK_END = 0.92;
+        if (!wrapperEl || !screenTiltTl.current || !dominoTl.current || !fallTl.current || !fontsTlRef.current) return;
 
         const mainTl = gsap.timeline({
             scrollTrigger: {
@@ -59,53 +50,20 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
             scrub: true,
             pin: true,
             anticipatePin: 1,
-            onUpdate: (self) => {
-                const p = self.progress;
-
-                if (p >= 0.001 && !hasScrolled) setHasScrolled(true);
-
-                if (bookEl) gsap.set(bookEl, { autoAlpha: p >= BOOK_START && p <= BOOK_END ? 1 : 0 });
-                if (inputEl) gsap.set(inputEl, { autoAlpha: p > BOOK_END ? 1 : 0 });
-
-                if (p < BOOK_START || p > BOOK_END) return;
-
-                const local = (p - BOOK_START) / (BOOK_END - BOOK_START);
-                const target = Math.round(local * maxPage);
-
-                if (target === lastTargetPageRef.current) return;
-                if (isAnimatingRef.current) return;
-
-                isAnimatingRef.current = true;
-
-                const done = () => {
-                    isAnimatingRef.current = false;
-                };
-
-                if (target > lastTargetPageRef.current) {
-                    goNext();
-                    gsap.delayedCall(1.45, done);
-                } else {
-                    goPrev();
-                    gsap.delayedCall(1.45, done);
-                }
-
-                lastTargetPageRef.current = target;
-                },
+            onUpdate: (self) => {},
             },
         });
-        
-        // Domino
+
         mainTl.add(screenTiltTl.current, 0.0);
         mainTl.add(dominoTl.current, 0.11);
         mainTl.add(fallTl.current, 0.71);
-        // Fonts
         mainTl.add(fontsTlRef.current, 2.2);
 
         return () => {
             mainTl.scrollTrigger?.kill();
             mainTl.kill();
         };
-    }, [setHasScrolled, hasScrolled, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, maxPage]);
+    }, [screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, maxPage]);
 
     useEffect(() => {
         if (hasScrolled) {
