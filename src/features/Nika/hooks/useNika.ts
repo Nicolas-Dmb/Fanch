@@ -19,11 +19,12 @@ interface UseNikaProps {
     inputRef : React.MutableRefObject<HTMLDivElement | null>;
     goNext: () => void;
     goPrev: () => void;
+    reset: () => void;
     currentPage: number;
     maxPage: number;
 }
 
-export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage }: UseNikaProps) {
+export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset }: UseNikaProps) {
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
 
@@ -38,7 +39,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
     const mainTlRef = useRef<gsap.core.Timeline | null>(null);
 
 
-    const bookPages = 4;
+    const bookPages = 5;
     const bookStart = 2.6;
     const bookEnd = 3.6;
 
@@ -90,6 +91,9 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
                             console.log(`Book page: ${prev} -> ${pageIndex}`);
                             if (pageIndex > prev) goNextRef.current();
                             else goPrevRef.current();
+                        }
+                        else if (pageIndex === bookPages - 1 && time > bookEnd) {
+                            reset();
                         }
                     }
                 },

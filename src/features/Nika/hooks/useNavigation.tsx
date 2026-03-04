@@ -34,16 +34,14 @@ export default function useNavigation({
     setCurrentRightPage((right) => {
       if (right >= maxPage) return right;
 
-      const nextRight = right + 1;
-
-      setTransitionRightPage(right);
-      setTransitionLeftPage((left) => left + 1);
+      setTransitionRightPage(currentRightPage);
+      setTransitionLeftPage(currentLeftPage+1);
 
       nextPageAnimation(() => {
-        setCurrentLeftPage((left) => Math.min(left + 1, maxPage));
+        setCurrentLeftPage(currentLeftPage+1);
       });
 
-      return nextRight;
+      return currentRightPage+1;
     });
   }, [maxPage, nextPageAnimation]);
 
@@ -51,18 +49,23 @@ export default function useNavigation({
     setCurrentLeftPage((left) => {
       if (left <= 0) return left;
 
-      const nextLeft = left - 1;
-
-      setTransitionLeftPage(left);
-      setTransitionRightPage((right) => Math.max(right - 1, 0));
+      setTransitionLeftPage(currentLeftPage);
+      setTransitionRightPage(currentRightPage-1);
 
       prevPageAnimation(() => {
-        setCurrentRightPage((right) => Math.max(right - 1, 0));
+        setCurrentRightPage(currentRightPage-1);
       });
 
-      return nextLeft;
+      return currentLeftPage-1;
     });
   }, [prevPageAnimation]);
+
+  const reset = useCallback(() => {
+    setCurrentLeftPage(0);
+    setCurrentRightPage(0);
+    setTransitionLeftPage(1);
+    setTransitionRightPage(1);
+  }, []);
 
   return {
     currentLeftPage,
@@ -74,5 +77,6 @@ export default function useNavigation({
     haveNext,
     havePrev,
     maxPage,
+    reset
   };
 }

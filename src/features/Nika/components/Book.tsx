@@ -36,30 +36,41 @@ const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi
     <div ref={ref} className="fixed inset-0 bg-white flex flex-col">
         <Header bgColor={Colors.White} textColor={Colors.Black} />
 
-        <div className="flex-1 overflow-hidden flex py-[20vh] md:py-[0vh] px-[4vw] md:px-[10vw]"
-            style={{ perspective: 1600, transformStyle: "preserve-3d" }}>
-            {/* LEFT */}
-            <div ref={left.containerRef} className="relative h-full w-1/2">
-                <div className="absolute inset-0">
-                    <Routes side="left" currentPage={currentLeftPage} />
-                </div>
-
-                <div ref={transitionLeft.containerRef} className="absolute inset-0">
-                    <Routes side="left" currentPage={transitionLeftPage} />
-                </div>
-            </div>
-
-            {/* RIGHT */}
-            <div ref={right.containerRef} className="relative h-full w-1/2">
-                <div className="absolute inset-0">
-                    <Routes side="right" currentPage={currentRightPage} />
-                </div>
-
-                <div ref={transitionRight.containerRef} className="absolute inset-0">
-                    <Routes side="right" currentPage={transitionRightPage} />
-                </div>
-            </div>
+        <div
+  className="
+    flex-1 overflow-hidden flex items-center justify-center
+    px-[4vw] md:px-[10vw]
+    py-6 md:py-8
+  "
+  style={{ perspective: 1600, transformStyle: "preserve-3d" }}
+>
+  {/* Zone qui limite la hauteur du livre */}
+  <div className="w-full max-w-[1200px] h-[55vh] md:h-[70vh]">
+    <div className="flex h-full">
+      {/* LEFT */}
+      <div ref={left.containerRef} className="relative h-full w-1/2">
+        <div className="absolute inset-0 flex items-center justify-end">
+          <Routes side="left" currentPage={currentLeftPage} />
         </div>
+
+        <div ref={transitionLeft.containerRef} className="absolute inset-0 flex items-center justify-end">
+          <Routes side="left" currentPage={transitionLeftPage} />
+        </div>
+      </div>
+
+      {/* RIGHT */}
+      <div ref={right.containerRef} className="relative h-full w-1/2">
+        <div className="absolute inset-0 flex items-center justify-start">
+          <Routes side="right" currentPage={currentRightPage} />
+        </div>
+
+        <div ref={transitionRight.containerRef} className="absolute inset-0 flex items-center justify-start">
+          <Routes side="right" currentPage={transitionRightPage} />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         <Footer bgColor={Colors.White} textColor={Colors.Black} logoFanch={false} />
 
     </div>    ,
@@ -93,7 +104,7 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img
                 src={second_page}
                 alt="second page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+  className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );
@@ -102,7 +113,7 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img
                 src={fourth_page}
                 alt="fourth page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+                className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );
@@ -111,7 +122,7 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img 
                 src={sixth_page}
                 alt="sixth page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+                className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );
@@ -120,7 +131,7 @@ export function BookLeftContent({page}: BookLeftContentProps) {
             <img 
                 src={last_page}
                 alt="last page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+                className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );
@@ -137,7 +148,7 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img
                 src={first_page}
                 alt="first page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+                className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );
@@ -146,7 +157,7 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img
                 src={third_page}
                 alt="third page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+                className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );
@@ -155,7 +166,7 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img 
                 src={fifth_page}
                 alt="fifth page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+                className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );
@@ -164,7 +175,7 @@ export function BookRightContent({page}: BookRightContentProps) {
             <img 
                 src={seventh_page}
                 alt="seventh page"
-                className="w-full h-full object-cover select-none pointer-events-none"
+                className="block max-h-full max-w-full object-contain select-none pointer-events-none"
                 draggable={false}
             />
         );

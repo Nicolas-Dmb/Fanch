@@ -21,7 +21,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
     const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation } = useDetailSimple();
     const {
       currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage,
-      goNext, goPrev
+      goNext, goPrev, reset
     } = useNavigation({ page: "nika", nextPageAnimation, prevPageAnimation });
     const { hasScrolled, letterClassName } = useNika({
         setAcceuil, setLogoFanch, setTextColor,
@@ -31,6 +31,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
         maxPage: 4,
         bookRef,
         inputRef,
+        reset
       });
 
   return (

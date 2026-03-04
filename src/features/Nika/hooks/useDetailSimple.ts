@@ -29,10 +29,10 @@ export default function useDetailSimple() {
     gsap.set([rightEl, leftEl], { autoAlpha: 1 });
 
     gsap.timeline()
-      .to(rightEl, { rotateY: -90, duration: 0.7, ease: "power3.in" }, 0)
-      .to(leftEl, { rotateY: 0, duration: 0.7, ease: "power3.out" }, 0.7)
-      .add(() => isDone?.(), 1.3)
-      .set([rightEl, leftEl], { autoAlpha: 0 }, 1.4);
+      .to(rightEl, { rotateY: -90, duration: 0.5, ease: "power3.in" }, 0)
+      .to(leftEl, { rotateY: 0, duration: 0.5, ease: "power3.out" }, 0.5)
+      .add(() => isDone?.(), 1.1)
+      .set([rightEl, leftEl], { autoAlpha: 0 }, 1.2);
   };
 
   const prevPageAnimation = (isDone: () => void) => {
@@ -46,10 +46,10 @@ export default function useDetailSimple() {
     gsap.set([rightEl, leftEl], { autoAlpha: 1 });
 
     gsap.timeline()
-      .to(leftEl, { rotateY: 90, duration: 0.7, ease: "power3.in" }, 0)
-      .to(rightEl, { rotateY: 0, duration: 0.7, ease: "power3.out" }, 0.7)
-      .add(() => isDone?.(), 1.3)
-      .set([rightEl, leftEl], { autoAlpha: 0 }, 1.4);
+      .to(leftEl, { rotateY: 90, duration: 0.5, ease: "power3.in" }, 0)
+      .to(rightEl, { rotateY: 0, duration: 0.5, ease: "power3.out" }, 0.5)
+      .add(() => isDone?.(), 1.1)
+      .set([rightEl, leftEl], { autoAlpha: 0 }, 1.2);
   };
 
   return { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation };
