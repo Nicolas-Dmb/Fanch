@@ -39,7 +39,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
     const mainTlRef = useRef<gsap.core.Timeline | null>(null);
 
 
-    const bookPages = 5;
+    const bookPages = maxPage + 1;
     const bookStart = 2.6;
     const bookEnd = 3.6;
 
