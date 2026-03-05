@@ -14,10 +14,8 @@ const FontInput = React.forwardRef<HTMLDivElement, FontInputProps>(function Font
     return createPortal(
     <div ref={ref} className="fixed inset-0 bg-[#ffffff] flex flex-col justify-between font-perso">
         <Header bgColor={Colors.White} textColor={Colors.Black} />
-        <div className="flex-grow flex flex-col justify-center gap-10">
-            <div className="w-[60vw] h-[6vh] md:w-[30vw] md:h-[8vh] items-center mx-auto my-30 ">
+        <div className="flex-grow flex flex-col justify-center gap-10 items-center">
                 <CornerInput/>
-            </div>
         </div>
         <Footer bgColor={Colors.White} textColor={Colors.Black} logoFanch={false} />
     </div>,
