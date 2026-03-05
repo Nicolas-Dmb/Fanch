@@ -1,4 +1,5 @@
 import { useCallback, useReducer, useRef } from "react";
+import { flushSync } from "react-dom";
 
 interface NavigationProps {
   nextPageAnimation: (isDone: () => void) => void;
@@ -15,7 +16,6 @@ type State = {
   pendingLeft: number | null;
   pendingRight: number | null;
   isAnimating: boolean;
-  isTransitionArmed: boolean;
 };
 
 type Action =
@@ -34,7 +34,6 @@ const initialState: State = {
   pendingLeft: null,
   pendingRight: null,
   isAnimating: false,
-  isTransitionArmed: false,
 };
 
 function reducer(state: State, action: Action): State {
@@ -43,7 +42,7 @@ function reducer(state: State, action: Action): State {
       if (state.currentRightPage >= action.maxPage) return state;
 
       const nextRight = state.currentRightPage + 1;
-      const nextLeft = state.currentLeftPage + 1;
+      const nextLeft = nextRight;
 
       return {
         ...state,
@@ -52,20 +51,18 @@ function reducer(state: State, action: Action): State {
         currentRightPage: nextRight,
         pendingLeft: nextLeft,
         isAnimating: true,
-        isTransitionArmed: true,
       };
     }
 
     case "NEXT_END": {
       if (!state.isAnimating || state.pendingLeft === null) {
-        return { ...state, isAnimating: false, isTransitionArmed: false };
+        return { ...state, isAnimating: false };
       }
       return {
         ...state,
         currentLeftPage: state.pendingLeft,
         pendingLeft: null,
         isAnimating: false,
-        isTransitionArmed: false,
       };
     }
 
@@ -73,7 +70,7 @@ function reducer(state: State, action: Action): State {
       if (state.currentLeftPage <= 0) return state;
 
       const prevLeft = state.currentLeftPage - 1;
-      const prevRight = state.currentRightPage - 1;
+      const prevRight = prevLeft;
 
       return {
         ...state,
@@ -82,20 +79,18 @@ function reducer(state: State, action: Action): State {
         currentLeftPage: prevLeft,
         pendingRight: prevRight,
         isAnimating: true,
-        isTransitionArmed: true,
       };
     }
 
     case "PREV_END": {
       if (!state.isAnimating || state.pendingRight === null) {
-        return { ...state, isAnimating: false, isTransitionArmed: false };
+        return { ...state, isAnimating: false };
       }
       return {
         ...state,
         currentRightPage: state.pendingRight,
         pendingRight: null,
         isAnimating: false,
-        isTransitionArmed: false,
       };
     }
 
@@ -110,7 +105,6 @@ function reducer(state: State, action: Action): State {
         currentRightPage: maxPage,
         currentLeftPage: maxPage,
         isAnimating: false,
-        isTransitionArmed: false,
       };
 
     default:
@@ -145,27 +139,36 @@ export default function useNavigation({ nextPageAnimation, prevPageAnimation }: 
 
     if (t > cur) {
       animGuardRef.current = true;
-      dispatch({ type: "NEXT_START", maxPage });
-      currentIndexRef.current = cur + 1; 
 
-      requestAnimationFrame(() => {
-        nextPageAnimation(() => {
-          dispatch({ type: "NEXT_END" });
-          animGuardRef.current = false;
-          requestAnimationFrame(stepToTarget);
-        });
+      flushSync(() => {
+        dispatch({ type: "NEXT_START", maxPage });
       });
+
+      currentIndexRef.current = cur + 1;
+
+      nextPageAnimation(() => {
+        flushSync(() => {
+          dispatch({ type: "NEXT_END" });
+        });
+        animGuardRef.current = false;
+        requestAnimationFrame(stepToTarget);
+      });
+
     } else {
       animGuardRef.current = true;
-      dispatch({ type: "PREV_START" });
-      currentIndexRef.current = cur - 1; 
 
-      requestAnimationFrame(() => {
-        prevPageAnimation(() => {
+      flushSync(() => {
+        dispatch({ type: "PREV_START" });
+      });
+
+      currentIndexRef.current = cur - 1;
+
+      prevPageAnimation(() => {
+        flushSync(() => {
           dispatch({ type: "PREV_END" });
-          animGuardRef.current = false;
-          requestAnimationFrame(stepToTarget);
         });
+        animGuardRef.current = false;
+        requestAnimationFrame(stepToTarget);
       });
     }
   }, [maxPage, nextPageAnimation, prevPageAnimation]);
@@ -185,17 +188,14 @@ export default function useNavigation({ nextPageAnimation, prevPageAnimation }: 
   }, [goTo]);
 
   const reset = useCallback(() => {
-    animGuardRef.current = false;
-    targetRef.current = null;
-    currentIndexRef.current = 0;
-    dispatch({ type: "RESET" });
-  }, []);
+    if (currentIndexRef.current === 0) return;
+    goTo(0);
+  }, [goTo]);
 
   const close = useCallback(() => {
-    animGuardRef.current = false;
-    targetRef.current = null;
-    dispatch({ type: "CLOSE" });
-  }, []);
+    if (currentIndexRef.current === maxPage) return;
+    goTo(maxPage);
+  }, [goTo]);
 
   return {
     ...state,
