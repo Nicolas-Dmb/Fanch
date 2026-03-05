@@ -43,7 +43,6 @@ const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi
             "
             style={{ perspective: 1600, transformStyle: "preserve-3d" }}
         >
-        {/* Zone qui limite la hauteur du livre */}
         <div className="w-full max-w-[1200px] h-[55vh] md:h-[70vh]">
             <div className="flex h-full">
                 {/* LEFT */}
