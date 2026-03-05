@@ -42,8 +42,8 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
 
 
     const bookPages = maxPage + 1;
-    const bookStart = 2.6;
-    const bookEnd = 4.6;
+    const bookStart = 2.4;
+    const bookEnd = 4.8;
 
     const lastPageRef = useRef<number>(-1);
 
@@ -73,7 +73,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
             scrollTrigger: {
                 trigger: wrapperEl,
                 start: "top top",
-                end: "+=11000",
+                end: "+=6000",
                 scrub: true,
                 pin: true,
                 anticipatePin: 1,
