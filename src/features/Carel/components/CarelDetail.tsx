@@ -4,6 +4,7 @@ import useDetail from '../hooks/useDetail.tsx';
 import { useParams } from 'react-router-dom';
 import useNavigation from '../hooks/useNavigation.tsx';
 
+
 import open_folder from '../static/images/open_folder.png';
 import page from '../static/images/page.png';
 import back_arrow from '../static/images/back_arrow.png';

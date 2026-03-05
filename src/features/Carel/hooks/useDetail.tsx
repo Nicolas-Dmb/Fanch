@@ -80,13 +80,11 @@ export default function useDetail() {
     gsap.set(rightEl, { rotateY: 0, transformOrigin: "left center" });
     gsap.set([rightEl, leftEl], { autoAlpha: 1 });
 
-    gsap.timeline({
-      defaults: { ease: "power2.inOut" },
-    })
+    gsap.timeline()
     .to(rightEl, { rotateY: -90, duration: 0.7, ease: "power3.in" }, 0)
     .to(leftEl, { rotateY: 0, duration: 0.7, ease: "power3.out" }, 0.7)
-    .add(() => isDone?.(), 1.3)
-    .to([rightEl, leftEl], { autoAlpha: 0, duration:0}, 1.4);
+    .to([rightEl, leftEl], { autoAlpha: 0, duration:0}, 1.3)
+    .add(() => isDone?.(), 1.3);
   };
 
   const prevPageAnimation = (isDone: () => void) => {
@@ -106,8 +104,8 @@ export default function useDetail() {
     })
     .to(leftEl, { rotateY: 90, duration: 0.7, ease: "power3.in" }, 0)
     .to(rightEl, { rotateY: 0, duration: 0.7, ease: "power3.out" }, 0.7)
-    .add(() => isDone?.(), 1.3)
-    .to([rightEl, leftEl], { autoAlpha: 0, duration:0}, 1.4);
+    .to([rightEl, leftEl], { autoAlpha: 0, duration:0}, 1.3)
+    .add(() => isDone?.(), 1.3);
   };
 
   return { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation }; 
