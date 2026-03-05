@@ -21,8 +21,8 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
     const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation } = useDetailSimple();
     const {
       currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage,
-      goNext, goPrev, reset
-    } = useNavigation({ page: "nika", nextPageAnimation, prevPageAnimation });
+      goNext, goPrev, reset,close, isTransitionArmed
+    } = useNavigation({nextPageAnimation, prevPageAnimation });
     const { hasScrolled, letterClassName } = useNika({
         setAcceuil, setLogoFanch, setTextColor,
         screenTiltTl, dominoTl, fallTl, fontsTlRef,
@@ -31,7 +31,8 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
         maxPage: 4,
         bookRef,
         inputRef,
-        reset
+        reset,
+        close
       });
 
   return (
@@ -95,7 +96,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
       ref={bookRef}
       bookApi={{
         left, right, transitionLeft, transitionRight,
-        currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage,
+        currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage, isTransitionArmed
       }}
     />
     <FontInput ref={inputRef}/>

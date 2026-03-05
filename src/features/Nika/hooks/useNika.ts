@@ -20,17 +20,19 @@ interface UseNikaProps {
     goNext: () => void;
     goPrev: () => void;
     reset: () => void;
+    close: () => void;
     currentPage: number;
     maxPage: number;
 }
 
-export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset }: UseNikaProps) {
+export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset, close }: UseNikaProps) {
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
 
     const goNextRef = useRef(goNext);
     const goPrevRef = useRef(goPrev);
     const currentPageRef = useRef(currentPage);
+    const lastFlipTsRef = useRef(0);
 
     useEffect(() => { goNextRef.current = goNext; }, [goNext]);
     useEffect(() => { goPrevRef.current = goPrev; }, [goPrev]);
@@ -41,7 +43,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
 
     const bookPages = maxPage + 1;
     const bookStart = 2.6;
-    const bookEnd = 3.6;
+    const bookEnd = 4.6;
 
     const lastPageRef = useRef<number>(-1);
 
@@ -71,7 +73,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
             scrollTrigger: {
                 trigger: wrapperEl,
                 start: "top top",
-                end: "+=7000",
+                end: "+=11000",
                 scrub: true,
                 pin: true,
                 anticipatePin: 1,
@@ -84,17 +86,27 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
                     const pageIndex = toPageIndexFromTime(time);
 
                     if (pageIndex !== lastPageRef.current) {
+                        const now = Date.now();
+                        if (now - lastFlipTsRef.current < 250) return; 
+                        lastFlipTsRef.current = now;
                         const prev = lastPageRef.current;
                         lastPageRef.current = pageIndex;
 
                         if (prev !== -1 && time >= bookStart && time <= bookEnd) {
-                            console.log(`Book page: ${prev} -> ${pageIndex}`);
                             if (pageIndex > prev) goNextRef.current();
                             else goPrevRef.current();
                         }
                         else if (pageIndex === bookPages - 1 && time > bookEnd) {
                             reset();
                         }
+                    }
+                    if (time < bookStart) {
+                        lastPageRef.current = 0;
+                        reset();
+                    }
+                    if (time > bookEnd) {
+                        lastPageRef.current = bookPages - 1 ;
+                        close();
                     }
                 },
             },
