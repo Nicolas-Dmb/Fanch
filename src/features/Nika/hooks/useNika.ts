@@ -93,10 +93,12 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
                         lastPageRef.current = pageIndex;
 
                         if (prev !== -1 && time >= bookStart && time <= bookEnd) {
+                            setAcceuil(Colors.White);
                             if (pageIndex > prev) goNextRef.current();
                             else goPrevRef.current();
                         }
                         else if (pageIndex === bookPages - 1 && time > bookEnd) {
+                            setAcceuil(Colors.Yellow);
                             reset();
                         }
                     }
