@@ -23,9 +23,10 @@ interface UseNikaProps {
     close: () => void;
     currentPage: number;
     maxPage: number;
+    setDefaultStyle: (isActive: boolean) => void;
 }
 
-export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset, close }: UseNikaProps) {
+export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset, close, setDefaultStyle }: UseNikaProps) {
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
 
@@ -71,11 +72,12 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
         if (setAcceuil) {
             setAcceuil(Colors.Yellow);
             setTextColor(Colors.Black);
+            setDefaultStyle(false);
         }
         if (setLogoFanch) {
             setLogoFanch(false);
         }
-    }, [setAcceuil, setLogoFanch, setTextColor]);
+    }, [setAcceuil, setLogoFanch, setTextColor, setDefaultStyle]);
 
 
     useEffect(() => {

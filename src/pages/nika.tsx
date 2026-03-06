@@ -6,17 +6,17 @@ import FontInput from "../features/Nika/components/FontInput.tsx";
 import Book from "../features/Nika/components/Book.tsx";
 import useNavigation from "../features/Nika/hooks/useNavigation.tsx";
 import useDetailSimple from "../features/Nika/hooks/useDetailSimple.ts";
-import { useEffect } from "react";
 
 interface NikaProps {
   setAcceuil: React.Dispatch<React.SetStateAction<ColorType>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
   setTextColor: React.Dispatch<React.SetStateAction<ColorType>>;
+  setDefaultStyle: (isActive: boolean) => void;
 }
 
 
 
-export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaProps) {
+export default function Nika({ setAcceuil, setLogoFanch, setTextColor, setDefaultStyle }: NikaProps) {
     const {textRef, nRef, iRef, kRef, aRef, transitionRef, screenTiltTl, dominoTl, fallTl} = useDomino();
     const  {fontsTlRef, thinRef, bookRef, inputRef} = useFonts();
     const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation } = useDetailSimple();
@@ -33,7 +33,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
         bookRef,
         inputRef,
         reset,
-        close
+        close, setDefaultStyle
       });
 
   return (

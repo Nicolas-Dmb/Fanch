@@ -20,6 +20,7 @@ interface CarelDetailProps {
   setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
   setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
+  setDefaultStyle: (isActive: boolean) => void;
 }
 
 export default function CarelDetailRoute(props: CarelDetailProps) {
@@ -31,6 +32,7 @@ function CarelDetail({
   setAcceuil,
   setLogoFanch,
   setTextColor,
+  setDefaultStyle
 }: CarelDetailProps) {
     const { name } = useParams<{ name: string }>();
 
@@ -38,7 +40,8 @@ function CarelDetail({
         setAcceuil(Colors.Black);
         setTextColor(Colors.White);
         setLogoFanch(false); 
-    }, [setAcceuil, setLogoFanch, setTextColor]);
+        setDefaultStyle(true);
+    }, [setAcceuil, setLogoFanch, setTextColor, setDefaultStyle]);
 
     const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation } = useDetail();
     const { currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage, goNext, goPrev, haveNext } = useNavigation( {page: name || "", nextPageAnimation, prevPageAnimation} );

@@ -4,7 +4,7 @@ import bandeau from '../static/image/Bandeau.png';
 import signature from '../static/image/signature.png';
 import Colors from '../entities/Background.ts';
 
-function About({setAcceuil,setLogoFanch, setTextColor}) {
+function About({setAcceuil,setLogoFanch, setTextColor, setDefaultStyle}) {
   const bannerRef = useRef(null);
   const [xPos, setXPos] = useState(0);
   const speed = 2; // Vitesse de défilement
@@ -14,6 +14,7 @@ function About({setAcceuil,setLogoFanch, setTextColor}) {
     setAcceuil(Colors.White)
     setTextColor(Colors.Black)
     setLogoFanch(true)
+    setDefaultStyle(true)
     const banner = bannerRef.current;
     const images = banner.children;
 

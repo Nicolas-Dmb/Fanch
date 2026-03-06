@@ -6,7 +6,6 @@ import Home from './pages/Home.tsx';
 import About from './pages/about';
 import Work from './pages/work';
 import Footer from './components/Footer.tsx';
-import Foto from './pages/foto';
 import Carel from './pages/carel.tsx';
 import Nika from './pages/nika.tsx';
 import './index.css';
@@ -29,19 +28,30 @@ const App: React.FC = () => {
     };
   }, [bgColor]);
 
+  const setDefaultStyle = (isActive: boolean) => {
+    if (isActive) {
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.overscrollBehavior = "none";
+      document.body.style.height = "100svh";
+    } else {
+      document.body.style.height = "";
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.overscrollBehavior = "";
+    }
+  }
+
   return (
-    <div id="global-wrapper" className={`h-screen w-screen flex flex-col overflow-hidden`} style={{height: "100svh", backgroundColor: bgColor }} >
+    <div id="global-wrapper" className={`h-screen w-screen flex flex-col overflow-hidden`} style={{backgroundColor: bgColor }} >
       <Router>
         <Header bgColor={bgColor} textColor={textColor}/>
         <div className="relative overflow-hidden flex-1">
           <Routes>
-            <Route path="/" element={<Home setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} acceuil={bgColor} setTextColor={setTextColor}/>} />
-            <Route path="/about" element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
-            <Route path="/work" element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
-            <Route path="/photo" element={<Foto setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
-            <Route path="/carel" element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
-            <Route path="/nika" element={<Nika setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
-            <Route path="/carel/:name" element={<CarelDetailRoute setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor}/>} />
+            <Route path="/" element={<Home setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} acceuil={bgColor} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
+            <Route path="/about" element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
+            <Route path="/work" element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
+            <Route path="/carel" element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
+            <Route path="/nika" element={<Nika setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
+            <Route path="/carel/:name" element={<CarelDetailRoute setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
           </Routes>
         </div>
         <Footer bgColor={bgColor} textColor={textColor} logoFanch={logoFanch} />

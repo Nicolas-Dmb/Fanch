@@ -12,11 +12,12 @@ interface HomeProps {
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
   setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   acceuil: BackgroundColor;
+  setDefaultStyle: (isActive: boolean) => void;
 }
 
-function Home({ setAcceuil, setLogoFanch,setTextColor, acceuil}:HomeProps) {
+function Home({ setAcceuil, setLogoFanch,setTextColor, acceuil, setDefaultStyle }:HomeProps) {
   const isDesktop = useIsDesktop();
-  const {nameCircle, grid, frame, displayTetris, handleNoGame, handleCircleClick, handleCellClick, setDisplayMobileModal, size, containerRef,phase, displayMobileModal} = useHome({setAcceuil, setLogoFanch, setTextColor, isDesktop});
+  const {nameCircle, grid, frame, displayTetris, handleNoGame, handleCircleClick, handleCellClick, setDisplayMobileModal, size, containerRef,phase, displayMobileModal} = useHome({setAcceuil, setLogoFanch, setTextColor, isDesktop, setDefaultStyle});
 
   const showIntro = phase === "idle";
   const showCircle = phase !== "done";

@@ -28,16 +28,18 @@ interface carelProps {
   setAcceuil: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
   setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
+  setDefaultStyle: (isActive: boolean) => void;
 }
 
-export default function Carel({ setAcceuil, setLogoFanch, setTextColor }: carelProps) {
+export default function Carel({ setAcceuil, setLogoFanch, setTextColor, setDefaultStyle }: carelProps) {
   const { windowRef, concordeRef, bossaRef, alesiaRef, StorageRef, maroquinerieRef, chaussuresRef, closeFoldersRef, clemenceauRef, accessoiresLabelRef, accessoiresRef, miniClemenceauRef, madeleineRef, madeleineBrodeeRef, maddieRef, mabillonRef, elyseeRef } = useFolders();
 
   useEffect(() => {
     setAcceuil(Colors.Black);
     setTextColor(Colors.White);
     setLogoFanch(false);
-  }, [setAcceuil, setLogoFanch, setTextColor]);
+    setDefaultStyle(true);
+  }, [setAcceuil, setLogoFanch, setTextColor, setDefaultStyle]);
 
   
 
