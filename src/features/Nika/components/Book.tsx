@@ -33,7 +33,7 @@ const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi
   } = bookApi;
 
   return createPortal(
-    <div ref={ref} className="fixed inset-0 bg-white flex flex-col">
+    <div ref={ref} className="fixed inset-0 bg-white flex flex-col h-[100dvh]">
         <Header bgColor={Colors.White} textColor={Colors.Black} />
         <div
             className="
@@ -43,32 +43,30 @@ const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi
             "
             style={{ perspective: 1600, transformStyle: "preserve-3d" }}
         >
-        <div className="w-full max-w-[1200px] h-[55vh] md:h-[70vh]">
-            <div className="flex h-full">
-                {/* LEFT */}
-                <div ref={left.containerRef} className="relative h-full w-1/2">
-                    <div className="absolute inset-0 flex items-center justify-end">
-                        <Routes side="left" currentPage={currentLeftPage} />
+            <div className="w-full max-w-[1200px] h-[55vh] md:h-[70vh]">
+                <div className="flex h-full">
+                    {/* LEFT */}
+                    <div ref={left.containerRef} className="relative h-full w-1/2">
+                        <div className="absolute inset-0 flex items-center justify-end">
+                            <Routes side="left" currentPage={currentLeftPage} />
+                        </div>
+                        <div ref={transitionLeft.containerRef} className="absolute inset-0 flex items-center justify-end">
+                            <Routes side="left" currentPage={transitionLeftPage} />
+                        </div>
                     </div>
-                    <div ref={transitionLeft.containerRef} className="absolute inset-0 flex items-center justify-end">
-                        <Routes side="left" currentPage={transitionLeftPage} />
-                    </div>
-                </div>
 
-                {/* RIGHT */}
-                <div ref={right.containerRef} className="relative h-full w-1/2">
-                    <div className="absolute inset-0 flex items-center justify-start">
-                        <Routes side="right" currentPage={currentRightPage}/>
-                    </div>
-                    <div ref={transitionRight.containerRef} className="absolute inset-0 flex items-center justify-start">
-                        <Routes side="right" currentPage={transitionRightPage}/>
+                    {/* RIGHT */}
+                    <div ref={right.containerRef} className="relative h-full w-1/2">
+                        <div className="absolute inset-0 flex items-center justify-start">
+                            <Routes side="right" currentPage={currentRightPage}/>
+                        </div>
+                        <div ref={transitionRight.containerRef} className="absolute inset-0 flex items-center justify-start">
+                            <Routes side="right" currentPage={transitionRightPage}/>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-        <Footer bgColor={Colors.White} textColor={Colors.Black} logoFanch={false} />
-
     </div>    ,
     document.body
   );
