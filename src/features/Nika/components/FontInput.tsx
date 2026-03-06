@@ -12,7 +12,7 @@ interface FontInputProps {
 const FontInput = React.forwardRef<HTMLDivElement, FontInputProps>(function FontInput(_props, ref){
 
     return createPortal(
-    <div ref={ref} className="fixed inset-0 bg-[#ffffff] flex flex-col justify-between font-perso min-h-[100lvh]">
+    <div ref={ref} className="fixed inset-0 z-[9999] bg-[#ffffff] flex flex-col justify-between font-perso">
         <Header bgColor={Colors.White} textColor={Colors.Black} />
         <div className="flex-grow flex flex-col justify-center gap-10 items-center">
                 <CornerInput/>

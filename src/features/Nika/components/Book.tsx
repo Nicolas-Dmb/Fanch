@@ -33,7 +33,7 @@ const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi
   } = bookApi;
 
   return createPortal(
-    <div ref={ref} className="fixed inset-0 bg-white flex flex-col min-h-[100lvh]">
+    <div ref={ref} className="fixed inset-0 z-[9998] bg-white flex flex-col overflow-hidden">
         <Header bgColor={Colors.White} textColor={Colors.Black} />
         <div
             className="
