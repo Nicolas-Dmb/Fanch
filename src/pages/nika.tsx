@@ -6,6 +6,7 @@ import FontInput from "../features/Nika/components/FontInput.tsx";
 import Book from "../features/Nika/components/Book.tsx";
 import useNavigation from "../features/Nika/hooks/useNavigation.tsx";
 import useDetailSimple from "../features/Nika/hooks/useDetailSimple.ts";
+import { useEffect } from "react";
 
 interface NikaProps {
   setAcceuil: React.Dispatch<React.SetStateAction<ColorType>>;

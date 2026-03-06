@@ -30,7 +30,7 @@ const App: React.FC = () => {
   }, [bgColor]);
 
   return (
-    <div id="global-wrapper" className={`h-screen w-screen flex flex-col`} style={{ backgroundColor: bgColor }} >
+    <div id="global-wrapper" className={`h-screen w-screen flex flex-col overflow-hidden`} style={{ backgroundColor: bgColor }} >
       <Router>
         <Header bgColor={bgColor} textColor={textColor}/>
         <div className="relative overflow-hidden flex-1">
