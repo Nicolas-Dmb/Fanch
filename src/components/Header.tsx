@@ -76,7 +76,7 @@ export default function Header({bgColor, textColor}: HeaderProps){
             </div>
             <p className='FANCH hidden sm:block' style={{ color: textColor}}>FANCH</p>
             <div className='house'>
-                <img  src={textColor === Colors.White ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={textColor=== Colors.White ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('')}/>
+                <img  src={textColor === Colors.White ?currentImage_white.maison : currentImage.maison} alt='maison' id='image' className='maison_1' style={textColor=== Colors.White ?{height: currentImage_white.height, marginTop:currentImage_white.paddingTop}: {height: currentImage.height, marginTop:currentImage.paddingTop}} onClick={()=>navigate('/')}/>
             </div>
         </div>
     );

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 export default function SideBracketsInput() {
   return (
-    <div className="relative w-[70vw] h-[8vh] md:w-[40vw] md:h-[10vh]">
+    <div className="relative w-[70vw] h-[8vh] xl:w-[40vw]  md:h-[10vh]">
 
       <img
         src={corner}
