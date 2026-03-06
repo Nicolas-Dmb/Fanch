@@ -11,6 +11,7 @@ export default function useDomino(){
     const screenTiltTlRef = useRef<gsap.core.Timeline | null>(null);
     const dominoTlRef = useRef<gsap.core.Timeline | null>(null);
     const fallTlRef = useRef<gsap.core.Timeline | null>(null);
+    const windowWidth = window.innerWidth;
 
     useEffect(() => {
         const textEl = textRef.current;
@@ -53,6 +54,10 @@ export default function useDomino(){
             ease: "power2.out",
             duration: 2.2,
         }, 0.0);
+
+        if (windowWidth < 768) {
+            return;
+        }
 
         // PHASE 2 : domino effect on letters
         // Hit i first
