@@ -22,7 +22,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor }: NikaPro
     const {
       currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage,
       goNext, goPrev, reset,close
-    } = useNavigation({nextPageAnimation, prevPageAnimation });
+    } = useNavigation({nextPageAnimation, prevPageAnimation});
     const { hasScrolled, letterClassName } = useNika({
         setAcceuil, setLogoFanch, setTextColor,
         screenTiltTl, dominoTl, fallTl, fontsTlRef,
