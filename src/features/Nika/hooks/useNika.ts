@@ -33,6 +33,7 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
     const goPrevRef = useRef(goPrev);
     const currentPageRef = useRef(currentPage);
     const lastFlipTsRef = useRef(0);
+    const bgZoneRef = useRef<"yellow" | "white">("yellow");
 
     useEffect(() => { goNextRef.current = goNext; }, [goNext]);
     useEffect(() => { goPrevRef.current = goPrev; }, [goPrev]);
@@ -51,6 +52,19 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
         const t = (time - bookStart) / (bookEnd - bookStart);
         const clamped = Math.min(1, Math.max(0, t));
         return Math.min(bookPages - 1, Math.floor(clamped * bookPages));
+    };
+
+    const setBackgroundZone = (zone: "yellow" | "white") => {
+        if (bgZoneRef.current === zone) return;
+        bgZoneRef.current = zone;
+
+        if (zone === "yellow") {
+            setAcceuil(Colors.Yellow);
+            setTextColor(Colors.Black);
+        } else {
+            setAcceuil(Colors.White);
+            setTextColor(Colors.Black);
+        }
     };
 
     useEffect(() => {
@@ -107,6 +121,13 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
                     if (time > bookEnd) {
                         lastPageRef.current = bookPages - 1 ;
                         close();
+                    }
+                    if (time < bookStart) {
+                        setBackgroundZone("yellow");
+                        lastPageRef.current = 0;
+                        reset();
+                    } else {
+                        setBackgroundZone("white");
                     }
                 },
             },
