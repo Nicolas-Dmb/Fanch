@@ -87,7 +87,7 @@ export default function useFolders() {
             tl.to(folderelements, {opacity:1, duration:0},1);
 
             // 3) staggered rise
-            var mobileExpansion = isDesktopNow ? 0 : 100;
+            var mobileExpansion = isDesktopNow ? 0 : 200;
             const coef = isDesktopNow ? 0 : 40;
             const timelineMobile = isDesktopNow ? 1 : 1.5;
             tl.to(accessoiresLabel, { y: (290 - mobileExpansion) * yresponsive, duration: 0.4 }, 1*timelineMobile);
