@@ -33,11 +33,15 @@ const App: React.FC = () => {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overscrollBehavior = "none";
       document.body.style.overscrollBehavior = "none";
+      document.body.style.height = "100%";
+      document.body.style.width = "100%";
     } else {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
       document.documentElement.style.overscrollBehavior = "";
       document.body.style.overscrollBehavior = "";
+      document.body.style.height = "";
+      document.body.style.width = "";
     }
   };
 

@@ -77,6 +77,9 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
         if (setLogoFanch) {
             setLogoFanch(false);
         }
+        return () => {
+            setDefaultStyle(true);
+        };
     }, [setAcceuil, setLogoFanch, setTextColor, setDefaultStyle]);
 
 
