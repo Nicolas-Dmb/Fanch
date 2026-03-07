@@ -23,10 +23,6 @@ const App: React.FC = () => {
   useEffect(() => {
     document.body.style.backgroundColor = bgColor;
     document.documentElement.style.backgroundColor = bgColor;
-    return () => {
-      document.body.style.backgroundColor = "";
-      document.documentElement.style.backgroundColor = "";
-    };
   }, [bgColor]);
 
   const setDefaultStyle = (isActive: boolean) => {

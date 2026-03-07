@@ -27,7 +27,7 @@ function Home({ setAcceuil, setLogoFanch,setTextColor, acceuil, setDefaultStyle 
     <div
       ref={containerRef}
       style={{ backgroundColor: acceuil }}
-      className="w-full h-full relative"
+      className="size-full relative"
     >
       {displayMobileModal && 
         <Modal onClose={() => setDisplayMobileModal(false)} title="Bienvenue" content="Pour une meilleure expérience, il est préférable de visiter ce site sur ordinateur." background={Colors.White} text={Colors.Black} />
@@ -41,7 +41,7 @@ function Home({ setAcceuil, setLogoFanch,setTextColor, acceuil, setDefaultStyle 
           onCellClick={handleCellClick}
         />
       ) : (
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="size-full flex items-center justify-center">
           {showIntro && (
             <div className="partie2 cursor-pointer" onClick={handleNoGame}>
               <Typewriter

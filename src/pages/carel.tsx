@@ -44,7 +44,7 @@ export default function Carel({ setAcceuil, setLogoFanch, setTextColor, setDefau
   
 
   return (
-    <div ref={windowRef} className="w-full h-screen relative overflow-hidden">
+    <div ref={windowRef} className="size-full relative overflow-hidden">
       <img ref={closeFoldersRef} src={close_folders} alt="Close Folders" className="absolute w-[70vw] h-auto"/>
       <img ref={StorageRef} src={Storage} alt="Storage" className="absolute w-[70vw] h-auto" />
       <img ref={accessoiresLabelRef} src={accessoires} data-folder="accessoires" alt="Accessoires" className="absolute w-[70vw] h-auto"/>
