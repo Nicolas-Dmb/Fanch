@@ -9,11 +9,11 @@ interface useHomeProps {
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
   setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
   isDesktop: boolean;
-  setDefaultStyle: (isActive: boolean) => void;
+  LockLayout: (isActive: boolean) => void;
 }
 
 
-export default function useHome({setAcceuil, setLogoFanch, setTextColor, isDesktop, setDefaultStyle}:useHomeProps) {
+export default function useHome({setAcceuil, setLogoFanch, setTextColor, isDesktop, LockLayout}:useHomeProps) {
   const [nameCircle, setNameCircle] = useState('circle');
   const grid = data.grid; 
   const [displayTetris, setDisplayTetris] = useState(false);
@@ -32,7 +32,7 @@ export default function useHome({setAcceuil, setLogoFanch, setTextColor, isDeskt
     setAcceuil(Colors.White);
     setTextColor(Colors.Black);
     setLogoFanch(false);
-    setDefaultStyle(true);
+    LockLayout(true);
     isDesktop ? setDisplayMobileModal(false) : setDisplayMobileModal(true);
     function computeSize() {
       if (!containerRef.current) return;

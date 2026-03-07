@@ -19,13 +19,14 @@ const App: React.FC = () => {
   const [textColor, setTextColor] = useState<BackgroundColor>(Colors.Black);
   const [logoFanch, setLogoFanch] = useState<boolean>(true);
   const [isLockedLayout, setIsLockedLayout] = useState<boolean>(true);
+  const [displayFooter, setDisplayFooter] = useState<boolean>(true);
 
   useEffect(() => {
     document.body.style.backgroundColor = bgColor;
     document.documentElement.style.backgroundColor = bgColor;
   }, [bgColor]);
 
-  const setDefaultStyle = (isActive: boolean) => {
+  const LockLayout = (isActive: boolean) => {
     setIsLockedLayout(isActive);
 
     if (isActive) {
@@ -59,15 +60,15 @@ const App: React.FC = () => {
         <Header bgColor={bgColor} textColor={textColor}/>
         <div className="relative flex-1 min-h-0 overflow-hidden">
           <Routes>
-            <Route path="/" element={<Home setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} acceuil={bgColor} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
-            <Route path="/about" element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
-            <Route path="/work" element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
-            <Route path="/carel" element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
-            <Route path="/nika" element={<Nika setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
-            <Route path="/carel/:name" element={<CarelDetailRoute setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
+            <Route path="/" element={<Home setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} acceuil={bgColor} setTextColor={setTextColor} LockLayout={LockLayout}/>} />
+            <Route path="/about" element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} LockLayout={LockLayout}/>} />
+            <Route path="/work" element={<Work setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} LockLayout={LockLayout}/>} />
+            <Route path="/carel" element={<Carel setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} LockLayout={LockLayout}/>} />
+            <Route path="/nika" element={<Nika setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} LockLayout={LockLayout} setDisplayFooter={setDisplayFooter}/>} />
+            <Route path="/carel/:name" element={<CarelDetailRoute setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} LockLayout={LockLayout}/>} />
           </Routes>
         </div>
-        <Footer bgColor={bgColor} textColor={textColor} logoFanch={logoFanch} />
+        <Footer bgColor={bgColor} textColor={textColor} logoFanch={logoFanch} displayFooter={displayFooter} />
       </Router>
     </div>
   );

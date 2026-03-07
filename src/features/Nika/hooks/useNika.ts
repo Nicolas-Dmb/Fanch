@@ -23,10 +23,11 @@ interface UseNikaProps {
     close: () => void;
     currentPage: number;
     maxPage: number;
-    setDefaultStyle: (isActive: boolean) => void;
+    LockLayout: (isActive: boolean) => void;
+    setDisplayFooter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset, close, setDefaultStyle }: UseNikaProps) {
+export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset, close, LockLayout, setDisplayFooter }: UseNikaProps) {
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
 
@@ -69,18 +70,20 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
     };
 
     useEffect(() => {
+        LockLayout(false);
+        setDisplayFooter(false);
         if (setAcceuil) {
             setAcceuil(Colors.Yellow);
             setTextColor(Colors.Black);
-            setDefaultStyle(false);
         }
         if (setLogoFanch) {
             setLogoFanch(false);
         }
         return () => {
-            setDefaultStyle(true);
+            LockLayout(true);
+            setDisplayFooter(true);
         };
-    }, [setAcceuil, setLogoFanch, setTextColor, setDefaultStyle]);
+    }, [setAcceuil, setLogoFanch, setTextColor, LockLayout]);
 
 
     useEffect(() => {

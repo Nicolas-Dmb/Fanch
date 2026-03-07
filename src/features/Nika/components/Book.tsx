@@ -7,7 +7,6 @@ import sixth_page from '../static/images/sixth_page.png';
 import seventh_page from '../static/images/seventh_page.png';
 import last_page from '../static/images/last_page.png';
 import Header from "../../../components/Header.tsx";
-import Footer from "../../../components/Footer.tsx";
 import Colors from "../../../entities/Background.ts";
 
 import React from 'react';

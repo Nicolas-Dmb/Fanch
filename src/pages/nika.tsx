@@ -11,12 +11,13 @@ interface NikaProps {
   setAcceuil: React.Dispatch<React.SetStateAction<ColorType>>;
   setLogoFanch: React.Dispatch<React.SetStateAction<boolean>>;
   setTextColor: React.Dispatch<React.SetStateAction<ColorType>>;
-  setDefaultStyle: (isActive: boolean) => void;
+  LockLayout: (isActive: boolean) => void;
+  setDisplayFooter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
 
-export default function Nika({ setAcceuil, setLogoFanch, setTextColor, setDefaultStyle }: NikaProps) {
+export default function Nika({ setAcceuil, setLogoFanch, setTextColor, LockLayout, setDisplayFooter }: NikaProps) {
     const {textRef, nRef, iRef, kRef, aRef, transitionRef, screenTiltTl, dominoTl, fallTl} = useDomino();
     const  {fontsTlRef, thinRef, bookRef, inputRef} = useFonts();
     const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation } = useDetailSimple();
@@ -33,7 +34,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor, setDefaul
         bookRef,
         inputRef,
         reset,
-        close, setDefaultStyle
+        close, LockLayout, setDisplayFooter
       });
 
   return (
@@ -83,7 +84,7 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor, setDefaul
 
           <div className="w-full border-t border-black mt-[4vh] mb-[4vh]" />
 
-          <div className="text-[4vw] md:text-[3vw] leading-none font-perso">
+          <div className="text-[6vw] md:text-[3vw] leading-none font-perso">
             <p>ABCDEFGHIJKLMN</p>
             <p>OPQRSTUVWXYZ</p>
             <p>abcdefghijklmnopqrstuvwxyz</p>
