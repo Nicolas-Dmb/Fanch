@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const [bgColor, setAcceuil] = useState<BackgroundColor>(Colors.White);
   const [textColor, setTextColor] = useState<BackgroundColor>(Colors.Black);
   const [logoFanch, setLogoFanch] = useState<boolean>(true);
-  const [defaultStyle, setDefaultStyleState] = useState<boolean>(true);
+  const [isLockedLayout, setIsLockedLayout] = useState<boolean>(true);
 
   useEffect(() => {
     document.body.style.backgroundColor = bgColor;
@@ -26,20 +26,31 @@ const App: React.FC = () => {
   }, [bgColor]);
 
   const setDefaultStyle = (isActive: boolean) => {
+    setIsLockedLayout(isActive);
+
     if (isActive) {
-      setDefaultStyleState(true);
       document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
       document.documentElement.style.overscrollBehavior = "none";
+      document.body.style.overscrollBehavior = "none";
     } else {
-      setDefaultStyleState(false);
-      document.body.style.height = "";
       document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
       document.documentElement.style.overscrollBehavior = "";
+      document.body.style.overscrollBehavior = "";
     }
-  }
+  };
 
   return (
-    <div id="global-wrapper" className={defaultStyle ? 'h-screen w-screen flex flex-col overflow-hidden h-[100svh]' : 'h-screen w-screen flex flex-col overflow-hidden'} style={{backgroundColor: bgColor }} >
+    <div
+      id="global-wrapper"
+      className={`w-screen flex flex-col ${isLockedLayout ? "overflow-hidden" : ""}`}
+      style={{
+        backgroundColor: bgColor,
+        height: isLockedLayout ? "100svh" : undefined,
+        minHeight: !isLockedLayout ? "100svh" : undefined,
+      }}
+    >
       <Router>
         <Header bgColor={bgColor} textColor={textColor}/>
         <div className="relative flex-1 min-h-0 overflow-hidden">
