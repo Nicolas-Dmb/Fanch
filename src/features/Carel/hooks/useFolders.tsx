@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import {useNavigate} from "react-router-dom"
 
-
 export default function useFolders() {
     const concordeRef = useRef<HTMLImageElement | null>(null);
     const bossaRef = useRef<HTMLImageElement | null>(null);
@@ -37,6 +36,9 @@ export default function useFolders() {
     const LIFT = 18;
 
     useEffect(() => {
+        const isDesktopNow = window.innerWidth >= 1024;
+        const yresponsive = isDesktopNow ? 1 : 0.20;
+
         const footerEl = document.getElementById("footer");
         const storage = StorageRef.current;
         const concorde = concordeRef.current;
@@ -72,36 +74,52 @@ export default function useFolders() {
             const all = [storage, concorde, bossa, alesia, chaussures, maroquinerie, closeFolders, clemenceau, accessoiresLabel, accessoires, miniClem, madeleine, madeleineBrodee, maddie, mabillon, elysee];
             const folderelements = [concorde, bossa, alesia, chaussures, maroquinerie, clemenceau, accessoiresLabel, accessoires, miniClem, madeleine, madeleineBrodee, maddie, mabillon, elysee];
 
-            _setGsapDefaults({ concorde, chaussures, bossa, maroquinerie, alesia, closeFolders, storage, all, folderelements, clemenceau, accessoiresLabel, accessoires, miniClem, madeleine, madeleineBrodee, maddie, mabillon, elysee });
+            _setGsapDefaults({ concorde, chaussures, bossa, maroquinerie, alesia, closeFolders, storage, all, folderelements, clemenceau, accessoiresLabel, accessoires, miniClem, madeleine, madeleineBrodee, maddie, mabillon, elysee, isDesktop: isDesktopNow, yresponsive });
 
             const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
             
             // 1) Entry animation
-            tl.to(storage, { y: 400, width: "80vw", duration: 1 }, 0);
-            tl.to(closeFolders, { y: 330, width: "75vw", duration: 1 }, 0);
+            tl.to(storage, { y: 400 * yresponsive, width: isDesktopNow ? "80vw" : "100vw", duration: 1 }, 0);
+            tl.to(closeFolders, { y: 330 * yresponsive, width: isDesktopNow ? "75vw" : "100vw", duration: 1 }, 0);
 
             // 2) replace folders
             tl.to(closeFolders, {opacity:0, duration:0}, 1);
             tl.to(folderelements, {opacity:1, duration:0},1);
 
             // 3) staggered rise
-            tl.to(accessoiresLabel, { y: 290, duration: 0.4 }, 1);
-            tl.to(accessoires, { y: 300, duration: 0.4 }, 1.04);
-            tl.to(chaussures, { y: 240, duration: 0.4 }, 1.08);
-            tl.to(bossa, { y: 280, duration: 0.4 }, 1.12);
-            tl.to(maroquinerie, { y: 250, duration: 0.4 }, 1.16);
-            tl.to(concorde, { y: 270, duration: 0.4 }, 1.20);
-            tl.to(clemenceau, { y: 260, duration: 0.4 }, 1.24);
-            tl.to(miniClem, { y: 250, duration: 0.4 }, 1.28);
-            tl.to(alesia, { y: 235, duration: 0.4 }, 1.32);
-            tl.to(madeleine, { y: 230, duration: 0.4 }, 1.36);
-            tl.to(maddie, { y: 220, duration: 0.4 }, 1.40);
-            tl.to(madeleineBrodee, { y: 200, duration: 0.4 }, 1.44);
-            tl.to(elysee, { y: 185, duration: 0.4 }, 1.48);
-            tl.to(mabillon, { y: 170, duration: 0.4 }, 1.52);
+            var mobileExpansion = isDesktopNow ? 0 : 80;
+            const coef = isDesktopNow ? 0 : 40;
+            const timelineMobile = isDesktopNow ? 1 : 1.5;
+            tl.to(accessoiresLabel, { y: (290 - mobileExpansion) * yresponsive, duration: 0.4 }, 1*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(accessoires, { y: (300 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.04*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(chaussures, { y: (240 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.08*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(bossa, { y: (280 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.12*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(maroquinerie, { y: (250 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.16*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(concorde, { y: (270 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.20*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(clemenceau, { y: (260 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.24*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(miniClem, { y: (250 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.28*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(alesia, { y: (235 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.32*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(madeleine, { y: (230 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.36*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(maddie, { y: (220 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.40*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(madeleineBrodee, { y: (200 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.44*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(elysee, { y: (185 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.48*timelineMobile);
+            mobileExpansion += coef;
+            tl.to(mabillon, { y: (170 - mobileExpansion) * yresponsive, duration: 0.4 }, 1.52*timelineMobile);
 
             tl.eventCallback("onComplete", () => {
-                _setupFolderInteractions();
+                _setupFolderInteractions(isDesktopNow);
             });
 
         }, windowRef);
@@ -136,7 +154,7 @@ export default function useFolders() {
     }
 
     // Setup folder hover and click interactions
-    function _setupFolderInteractions() {
+    function _setupFolderInteractions(isDesktopNow: boolean) {
         isReady.current = true;
 
         const a = accessoiresRef.current!;
@@ -176,7 +194,7 @@ export default function useFolders() {
 
 
         const target = windowRef.current!;
-        const handleMove = (e: MouseEvent) => _onMove(e, ORDER);
+        const handleMove = (e: MouseEvent) => _onMove(e, ORDER, isDesktopNow);
         const handleLeave = () => _onLeave();
         const handleClick = () => _onClick();
 
@@ -191,7 +209,7 @@ export default function useFolders() {
         });
     }
 
-    const _onMove = (e: MouseEvent, ORDER: HTMLImageElement[]) => {
+    const _onMove = (e: MouseEvent, ORDER: HTMLImageElement[], isDesktopNow: boolean) => {
         if (!isReady.current) return;
 
         let hit: HTMLImageElement | null = null;
@@ -201,8 +219,8 @@ export default function useFolders() {
         }
 
         if (hit !== currentRef.current) {
-            if (currentRef.current) _liftOff(currentRef.current);
-            if (hit) _liftOn(hit);
+            if (currentRef.current && isDesktopNow) _liftOff(currentRef.current);
+            if (hit && isDesktopNow) _liftOn(hit);
             currentRef.current = hit;
         }
     };
@@ -244,11 +262,11 @@ export default function useFolders() {
         if (!ctx) return;
 
         const draw = () => {
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0);
-        alphaMaps.current.set(img, { canvas, ctx });
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0);
+            alphaMaps.current.set(img, { canvas, ctx });
         };
 
         if (img.complete && img.naturalWidth > 0) draw();
@@ -344,9 +362,11 @@ interface GsapDefaults {
     elysee: HTMLImageElement;
     all: HTMLImageElement[];
     folderelements: HTMLImageElement[];
+    isDesktop: boolean;
+    yresponsive: number;
 }
 
-function _setGsapDefaults({ concorde, chaussures, bossa, maroquinerie, alesia, closeFolders, storage, clemenceau, all, folderelements, accessoiresLabel, accessoires, miniClem, madeleine, madeleineBrodee, maddie, mabillon, elysee }: GsapDefaults) { 
+function _setGsapDefaults({ concorde, chaussures, bossa, maroquinerie, alesia, closeFolders, storage, clemenceau, all, folderelements, accessoiresLabel, accessoires, miniClem, madeleine, madeleineBrodee, maddie, mabillon, elysee, isDesktop, yresponsive }: GsapDefaults) { 
     gsap.set(storage, { zIndex: 120 });
     gsap.set(accessoiresLabel, { zIndex: 115 });
     gsap.set(accessoires, { zIndex: 110 });
@@ -374,8 +394,8 @@ function _setGsapDefaults({ concorde, chaussures, bossa, maroquinerie, alesia, c
         backfaceVisibility: "hidden",
         transformPerspective: 1000,
     });
-    gsap.set(folderelements, { opacity: 0, y: 330, width: "75vw"});
-    gsap.set(maroquinerie,{y: 320});
+    gsap.set(folderelements, { opacity: 0, y: 330* yresponsive, width: isDesktop ? "75vw" : "100vw" });
+    gsap.set(maroquinerie,{y: 320* yresponsive});
     gsap.set(closeFolders, {width: "35vw", y: -80});
-    gsap.set(storage, { y: -60, width: "35vw" });
+    gsap.set(storage, { y: -60, width:"35vw"});
 }

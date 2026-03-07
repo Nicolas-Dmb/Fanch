@@ -31,7 +31,7 @@ interface carelProps {
   LockLayout: (isActive: boolean) => void;
 }
 
-export default function Carel({ setAcceuil, setLogoFanch, setTextColor, LockLayout: LockLayout }: carelProps) {
+export default function Carel({ setAcceuil, setLogoFanch, setTextColor, LockLayout }: carelProps) {
   const { windowRef, concordeRef, bossaRef, alesiaRef, StorageRef, maroquinerieRef, chaussuresRef, closeFoldersRef, clemenceauRef, accessoiresLabelRef, accessoiresRef, miniClemenceauRef, madeleineRef, madeleineBrodeeRef, maddieRef, mabillonRef, elyseeRef } = useFolders();
 
   useEffect(() => {
