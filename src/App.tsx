@@ -46,7 +46,7 @@ const App: React.FC = () => {
     <div id="global-wrapper" className={defaultStyle ? 'h-screen w-screen flex flex-col overflow-hidden h-[100svh]' : 'h-screen w-screen flex flex-col overflow-hidden'} style={{backgroundColor: bgColor }} >
       <Router>
         <Header bgColor={bgColor} textColor={textColor}/>
-        <div className="relative overflow-hidden flex-1">
+        <div className="relative flex-1 min-h-0 overflow-hidden">
           <Routes>
             <Route path="/" element={<Home setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} acceuil={bgColor} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
             <Route path="/about" element={<About setAcceuil={setAcceuil} setLogoFanch={setLogoFanch} setTextColor={setTextColor} setDefaultStyle={setDefaultStyle}/>} />
