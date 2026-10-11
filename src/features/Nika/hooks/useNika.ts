@@ -17,29 +17,20 @@ interface UseNikaProps {
     setTextColor: React.Dispatch<React.SetStateAction<BackgroundColor>>;
     bookRef : React.MutableRefObject<HTMLElement | null>
     inputRef : React.MutableRefObject<HTMLDivElement | null>;
-    goNext: () => void;
-    goPrev: () => void;
-    reset: () => void;
-    close: () => void;
-    currentPage: number;
+    goTo: (page: number) => void;
     maxPage: number;
     LockLayout: (isActive: boolean) => void;
     setDisplayFooter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goNext, goPrev, currentPage, maxPage, reset, close, LockLayout, setDisplayFooter }: UseNikaProps) {
+export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screenTiltTl, dominoTl, fallTl, fontsTlRef, bookRef, inputRef, goTo, maxPage, LockLayout, setDisplayFooter }: UseNikaProps) {
     const [hasScrolled, setHasScrolled] = React.useState(false);
     const [letterClassName, setLetterClassName] = React.useState("inline-block will-change-transform hover:animate-wiggle");
 
-    const goNextRef = useRef(goNext);
-    const goPrevRef = useRef(goPrev);
-    const currentPageRef = useRef(currentPage);
-    const lastFlipTsRef = useRef(0);
+    const goToRef = useRef(goTo);
     const bgZoneRef = useRef<"yellow" | "white">("yellow");
 
-    useEffect(() => { goNextRef.current = goNext; }, [goNext]);
-    useEffect(() => { goPrevRef.current = goPrev; }, [goPrev]);
-    useEffect(() => { currentPageRef.current = currentPage; }, [currentPage]);
+    useEffect(() => { goToRef.current = goTo; }, [goTo]);
 
     const mainTlRef = useRef<gsap.core.Timeline | null>(null);
 
@@ -47,8 +38,6 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
     const bookPages = maxPage + 1;
     const bookStart = 2.4;
     const bookEnd = 4.8;
-
-    const lastPageRef = useRef<number>(-1);
 
     const toPageIndexFromTime = (time: number) => {
         const t = (time - bookStart) / (bookEnd - bookStart);
@@ -100,42 +89,22 @@ export default function useNika({ setAcceuil, setLogoFanch, setTextColor, screen
                 pin: true,
                 anticipatePin: 1,
                 onUpdate: (self) => {
-                    if (self.progress > 0.01 && !hasScrolled) {
+                    if (self.progress > 0.01) {
                         setHasScrolled(true);
                     }
 
+                    // Always aim at the page matching the scroll position: useNavigation
+                    // queues the flips one by one, so fast scrolls never skip or desync pages.
                     const time = mainTl.time();
-                    const pageIndex = toPageIndexFromTime(time);
-
-                    if (pageIndex !== lastPageRef.current) {
-                        const now = Date.now();
-                        if (now - lastFlipTsRef.current < 250) return; 
-                        lastFlipTsRef.current = now;
-                        const prev = lastPageRef.current;
-                        lastPageRef.current = pageIndex;
-
-                        if (prev !== -1 && time >= bookStart && time <= bookEnd) {
-                            if (pageIndex > prev) goNextRef.current();
-                            else goPrevRef.current();
-                        }
-                        else if (pageIndex === bookPages - 1 && time > bookEnd) {
-                            reset();
-                        }
-                    }
-                    if (time < bookStart) {
-                        lastPageRef.current = 0;
-                        reset();
-                    }
-                    if (time > bookEnd) {
-                        lastPageRef.current = bookPages - 1 ;
-                        close();
-                    }
                     if (time < bookStart) {
                         setBackgroundZone("yellow");
-                        lastPageRef.current = 0;
-                        reset();
+                        goToRef.current(0);
+                    } else if (time > bookEnd) {
+                        setBackgroundZone("white");
+                        goToRef.current(maxPage);
                     } else {
                         setBackgroundZone("white");
+                        goToRef.current(toPageIndexFromTime(time));
                     }
                 },
             },
