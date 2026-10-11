@@ -11,7 +11,6 @@ function Work({setAcceuil, setLogoFanch, setTextColor, LockLayout}) {
     },[setAcceuil, setLogoFanch, setTextColor, LockLayout])
     return(
         <div>
-            work
         </div>
     );
 }
