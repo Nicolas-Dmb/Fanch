@@ -1,15 +1,15 @@
-import first_page from '../static/images/first_page.png';
-import second_page from '../static/images/second_page.png';
-import third_page from '../static/images/third_page.png';
-import fourth_page from '../static/images/fourth_page.png';
-import fifth_page from '../static/images/fifth_page.png';
-import sixth_page from '../static/images/sixth_page.png';
-import seventh_page from '../static/images/seventh_page.png';
-import last_page from '../static/images/last_page.png';
+import first_page from '../static/images/first_page.webp';
+import second_page from '../static/images/second_page.webp';
+import third_page from '../static/images/third_page.webp';
+import fourth_page from '../static/images/fourth_page.webp';
+import fifth_page from '../static/images/fifth_page.webp';
+import sixth_page from '../static/images/sixth_page.webp';
+import seventh_page from '../static/images/seventh_page.webp';
+import last_page from '../static/images/last_page.webp';
 import Header from "../../../components/Header.tsx";
 import Colors from "../../../entities/Background.ts";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createPortal } from "react-dom";
 
 interface BookProps {
@@ -25,11 +25,30 @@ interface BookProps {
   };
 }
 
+const PAGES = [first_page, second_page, third_page, fourth_page, fifth_page, sixth_page, seventh_page, last_page];
+
+// Kept at module level so the decoded images are not garbage collected.
+const preloadedPages: HTMLImageElement[] = [];
+
+// Download and decode every page up front so a flip never waits on a decode.
+function usePreloadPages() {
+  useEffect(() => {
+    if (preloadedPages.length) return;
+    PAGES.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.decode().catch(() => {});
+      preloadedPages.push(img);
+    });
+  }, []);
+}
+
 const Book = React.forwardRef<HTMLDivElement, BookProps>(function Book({ bookApi }, ref) {
   const {
     left, right, transitionLeft, transitionRight,
     currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage
   } = bookApi;
+  usePreloadPages();
 
   return createPortal(
     <div ref={ref} className="fixed inset-0 z-[9998] bg-white flex flex-col overflow-hidden">

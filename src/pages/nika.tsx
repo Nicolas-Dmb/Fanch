@@ -23,18 +23,16 @@ export default function Nika({ setAcceuil, setLogoFanch, setTextColor, LockLayou
     const { left, right, transitionLeft, transitionRight, nextPageAnimation, prevPageAnimation } = useDetailSimple();
     const {
       currentLeftPage, currentRightPage, transitionLeftPage, transitionRightPage,
-      goNext, goPrev, reset,close
+      goTo
     } = useNavigation({nextPageAnimation, prevPageAnimation});
     const { hasScrolled, letterClassName } = useNika({
         setAcceuil, setLogoFanch, setTextColor,
         screenTiltTl, dominoTl, fallTl, fontsTlRef,
-        goNext, goPrev,
-        currentPage: currentRightPage,
+        goTo,
         maxPage: 4,
         bookRef,
         inputRef,
-        reset,
-        close, LockLayout, setDisplayFooter
+        LockLayout, setDisplayFooter
       });
 
   return (
